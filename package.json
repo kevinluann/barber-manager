@@ -1,4 +1,7 @@
 {
+  "name": "hairday",
+  "description": "Aplicação de agendamentos para barbearias",
+  "author": "Kevin Luan",
   "scripts": {
     "server": "json-server server.json --watch --port 3333"
   },
