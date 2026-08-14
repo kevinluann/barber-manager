@@ -3,7 +3,8 @@
   "description": "Aplicação de agendamentos para barbearias",
   "author": "Kevin Luan",
   "scripts": {
-    "server": "json-server server.json --watch --port 3333"
+    "server": "json-server server.json --watch --port 3333",
+    "build": "webpack"
   },
   "dependencies": {
     "json-server": "^1.0.0-beta.15"
