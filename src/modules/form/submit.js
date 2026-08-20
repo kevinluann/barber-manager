@@ -25,7 +25,7 @@ form.addEventListener('submit', async (event) => {
         const hourSelected = document.querySelector('.hour-selected')
 
         if (!hourSelected) {
-            alert('Selecione o horário.')
+            return alert('Selecione o horário.')
         }
 
         const [hour, _] = hourSelected.textContent.split(':')
