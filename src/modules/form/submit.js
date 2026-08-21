@@ -32,9 +32,7 @@ form.addEventListener('submit', async (event) => {
 
         const when = dayjs(selectedDate.value).add(hour, 'hour')
 
-        const id = new Date().getTime()
-
-        await scheduleNew({id, name, when})
+        await scheduleNew({ name, when })
     } catch (error) {
         alert('Não foi possivel realizar o agendamento.')
         console.log(error)
