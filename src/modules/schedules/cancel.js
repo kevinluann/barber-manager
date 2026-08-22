@@ -5,7 +5,7 @@ const periods = document.querySelectorAll('.period')
 
 periods.forEach((period) => {
     period.addEventListener('click', async (event) => {
-        if (event.target.classList.contains('cancel-icon')) {
+        if (event.target.closest('.cancel-icon')) {
             const item = event.target.closest('li')
             const { id } = item.dataset
 

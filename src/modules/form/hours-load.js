@@ -30,6 +30,10 @@ export function hoursLoad({ date, dailySchedules }) {
         li.classList.add('hour')
         li.classList.add(available ? "hour-available" : "hour-unavailable")
         li.textContent = hour
+        li.setAttribute('role', 'button')
+        li.setAttribute('tabindex', available ? '0' : '-1')
+        li.setAttribute('aria-label', `${hour} ${available ? 'disponível' : 'indisponível'}`)
+        if (!available) li.setAttribute('aria-disabled', 'true')
 
         if (hour === '9:00') {
             hourHeaderAdd('Manhã')

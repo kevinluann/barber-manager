@@ -17,7 +17,8 @@
   flex-wrap: wrap;
 }
 
-.schedule-header h1 {
+.schedule-header h1,
+.schedule-header h2 {
   font-family: "Instrument Serif", serif;
   font-size: 2.6rem;
   font-weight: 400;
@@ -79,7 +80,8 @@
   flex-shrink: 0;
 }
 
-.schedule-period header strong {
+.schedule-period header strong,
+.schedule-period header h3 {
   flex: 0 0 auto;
   font-family: "Instrument Sans", sans-serif;
   font-size: 0.72rem;
@@ -87,6 +89,7 @@
   text-transform: uppercase;
   font-weight: 600;
   color: var(--ink);
+  margin: 0;
 }
 
 .period-range {
@@ -213,7 +216,17 @@
   border: none;
   padding: 0;
   background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  appearance: none;
+}
+
+.cancel-icon img {
+  width: 16px;
+  height: 16px;
   display: block;
+  pointer-events: none;
 }
 
 .schedule-period ul li:hover .cancel-icon {
@@ -224,6 +237,12 @@
 .cancel-icon:hover {
   opacity: 1 !important;
   transform: scale(1.05);
+}
+
+.cancel-icon:focus-visible {
+  opacity: 1;
+  outline: 1px solid var(--gold);
+  outline-offset: 2px;
 }
 
 .schedule-period ul li img:hover {
@@ -254,7 +273,8 @@
     padding: 1.6rem 1.25rem 1.4rem;
   }
 
-  .schedule-header h1 {
+  .schedule-header h1,
+  .schedule-header h2 {
     font-size: 2.1rem;
   }
 }
@@ -301,7 +321,8 @@
     gap: 0.6rem;
   }
 
-  .schedule-header h1 {
+  .schedule-header h1,
+  .schedule-header h2 {
     font-size: 1.8rem;
   }
 }

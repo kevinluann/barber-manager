@@ -19,14 +19,19 @@ export function schedulesShow({ dailySchedules }) {
             time.textContent = dayjs(schedule.when).format('HH:mm')
             name.textContent = schedule.name
 
+            const cancelButton = document.createElement('button')
+            cancelButton.classList.add('cancel-icon')
+            cancelButton.setAttribute('type', 'button')
+            cancelButton.setAttribute('aria-label', `Remover agendamento de ${schedule.name} às ${dayjs(schedule.when).format('HH:mm')}`)
+            cancelButton.setAttribute('title', 'Remover')
+
             const cancelIcon = document.createElement('img')
-
-            cancelIcon.classList.add('cancel-icon')
             cancelIcon.setAttribute('src', './assets/cancel.svg')
-            cancelIcon.setAttribute('alt', 'Remover')
-            cancelIcon.setAttribute('title', 'Remover')
+            cancelIcon.setAttribute('alt', '')
+            cancelIcon.setAttribute('aria-hidden', 'true')
 
-            item.append(time, name, cancelIcon)
+            cancelButton.appendChild(cancelIcon)
+            item.append(time, name, cancelButton)
 
             const hour = dayjs(schedule.when).hour()
 
