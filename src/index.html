@@ -7,84 +7,140 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@400;700&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Catamaran:wght@400;700&display=swap"
+    rel="stylesheet" />
 
   <link rel="icon" href="./assets/scissors.svg" />
 
-  <title>Hair Day</title>
+  <title>BarberManager</title>
 </head>
 
 <body>
+  <div class="page-frame" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <img src="./assets/scissors.svg" alt="BarberManager" class="brand-mark" />
+        <span class="brand-wordmark">BARBERMANAGER</span>
+        <span class="brand-sub">· 09 — 21H</span>
+      </div>
+
+      <div class="topbar-rule" aria-hidden="true"></div>
+
+      <div class="date-display" id="date-display">
+        <span class="date-display-label">Agenda de</span>
+        <span class="date-display-value" id="date-display-value">—</span>
+        <span class="date-display-dot" aria-hidden="true">·</span>
+        <span class="date-display-weekday" id="date-display-weekday">—</span>
+      </div>
+
+      <div class="topbar-meta">
+        <span class="topbar-edition">Agenda do dia</span>
+        <span class="topbar-dot" aria-hidden="true"></span>
+        <span class="topbar-year">2026</span>
+      </div>
+    </div>
+  </header>
+
   <div class="container">
-    <img src="./assets/logo.svg" alt="Logo" class="logo" />
+    <div class="control">
+      <form class="form">
+        <div class="control-kicker">
+          <span class="kicker-line" aria-hidden="true"></span>
+          <span class="kicker-text">Novo agendamento</span>
+        </div>
 
-    <form class="form">
-      <header>
-        <h1>Agende um atendimento</h1>
-        <p>
-          Selecione data, horário e informe o nome do cliente para criar o
-          agendamento
-        </p>
-      </header>
+        <header class="form-header">
+          <h1>Agendar atendimento</h1>
+          <p>Selecione a data, o horário e informe o cliente.</p>
+        </header>
 
-      <label for="date" class="label">Data</label>
-      <div class="input">
-        <i><img src="./assets/calendar.svg" alt="Calendário" /></i>
-        <input type="date" id="date" name="date" required />
+        <div class="field">
+          <label for="date" class="label">Data</label>
+          <div class="input">
+            <i aria-hidden="true"><img src="./assets/calendar.svg" alt="" /></i>
+            <input type="date" id="date" name="date" required />
+          </div>
+        </div>
+
+        <div class="field">
+          <span class="label" id="hours-label">Horário</span>
+          <p class="field-hint">Selecione um horário disponível.</p>
+          <ul id="hours" class="hours" aria-labelledby="hours-label"></ul>
+        </div>
+
+        <div class="field">
+          <label for="client" class="label">Cliente</label>
+          <div class="input">
+            <i aria-hidden="true"><img src="./assets/person.svg" alt="" /></i>
+            <input type="text" id="client" name="client" placeholder="Nome do cliente" required autocomplete="off" />
+          </div>
+        </div>
+
+        <button type="submit" class="button">
+          <span class="button-label">Agendar atendimento</span>
+          <span class="button-arrow" aria-hidden="true">—→</span>
+        </button>
+
+        <p class="control-footnote">Os horários indisponíveis ficam desativados.</p>
+      </form>
+
+      <div class="control-sheet" aria-hidden="true">
+        <div class="sheet-line"></div>
+        <div class="sheet-line"></div>
+        <div class="sheet-line"></div>
       </div>
-
-      <span class="label">Horários</span>
-      <ul id="hours" class="hours" aria-label="Horários disponíveis de manhã">
-
-      </ul>
-
-      <label for="client" class="label">Cliente</label>
-      <div class="input">
-        <i><img src="./assets/person.svg" alt="Calendário" /></i>
-        <input type="text" id="client" name="client" placeholder="Nome do cliente" required />
-      </div>
-
-      <button type="submit" class="button">Agendar</button>
-    </form>
+    </div>
 
     <aside class="schedule">
-      <header>
-        <h1>Agendamentos</h1>
-        <p>Visualize os agendamentos de acordo com o dia selecionado</p>
+      <header class="schedule-header">
+        <div class="schedule-title-row">
+          <h1>Agenda</h1>
+          <span class="schedule-count" id="schedule-count">0 atendimentos</span>
+        </div>
+        <p>Atendimentos do dia</p>
+        <div class="schedule-rule" aria-hidden="true"></div>
       </header>
 
       <section class="schedule-period">
         <header>
-          <img src="./assets/morning.svg" alt="Manhã" />
+          <span class="period-index">A</span>
           <strong>Manhã</strong>
-          <span>09h-12h</span>
+          <span class="period-range">09h — 12h</span>
+          <span class="period-line" aria-hidden="true"></span>
+          <span class="period-count" data-period="morning">—</span>
         </header>
-        <ul id="period-morning" class="period">
-
-        </ul>
+        <ul id="period-morning" class="period"></ul>
       </section>
 
       <section class="schedule-period">
         <header>
-          <img src="./assets/afternoon.svg" alt="Tarde" />
+          <span class="period-index">B</span>
           <strong>Tarde</strong>
-          <span>13h-18h</span>
+          <span class="period-range">13h — 18h</span>
+          <span class="period-line" aria-hidden="true"></span>
+          <span class="period-count" data-period="afternoon">—</span>
         </header>
-        <ul id="period-afternoon" class="period">
-
-        </ul>
+        <ul id="period-afternoon" class="period"></ul>
       </section>
 
       <section class="schedule-period">
         <header>
-          <img src="./assets/night.svg" alt="noite" />
+          <span class="period-index">C</span>
           <strong>Noite</strong>
-          <span>19h-21h</span>
+          <span class="period-range">19h — 21h</span>
+          <span class="period-line" aria-hidden="true"></span>
+          <span class="period-count" data-period="night">—</span>
         </header>
-        <ul id="period-night" class="period">
-
-        </ul>
+        <ul id="period-night" class="period"></ul>
       </section>
+
+      <footer class="ledger-footer">
+        <span aria-hidden="true" class="ledger-mark">— ✦ —</span>
+        <span>BarberManager · Sua agenda, organizada.</span>
+      </footer>
     </aside>
   </div>
 </body>

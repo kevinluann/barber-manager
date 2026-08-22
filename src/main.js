@@ -14,3 +14,4 @@ import './modules/form/date-change.js'
 import './modules/schedules/cancel.js'
 
 import "./modules/page-load.js"
+import "./modules/ui-enhance.js"
