@@ -1,0 +1,55 @@
+.edit-dialog {
+  border: 1px solid #DDD2B8;
+  background: #FDFBF5;
+  padding: 1.5rem;
+  max-width: 420px;
+  width: calc(100% - 2rem);
+  box-shadow: 0 8px 24px rgba(14, 14, 16, 0.18);
+  margin: auto;
+}
+
+.edit-dialog::backdrop {
+  background: rgba(14, 14, 16, 0.45);
+  backdrop-filter: blur(2px);
+}
+
+.edit-dialog h3 {
+  font-family: "Instrument Serif", serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: #1A1816;
+  margin: 0 0 0.3rem;
+}
+
+.edit-hint {
+  font-size: 0.78rem;
+  color: #6B6760;
+  margin: 0 0 1.2rem;
+}
+
+.edit-dialog .field {
+  margin-bottom: 1rem;
+}
+
+.edit-dialog .input {
+  background: #fff;
+}
+
+.edit-dialog .input input {
+  color: #1A1816;
+}
+
+.edit-dialog #edit-hours {
+  margin-bottom: 0.4rem;
+}
+
+.edit-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  margin-top: 1.2rem;
+}
+
+.edit-actions .confirm-btn {
+  min-width: 92px;
+}

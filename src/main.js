@@ -9,6 +9,7 @@ import "./styles/global.css"
 import "./styles/schedule.css"
 import "./styles/toast.css"
 import "./styles/confirm.css"
+import "./styles/edit.css"
 
 //JS
 import "./modules/form/submit.js"
