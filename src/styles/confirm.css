@@ -1,0 +1,64 @@
+.confirm-dialog {
+  border: 1px solid #DDD2B8;
+  background: #FDFBF5;
+  padding: 1.25rem 1.25rem 1rem;
+  max-width: 360px;
+  width: calc(100% - 2rem);
+  box-shadow: 0 8px 24px rgba(14, 14, 16, 0.18);
+  margin: auto;
+}
+
+.confirm-dialog::backdrop {
+  background: rgba(14, 14, 16, 0.45);
+  backdrop-filter: blur(2px);
+}
+
+.confirm-message {
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: #1A1816;
+  margin: 0 0 1rem;
+}
+
+.confirm-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+}
+
+.confirm-btn {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid #DDD2B8;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+
+.confirm-btn--cancel {
+  background: #fff;
+  color: #1A1816;
+}
+
+.confirm-btn--cancel:hover {
+  background: #F2EBD8;
+}
+
+.confirm-btn--confirm {
+  background: #8A6D1E;
+  color: #FDFBF5;
+  border-color: #8A6D1E;
+}
+
+.confirm-btn--confirm:hover {
+  background: #6B4E07;
+  border-color: #6B4E07;
+}
+
+.confirm-btn:focus-visible {
+  outline: 1px solid #C6A75C;
+  outline-offset: 2px;
+}

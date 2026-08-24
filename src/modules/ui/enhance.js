@@ -1,5 +1,5 @@
 import dayjs from "dayjs"
-import { monthsPtBr, weekdaysPtBr } from "../utils/date-labels.js"
+import { monthsPtBr, weekdaysPtBr } from "../../utils/date-labels.js"
 
 const dateInput = document.querySelector('#date')
 const dateValueEl = document.querySelector('#date-display-value')

@@ -2,6 +2,7 @@ import dayjs from "dayjs"
 
 import { scheduleNew } from "../../services/schedule-new.js"
 import { schedulesDay } from "../schedules/load.js"
+import { showToast } from "../ui/toast.js"
 
 const form = document.querySelector('form')
 const clientName = document.querySelector('#client')
@@ -20,13 +21,15 @@ form.addEventListener('submit', async (event) => {
         const name = clientName.value.trim()
 
         if (!name) {
-            return alert('Informe o nome do cliente!')
+            showToast('Informe o nome do cliente!', 'error')
+            return
         }
 
         const hourSelected = document.querySelector('.hour-selected')
 
         if (!hourSelected) {
-            return alert('Selecione o horário.')
+            showToast('Selecione o horário.', 'error')
+            return
         }
 
         const [hour, _] = hourSelected.textContent.split(':')
@@ -39,7 +42,7 @@ form.addEventListener('submit', async (event) => {
 
         clientName.value = ''
     } catch (error) {
-        alert('Não foi possivel realizar o agendamento.')
+        showToast('Não foi possivel realizar o agendamento.', 'error')
         console.log(error)
     }
 })

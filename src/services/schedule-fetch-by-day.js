@@ -1,4 +1,5 @@
 import dayjs from "dayjs"
+import { showToast } from "../modules/ui/toast.js"
 import { apiConfig } from "./api-config.js"
 
 export async function scheduleFetchByDay({ date }) {
@@ -13,7 +14,7 @@ export async function scheduleFetchByDay({ date }) {
 
         return dailySchedules
     } catch (error) {
-        alert('Não foi possível buscar os agendamentos do dia.')
+        showToast('Não foi possível buscar os agendamentos do dia.', 'error')
         console.log(error)
     }
 }

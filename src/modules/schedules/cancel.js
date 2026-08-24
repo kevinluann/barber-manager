@@ -1,4 +1,5 @@
 import { scheduleCancel } from "../../services/schedule-cancel.js"
+import { showConfirm } from "../ui/confirm.js"
 import { schedulesDay } from "./load"
 
 const periods = document.querySelectorAll('.period')
@@ -10,7 +11,7 @@ periods.forEach((period) => {
             const { id } = item.dataset
 
             if (id) {
-                const isConfirm = confirm('Tem certeza que deseja cancelar o agendamento?')
+                const isConfirm = await showConfirm('Tem certeza que deseja remover o agendamento?')
 
                 if (isConfirm) {
                     await scheduleCancel({ id })

@@ -1,4 +1,5 @@
 import dayjs from "dayjs"
+import { showToast } from "../ui/toast.js"
 
 const periodMorning = document.querySelector('#period-morning')
 const periodAfternoon = document.querySelector('#period-afternoon')
@@ -44,7 +45,7 @@ export function schedulesShow({ dailySchedules }) {
             }
         });
     } catch (error) {
-        alert('Não foi possível exibir os agendamentos')
+        showToast('Não foi possível exibir os agendamentos', 'error')
         console.log(error)
     }
 }

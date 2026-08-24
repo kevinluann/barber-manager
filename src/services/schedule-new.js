@@ -1,3 +1,4 @@
+import { showToast } from "../modules/ui/toast.js"
 import { apiConfig } from "./api-config.js"
 
 export async function scheduleNew({ name, when }) {
@@ -10,9 +11,9 @@ export async function scheduleNew({ name, when }) {
             body: JSON.stringify({ name, when })
         })
 
-        alert('Agendamento realizado com sucesso.')
+        showToast('Agendamento realizado com sucesso.', 'success')
     } catch (error) {
-        alert('Não foi possível agendar. Tente novamente mais tarde.')
+        showToast('Não foi possível agendar. Tente novamente mais tarde.', 'error')
         console.log(error)
     }
 }
