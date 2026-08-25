@@ -11,7 +11,7 @@ periods.forEach((period) => {
             const { id } = item.dataset
 
             if (id) {
-                const isConfirm = await showConfirm('Tem certeza que deseja remover o agendamento?')
+                const isConfirm = await showConfirm('Tem certeza que deseja remover o agendamento?', 'Remover', 'Manter')
 
                 if (isConfirm) {
                     await scheduleCancel({ id })

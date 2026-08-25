@@ -1,8 +1,8 @@
-export function showConfirm(message) {
+export function showConfirm(message, confirmText, cancelText) {
   return new Promise((resolve) => {
     const popup = createPopup()
 
-    const { cancelBtn, confirmBtn } = buildDialogContent(popup, message)
+    const { cancelBtn, confirmBtn } = buildDialogContent(popup, message, confirmText, cancelText)
 
     document.body.appendChild(popup)
 
@@ -23,7 +23,7 @@ function createPopup() {
   return popup
 }
 
-function buildDialogContent(popup, message) {
+function buildDialogContent(popup, message, confirmText, cancelText) {
   const messageEl = document.createElement('p')
   messageEl.className = 'confirm-message'
   messageEl.textContent = message
@@ -35,13 +35,13 @@ function buildDialogContent(popup, message) {
   cancelBtn.type = 'button'
   cancelBtn.className = 'confirm-btn confirm-btn--cancel'
   cancelBtn.value = 'cancel'
-  cancelBtn.textContent = 'Manter'
+  cancelBtn.textContent = cancelText
 
   const confirmBtn = document.createElement('button')
   confirmBtn.type = 'button'
   confirmBtn.className = 'confirm-btn confirm-btn--confirm'
   confirmBtn.value = 'confirm'
-  confirmBtn.textContent = 'Remover'
+  confirmBtn.textContent = confirmText
 
   actionsEl.append(cancelBtn, confirmBtn)
   popup.append(messageEl, actionsEl)
