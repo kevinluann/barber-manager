@@ -17,6 +17,7 @@ export function schedulesShow({ dailySchedules }) {
             const name = document.createElement('span')
 
             item.setAttribute('data-id', schedule.id)
+            item.dataset.name = schedule.name
             time.textContent = dayjs(schedule.when).format('HH:mm')
             name.textContent = schedule.name
 
@@ -32,7 +33,14 @@ export function schedulesShow({ dailySchedules }) {
             cancelIcon.setAttribute('aria-hidden', 'true')
 
             cancelButton.appendChild(cancelIcon)
-            item.append(time, name, cancelButton)
+
+            const editButton = document.createElement('button')
+            editButton.className = 'edit-icon'
+            editButton.type = 'button'
+            editButton.setAttribute('aria-label', `Editar ${schedule.name}`)
+            editButton.innerHTML = '<img src="./assets/person.svg" alt="">'
+
+            item.append(time, name, editButton, cancelButton)
 
             const hour = dayjs(schedule.when).hour()
 
