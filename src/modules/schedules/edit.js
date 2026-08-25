@@ -49,59 +49,80 @@ function setupEditForm(dialog) {
     cancelBtn.addEventListener('click', () => dialog.close())
 }
 
+async function getUnavailableHours(date) {
+    const daily = await scheduleFetchByDay({ date })
+
+    return daily.map((schedule) => {
+        return dayjs(schedule.when).format('HH:mm')
+    })
+}
+
+function isHourUnavailable(hour, selectedHour, unavailable, date) {
+    const [h, _] = hour.split(':')
+    const isPast = dayjs(date).add(h, 'hour').isBefore(dayjs())
+    const isCurrent = hour === selectedHour
+
+    return (unavailable.includes(hour) && !isCurrent) || isPast
+}
+
+function createHourElement(hour, isCurrent, isUnavailable, list) {
+    const li = document.createElement('li')
+    li.textContent = hour
+    li.className = `hour ${isUnavailable ? 'hour-unavailable' : 'hour-available'}`
+    li.setAttribute('aria-disabled', isUnavailable ? 'true' : 'false')
+
+
+    if (!isUnavailable) {
+        li.addEventListener('click', (event) => {
+            const hourElements = list.querySelectorAll('.hour')
+
+            hourElements.forEach((h) => {
+                h.classList.remove('hour-selected')
+            })
+
+            event.currentTarget.classList.add('hour-selected')
+        })
+    }
+
+    if (isCurrent) {
+        li.classList.add('hour-selected')
+    }
+
+    return li
+}
+
+function buildEditHours(dialog, selectedHour, date, unavailable) {
+    const list = dialog.querySelector('#edit-hours')
+    list.replaceChildren()
+
+    openingHours.forEach(hour => {
+        const isUnavailable = isHourUnavailable(hour, selectedHour, unavailable, date)
+        const element = createHourElement(hour, selectedHour === hour, isUnavailable, list)
+
+        list.appendChild(element)
+    })
+}
+
 export function enableEditButtons() {
-    document.querySelectorAll('.edit-icon').forEach((button) => {
+    const editButtons = document.querySelectorAll('.edit-icon')
+
+    editButtons.forEach((button) => {
+        if (button.dataset.bound) return
+
+        button.dataset.bound = 'true'
+
         button.addEventListener('click', async () => {
             const li = button.closest('li[data-id]')
             const dialog = getEditDialog()
 
-            const date = dateInput.value
-            const dailySchedules = await scheduleFetchByDay({ date })
-
-            const unavailable = dailySchedules.map((schedule) => {
-                return dayjs(schedule.when).format('HH:mm')
-            })
-
-            const list = dialog.querySelector('#edit-hours')
-            list.replaceChildren()
-
-            openingHours.forEach((hour) => {
-                const [h, _] = hour.split(':')
-                const isPast = dayjs(date).add(h, 'hour').isBefore(dayjs())
-                const isCurrent = hour === li.dataset.hour
-                const isUnavailable = (unavailable.includes(hour) && !isCurrent) || isPast
-
-                const hourItem = document.createElement('li')
-                hourItem.textContent = hour
-                hourItem.className = `hour ${isUnavailable ? 'hour-unavailable' : 'hour-available'}`
-                hourItem.setAttribute('aria-disabled', isUnavailable ? 'true' : 'false')
-                hourItem.setAttribute('role', 'button')
-                hourItem.setAttribute('tabindex', isUnavailable ? '-1' : '0')
-
-                if (hour === li.dataset.hour) {
-                    hourItem.classList.add('hour-selected')
-                }
-
-                if (!isUnavailable) {
-                    hourItem.addEventListener('click', (event) => {
-                        list.querySelectorAll('.hour').forEach((h) => {
-                            h.classList.remove('hour-selected')
-                        })
-
-                        event.currentTarget.classList.add('hour-selected')
-                    })
-                }
-
-                list.appendChild(hourItem)
-            })
-
             setupEditForm(dialog)
 
-            const editIdInput = dialog.querySelector('#edit-id')
-            const editClientInput = dialog.querySelector('#edit-client')
+            const unavailable = await getUnavailableHours(dateInput.value)
 
-            editIdInput.value = li.dataset.id
-            editClientInput.value = li.dataset.name
+            buildEditHours(dialog, li.dataset.hour, dateInput.value, unavailable)
+
+            dialog.querySelector('#edit-id').value = li.dataset.id
+            dialog.querySelector('#edit-client').value = li.dataset.name
 
             dialog.showModal()
         })
