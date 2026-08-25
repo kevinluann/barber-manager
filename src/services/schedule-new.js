@@ -8,7 +8,7 @@ export async function scheduleNew({ name, when }) {
             headers: {
                 'Content-type': 'application/json'
             },
-            body: JSON.stringify({ name, when })
+            body: JSON.stringify({ name, when, status: 'pending' })
         })
 
         showToast('Agendamento realizado com sucesso.', 'success')
