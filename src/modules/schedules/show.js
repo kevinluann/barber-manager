@@ -20,6 +20,10 @@ export function schedulesShow({ dailySchedules }) {
             item.dataset.name = schedule.name
             time.textContent = dayjs(schedule.when).format('HH:mm')
             item.dataset.hour = time.textContent
+            item.dataset.status = schedule.status || 'pending'
+            if (schedule.status === 'done') {
+                item.classList.add('is-done')
+            }
             name.textContent = schedule.name
 
             const cancelButton = document.createElement('button')
@@ -41,7 +45,14 @@ export function schedulesShow({ dailySchedules }) {
             editButton.setAttribute('aria-label', `Editar ${schedule.name}`)
             editButton.innerHTML = '<img src="./assets/person.svg" alt="">'
 
-            item.append(time, name, editButton, cancelButton)
+            const completeButton = document.createElement('button')
+            completeButton.className = 'complete-icon'
+            completeButton.type = 'button'
+            completeButton.setAttribute('aria-label', `Concluir agendamento de ${schedule.name}`)
+            completeButton.setAttribute('title', 'Concluir')
+            completeButton.textContent = '✓'
+
+            item.append(time, name, editButton, completeButton, cancelButton)
 
             const hour = dayjs(schedule.when).hour()
 

@@ -137,13 +137,29 @@
   color: var(--ink-soft);
   font-size: 0.88rem;
   display: grid;
-  grid-template-columns: 72px 1fr auto auto;
+  grid-template-columns: 72px 1fr auto auto auto;
   align-items: center;
   gap: 0.6rem;
   padding: 0.35rem 0 0.35rem 0;
   border-bottom: 1px solid rgba(233, 224, 200, 0.55);
   position: relative;
   transition: background 0.18s;
+}
+
+.schedule-period ul li.is-done {
+  opacity: 0.55;
+}
+
+.schedule-period ul li.is-done strong,
+.schedule-period ul li.is-done span {
+  text-decoration: line-through;
+  text-decoration-color: #736E66;
+}
+
+.schedule-period ul li.is-done::before {
+  background: #736E66;
+  border-color: #736E66;
+  box-shadow: none;
 }
 
 .schedule-period ul li:last-child {
@@ -207,7 +223,8 @@
 }
 
 .cancel-icon,
-.edit-icon {
+.edit-icon,
+.complete-icon {
   cursor: pointer;
   transition: all 0.18s;
   width: 20px;
@@ -221,6 +238,10 @@
   align-items: center;
   justify-content: center;
   appearance: none;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 14px;
+  line-height: 1;
+  color: #5C4A1A;
 }
 
 .cancel-icon img,
@@ -231,23 +252,40 @@
   pointer-events: none;
 }
 
+.complete-icon {
+  font-weight: 700;
+}
+
 .schedule-period ul li:hover .cancel-icon,
-.schedule-period ul li:hover .edit-icon {
+.schedule-period ul li:hover .edit-icon,
+.schedule-period ul li:hover .complete-icon {
   opacity: 0.9;
   transform: scale(1);
 }
 
 .cancel-icon:hover,
-.edit-icon:hover {
+.edit-icon:hover,
+.complete-icon:hover {
   opacity: 1 !important;
   transform: scale(1.05);
 }
 
 .cancel-icon:focus-visible,
-.edit-icon:focus-visible {
+.edit-icon:focus-visible,
+.complete-icon:focus-visible {
   opacity: 1;
   outline: 1px solid var(--gold);
   outline-offset: 2px;
+}
+
+.schedule-period ul li.is-done .complete-icon {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.schedule-period ul li.is-done .edit-icon,
+.schedule-period ul li.is-done .cancel-icon {
+  opacity: 0.35;
 }
 
 .schedule-period ul li img:hover {
