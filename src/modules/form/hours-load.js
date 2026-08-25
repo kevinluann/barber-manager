@@ -35,7 +35,7 @@ export function hoursLoad({ date, dailySchedules }) {
         li.setAttribute('aria-label', `${hour} ${available ? 'disponível' : 'indisponível'}`)
         if (!available) li.setAttribute('aria-disabled', 'true')
 
-        if (hour === '9:00') {
+        if (hour === '09:00') {
             hourHeaderAdd('Manhã')
         } else if (hour === '13:00') {
             hourHeaderAdd('Tarde')
