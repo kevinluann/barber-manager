@@ -33,6 +33,14 @@ function createDialog() {
   return dialog
 }
 
+function createForm() {
+  const form = document.createElement('form')
+  form.id = 'edit-form'
+  form.method = 'dialog'
+  
+  return form
+}
+
 function createTitle() {
   const title = document.createElement('h3')
 
