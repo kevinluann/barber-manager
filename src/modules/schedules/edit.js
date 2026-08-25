@@ -1,9 +1,11 @@
 import dayjs from "dayjs"
-import { getEditDialog } from "../ui/edit-dialog.js"
+
+import { scheduleFetchByDay } from "../../services/schedule-fetch-by-day.js"
 import { openingHours } from "../../utils/opening-hours.js"
 import { scheduleUpdate } from "../../services/schedule-update.js"
-import { schedulesDay } from "./load.js"
+import { getEditDialog } from "../ui/edit-dialog.js"
 import { showToast } from "../ui/toast.js"
+import { schedulesDay } from "./load.js"
 
 const dateInput = document.querySelector('#date')
 
@@ -49,29 +51,46 @@ function setupEditForm(dialog) {
 
 export function enableEditButtons() {
     document.querySelectorAll('.edit-icon').forEach((button) => {
-        button.addEventListener('click', () => {
+        button.addEventListener('click', async () => {
             const li = button.closest('li[data-id]')
             const dialog = getEditDialog()
+
+            const date = dateInput.value
+            const dailySchedules = await scheduleFetchByDay({ date })
+
+            const unavailable = dailySchedules.map((schedule) => {
+                return dayjs(schedule.when).format('HH:mm')
+            })
 
             const list = dialog.querySelector('#edit-hours')
             list.replaceChildren()
 
             openingHours.forEach((hour) => {
+                const [h, _] = hour.split(':')
+                const isPast = dayjs(date).add(h, 'hour').isBefore(dayjs())
+                const isCurrent = hour === li.dataset.hour
+                const isUnavailable = (unavailable.includes(hour) && !isCurrent) || isPast
+
                 const hourItem = document.createElement('li')
-                hourItem.className = 'hour hour-available'
                 hourItem.textContent = hour
+                hourItem.className = `hour ${isUnavailable ? 'hour-unavailable' : 'hour-available'}`
+                hourItem.setAttribute('aria-disabled', isUnavailable ? 'true' : 'false')
+                hourItem.setAttribute('role', 'button')
+                hourItem.setAttribute('tabindex', isUnavailable ? '-1' : '0')
 
                 if (hour === li.dataset.hour) {
                     hourItem.classList.add('hour-selected')
                 }
 
-                hourItem.addEventListener('click', (event) => {
-                    list.querySelectorAll('.hour').forEach((h) => {
-                        h.classList.remove('hour-selected')
-                    })
+                if (!isUnavailable) {
+                    hourItem.addEventListener('click', (event) => {
+                        list.querySelectorAll('.hour').forEach((h) => {
+                            h.classList.remove('hour-selected')
+                        })
 
-                    event.currentTarget.classList.add('hour-selected')
-                })
+                        event.currentTarget.classList.add('hour-selected')
+                    })
+                }
 
                 list.appendChild(hourItem)
             })
