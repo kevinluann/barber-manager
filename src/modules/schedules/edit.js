@@ -52,6 +52,30 @@ export function enableEditButtons() {
         button.addEventListener('click', () => {
             const li = button.closest('li[data-id]')
             const dialog = getEditDialog()
+
+            const list = dialog.querySelector('#edit-hours')
+            list.replaceChildren()
+
+            openingHours.forEach((hour) => {
+                const hourItem = document.createElement('li')
+                hourItem.className = 'hour hour-available'
+                hourItem.textContent = hour
+
+                if (hour === li.dataset.hour) {
+                    hourItem.classList.add('hour-selected')
+                }
+
+                hourItem.addEventListener('click', (event) => {
+                    list.querySelectorAll('.hour').forEach((h) => {
+                        h.classList.remove('hour-selected')
+                    })
+
+                    event.currentTarget.classList.add('hour-selected')
+                })
+
+                list.appendChild(hourItem)
+            })
+
             setupEditForm(dialog)
 
             const editIdInput = dialog.querySelector('#edit-id')

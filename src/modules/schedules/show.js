@@ -16,9 +16,10 @@ export function schedulesShow({ dailySchedules }) {
             const time = document.createElement('strong')
             const name = document.createElement('span')
 
-            item.setAttribute('data-id', schedule.id)
+            item.dataset.id = schedule.id
             item.dataset.name = schedule.name
             time.textContent = dayjs(schedule.when).format('HH:mm')
+            item.dataset.hour = time.textContent
             name.textContent = schedule.name
 
             const cancelButton = document.createElement('button')
