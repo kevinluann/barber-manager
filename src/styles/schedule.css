@@ -233,7 +233,7 @@
 
 .schedule-period ul li:hover .cancel-icon,
 .schedule-period ul li:hover .edit-icon {
-  opacity: 0.55;
+  opacity: 0.9;
   transform: scale(1);
 }
 
