@@ -19,5 +19,6 @@ export async function schedulesDay() {
     hoursLoad({ date, dailySchedules })
 
     refreshUI()
+
     enableEditButtons()
 }
