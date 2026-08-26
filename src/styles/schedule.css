@@ -54,6 +54,41 @@
   background: var(--gold);
 }
 
+.filter-tabs {
+  display: inline-flex;
+  gap: 0.4rem;
+  margin-top: 1rem;
+}
+
+.filter-tab {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: #fff;
+  color: var(--ink-soft);
+  border: 1px solid var(--line-paper-strong);
+  padding: 0.35rem 0.7rem;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+
+.filter-tab:hover {
+  border-color: var(--ink-soft);
+  color: var(--ink);
+}
+
+.filter-tab--active {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+.filter-tab:focus-visible {
+  outline: 1px solid var(--gold);
+  outline-offset: 2px;
+}
+
 .schedule-period {
   border: none;
   border-radius: 0;
