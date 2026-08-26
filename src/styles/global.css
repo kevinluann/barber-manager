@@ -163,6 +163,42 @@ body {
   white-space: nowrap;
 }
 
+.date-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-left: 0.4rem;
+}
+
+.date-nav-btn {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: transparent;
+  color: #9A9690;
+  border: 1px solid #2C2B2E;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  transition: all 0.18s;
+  line-height: 1;
+}
+
+.date-nav-btn:hover {
+  border-color: var(--gold);
+  color: var(--paper);
+}
+
+.date-nav-btn--today {
+  color: var(--gold);
+  border-color: rgba(198, 167, 92, 0.35);
+}
+
+.date-nav-btn:focus-visible {
+  outline: 1px solid var(--gold);
+  outline-offset: 2px;
+}
+
 .topbar-meta {
   display: flex;
   align-items: center;
