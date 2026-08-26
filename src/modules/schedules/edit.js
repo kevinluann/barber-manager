@@ -16,18 +16,28 @@ function setupEditForm(dialog) {
 
     form.dataset.bound = 'true'
 
+    const editClientError = form.querySelector('#edit-client-error')
+    const editClientInput = form.querySelector('#edit-client')
+
+    editClientInput.addEventListener('input', () => {
+        editClientError.textContent = ''
+        editClientInput.removeAttribute('aria-invalid')
+    })
+
     form.addEventListener('submit', async (event) => {
         event.preventDefault()
 
         const editIdInput = form.querySelector('#edit-id')
-        const editClientInput = form.querySelector('#edit-client')
         const hourEl = form.querySelector('#edit-hours .hour-selected')
 
         const id = editIdInput.value
         const name = editClientInput.value.trim()
 
         if (!name) {
-            return showToast('Informe o nome', 'error')
+            editClientError.textContent = 'Informe o nome'
+            editClientInput.setAttribute('aria-invalid', 'true')
+
+            return
         }
 
         if (!hourEl) {

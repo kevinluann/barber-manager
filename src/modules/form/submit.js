@@ -7,12 +7,20 @@ import { showToast } from "../ui/toast.js"
 const form = document.querySelector('form')
 const clientName = document.querySelector('#client')
 const selectedDate = document.querySelector('#date')
+const clientError = document.querySelector('#client-error')
+const hoursError = document.querySelector('#hours-error')
 
 const inputToday = dayjs().format('YYYY-MM-DD')
 
 selectedDate.value = inputToday
 selectedDate.min = inputToday
 selectedDate.max = dayjs().add(1, 'month').format('YYYY-MM-DD')
+
+clientName.addEventListener('input', () => {
+    clientError.textContent = ''
+    clientName.removeAttribute('aria-invalid')
+    clientName.classList.remove('input--error')
+})
 
 form.addEventListener('submit', async (event) => {
     event.preventDefault()
@@ -21,15 +29,22 @@ form.addEventListener('submit', async (event) => {
         const name = clientName.value.trim()
 
         if (!name) {
-            showToast('Informe o nome do cliente!', 'error')
+            clientError.textContent = 'Informe o nome do cliente'
+            clientName.setAttribute('aria-invalid', 'true')
+            clientName.classList.add('input--error')
+            clientName.focus()
+
             return
         }
 
         const hourSelected = document.querySelector('.hour-selected')
 
         if (!hourSelected) {
-            showToast('Selecione o horário.', 'error')
+            hoursError.textContent = 'Selecione um horário'
+
             return
+        } else {
+            hoursError.textContent = ''
         }
 
         const [hour, _] = hourSelected.textContent.split(':')
