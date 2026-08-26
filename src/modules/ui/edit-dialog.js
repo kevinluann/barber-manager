@@ -37,6 +37,7 @@ function createForm() {
   const form = document.createElement('form')
   form.id = 'edit-form'
   form.method = 'dialog'
+  form.noValidate = true
   
   return form
 }
