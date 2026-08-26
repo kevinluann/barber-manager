@@ -95,9 +95,15 @@ function createClientField() {
   input.placeholder = 'Nome do cliente'
   input.required = true
   input.autocomplete = 'off'
+  input.setAttribute('aria-describedby', 'edit-client-error')
+
+  const errorEl = document.createElement('span')
+  errorEl.id = 'edit-client-error'
+  errorEl.className = 'field-error'
+  errorEl.setAttribute('aria-live', 'polite')
 
   wrap.append(iconWrap, input)
-  fieldWrapper.append(label, wrap)
+  fieldWrapper.append(label, wrap, errorEl)
 
   return fieldWrapper
 }
@@ -120,7 +126,12 @@ function createHoursField() {
   list.className = 'hours'
   list.setAttribute('aria-labelledby', 'edit-hours-label')
 
-  fieldWrapper.append(label, descriptionEl, list)
+  const errorEl = document.createElement('span')
+  errorEl.id = 'edit-hours-error'
+  errorEl.className = 'field-error'
+  errorEl.setAttribute('aria-live', 'polite')
+
+  fieldWrapper.append(label, descriptionEl, list, errorEl)
 
   return fieldWrapper
 }

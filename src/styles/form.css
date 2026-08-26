@@ -87,6 +87,23 @@
   margin-top: -0.2rem;
 }
 
+.field-error {
+  display: block;
+  min-height: 1rem;
+  font-size: 0.72rem;
+  color: #B55242;
+  margin-top: 0.4rem;
+  line-height: 1.3;
+}
+
+.field-error:empty {
+  display: none;
+}
+
+.input--error {
+  border-color: #B55242 !important;
+}
+
 .input {
   width: 100%;
   height: 2.9rem;

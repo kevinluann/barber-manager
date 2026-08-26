@@ -43,6 +43,10 @@
   margin-bottom: 0.4rem;
 }
 
+.edit-dialog .field-error {
+  color: #8B3A2A;
+}
+
 .edit-actions {
   display: flex;
   justify-content: flex-end;
