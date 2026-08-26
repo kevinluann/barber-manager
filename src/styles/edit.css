@@ -44,7 +44,19 @@
 }
 
 .edit-dialog .field-error {
-  color: #8B3A2A;
+  color: #6B1A1A;
+  font-weight: 600;
+  background: #FDE8E8;
+  border-left: 3px solid #6B1A1A;
+  padding: 0.3rem 0.5rem;
+  display: block;
+}
+
+.edit-dialog .field-error:empty {
+  display: none;
+  background: transparent;
+  border: none;
+  padding: 0;
 }
 
 .edit-actions {

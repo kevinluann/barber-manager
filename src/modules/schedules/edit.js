@@ -18,6 +18,7 @@ function setupEditForm(dialog) {
 
     const editClientError = form.querySelector('#edit-client-error')
     const editClientInput = form.querySelector('#edit-client')
+    const editHoursError = form.querySelector('#edit-hours-error')
 
     editClientInput.addEventListener('input', () => {
         editClientError.textContent = ''
@@ -34,14 +35,16 @@ function setupEditForm(dialog) {
         const name = editClientInput.value.trim()
 
         if (!name) {
-            editClientError.textContent = 'Informe o nome'
+            editClientError.textContent = 'Informe o nome do cliente'
             editClientInput.setAttribute('aria-invalid', 'true')
 
             return
         }
 
         if (!hourEl) {
-            return showToast('Selecione o horário', 'error')
+            editHoursError.textContent = 'Selecione um horário'
+
+            return
         }
 
         const [hour, _] = hourEl.textContent.split(':')
@@ -81,9 +84,12 @@ function createHourElement(hour, isCurrent, isUnavailable, list) {
     li.className = `hour ${isUnavailable ? 'hour-unavailable' : 'hour-available'}`
     li.setAttribute('aria-disabled', isUnavailable ? 'true' : 'false')
 
+    const editHoursError = list.closest('form').querySelector('#edit-hours-error')
 
     if (!isUnavailable) {
         li.addEventListener('click', (event) => {
+            editHoursError.textContent = ''
+
             const hourElements = list.querySelectorAll('.hour')
 
             hourElements.forEach((h) => {
