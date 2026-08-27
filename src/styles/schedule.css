@@ -84,6 +84,12 @@
   border-color: var(--ink);
 }
 
+.filter-tab--active:hover {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
 .filter-tab:focus-visible {
   outline: 1px solid var(--gold);
   outline-offset: 2px;
