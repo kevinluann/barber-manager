@@ -95,6 +95,21 @@
   outline-offset: 2px;
 }
 
+.empty-filtered {
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-size: 0.82rem;
+  color: var(--ink-faint);
+  padding: 0.7rem 0 0.7rem 1.9rem;
+  border-bottom: 1px dashed var(--line-paper);
+  margin: 0.5rem 0 1rem;
+}
+
+.empty-filtered:empty,
+.empty-filtered[hidden] {
+  display: none;
+}
+
 .schedule-period {
   border: none;
   border-radius: 0;

@@ -21,6 +21,15 @@ export async function schedulesDay() {
         })
     }
 
+    const emptyEl = document.querySelector('#empty-filtered')
+
+    if (filtered.length === 0 && currentFilter !== 'all') {
+        emptyEl.textContent = currentFilter === 'pending' ? 'Nenhum pendente' : 'Nenhum concluído'
+        emptyEl.hidden = false
+    } else {
+        emptyEl.hidden = true
+    }
+
     schedulesShow({ dailySchedules: filtered })
 
     enableCompleteButtons()
