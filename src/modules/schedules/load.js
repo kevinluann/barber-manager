@@ -4,6 +4,7 @@ import { refreshUI } from "../ui/enhance.js"
 import { schedulesShow } from "./show.js"
 import { enableEditButtons } from "./edit.js"
 import { enableCompleteButtons } from "./complete.js"
+import { currentFilter } from "./filter.js"
 
 const selectedDate = document.querySelector('#date')
 
@@ -12,7 +13,15 @@ export async function schedulesDay() {
 
     const dailySchedules = await scheduleFetchByDay({ date })
 
-    schedulesShow({ dailySchedules })
+    let filtered = dailySchedules
+
+    if (currentFilter !== 'all') {
+        filtered = dailySchedules.filter((schedule) => {
+            return (schedule.status || 'pending') === currentFilter
+        })
+    }
+
+    schedulesShow({ dailySchedules: filtered })
 
     enableCompleteButtons()
 
