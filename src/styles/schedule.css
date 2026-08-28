@@ -136,38 +136,6 @@
   display: none;
 }
 
-.sort-wrap {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 0.9rem;
-}
-
-.sort-label {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-}
-
-.sort-select {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  background: #fff;
-  color: var(--ink);
-  border: 1px solid var(--line-paper-strong);
-  padding: 0.3rem 0.6rem;
-  cursor: pointer;
-}
-
-.sort-select:focus-visible {
-  outline: 1px solid var(--gold);
-  outline-offset: 2px;
-}
-
 .schedule-period {
   border: none;
   border-radius: 0;

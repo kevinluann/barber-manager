@@ -251,9 +251,7 @@ body {
   position: relative;
 }
 
-.logo {
-  display: none !important;
-}
+
 
 @media (max-width: 1100px) {
   .topbar-inner {

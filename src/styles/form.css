@@ -36,14 +36,6 @@
   color: var(--gold);
 }
 
-.kicker-num {
-  margin-left: auto;
-  font-family: "Instrument Serif", serif;
-  font-size: 0.95rem;
-  color: #3A393C;
-  font-style: italic;
-}
-
 .form-header {
   margin-bottom: 1.8rem;
 }
