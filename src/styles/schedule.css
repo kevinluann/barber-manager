@@ -104,6 +104,38 @@
   flex-wrap: wrap;
 }
 
+.toolbar-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.search-wrap {
+  display: inline-flex;
+}
+
+.search-input {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--line-paper-strong);
+  padding: 0.35rem 0.6rem;
+  width: 160px;
+}
+
+.search-input::placeholder {
+  color: var(--ink-faint);
+}
+
+.search-input:focus {
+  outline: 1px solid var(--gold);
+  outline-offset: 0;
+  border-color: var(--gold);
+}
+
 .sort-select {
   font-family: "JetBrains Mono", monospace;
   font-size: 0.62rem;

@@ -6,6 +6,7 @@ import { enableEditButtons } from "./edit.js"
 import { enableCompleteButtons } from "./complete.js"
 import { currentFilter } from "./filter.js"
 import { sortSchedules } from "./sort.js"
+import { filterBySearch } from "./search.js"
 
 const selectedDate = document.querySelector('#date')
 
@@ -31,6 +32,7 @@ export async function schedulesDay() {
         emptyEl.hidden = true
     }
 
+    filtered = filterBySearch(filtered)
     filtered = sortSchedules(filtered)
 
     schedulesShow({ dailySchedules: filtered })

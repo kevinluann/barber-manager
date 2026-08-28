@@ -122,12 +122,19 @@
             aria-selected="false">Concluídos</button>
         </div>
 
-        <select id="sort-select" class="sort-select" aria-label="Ordenar agendamentos">
-          <option value="hour-asc">Horário ↑</option>
-          <option value="hour-desc">Horário ↓</option>
-          <option value="name-asc">Nome A-Z</option>
-          <option value="name-desc">Nome Z-A</option>
-        </select>
+        <div class="toolbar-actions">
+          <div class="search-wrap">
+            <input type="search" id="search" class="search-input" placeholder="Buscar cliente"
+              aria-label="Buscar cliente" autocomplete="off" />
+          </div>
+
+          <select id="sort-select" class="sort-select" aria-label="Ordenar agendamentos">
+            <option value="hour-asc">Horário ↑</option>
+            <option value="hour-desc">Horário ↓</option>
+            <option value="name-asc">Nome A-Z</option>
+            <option value="name-desc">Nome Z-A</option>
+          </select>
+        </div>
       </div>
 
       <p id="empty-filtered" class="empty-filtered" hidden aria-live="polite"></p>
