@@ -120,6 +120,16 @@
         <button type="button" data-filter="done" class="filter-tab" role="tab" aria-selected="false">Concluídos</button>
       </div>
 
+      <div class="sort-wrap">
+        <label for="sort-select" class="sort-label">Ordenar</label>
+        <select id="sort-select" class="sort-select" aria-label="Ordenar agendamentos">
+          <option value="hour-asc">Horário ↑</option>
+          <option value="hour-desc">Horário ↓</option>
+          <option value="name-asc">Nome A-Z</option>
+          <option value="name-desc">Nome Z-A</option>
+        </select>
+      </div>
+
       <p id="empty-filtered" class="empty-filtered" hidden aria-live="polite"></p>
 
       <section class="schedule-period">
