@@ -95,6 +95,32 @@
   outline-offset: 2px;
 }
 
+.schedule-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.sort-select {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--line-paper-strong);
+  padding: 0.35rem 0.6rem;
+  cursor: pointer;
+}
+
+.sort-select:focus-visible {
+  outline: 1px solid var(--gold);
+  outline-offset: 2px;
+}
+
 .empty-filtered {
   font-family: "Instrument Serif", serif;
   font-style: italic;
