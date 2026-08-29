@@ -58,7 +58,7 @@ export function schedulesShow({ dailySchedules }) {
 
             if (hour <= 12) {
                 periodMorning.appendChild(item)
-            } else if (hour > 12 && hour <= 18) {
+            } else if (hour > 12 && hour < 18) {
                 periodAfternoon.appendChild(item)
             } else {
                 periodNight.appendChild(item)
