@@ -20,7 +20,7 @@ export function schedulesShow({ dailySchedules }) {
             item.dataset.name = schedule.name
             time.textContent = dayjs(schedule.when).format('HH:mm')
             item.dataset.hour = time.textContent
-            item.dataset.status = schedule.status || 'pending'
+            item.dataset.status = schedule.status
             if (schedule.status === 'done') {
                 item.classList.add('is-done')
             }

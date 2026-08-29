@@ -4,7 +4,7 @@ import { refreshUI } from "../ui/enhance.js"
 import { schedulesShow } from "./show.js"
 import { enableEditButtons } from "./edit.js"
 import { enableCompleteButtons } from "./complete.js"
-import { currentFilter } from "./filter.js"
+import { applyStatusFilter, updateEmptyState } from "./filter.js"
 import { sortSchedules } from "./sort.js"
 import { filterBySearch } from "./search.js"
 
@@ -15,22 +15,9 @@ export async function schedulesDay() {
 
     const dailySchedules = await scheduleFetchByDay({ date })
 
-    let filtered = dailySchedules
+    let filtered = applyStatusFilter(dailySchedules)
 
-    if (currentFilter !== 'all') {
-        filtered = dailySchedules.filter((schedule) => {
-            return (schedule.status || 'pending') === currentFilter
-        })
-    }
-
-    const emptyEl = document.querySelector('#empty-filtered')
-
-    if (filtered.length === 0 && currentFilter !== 'all') {
-        emptyEl.textContent = currentFilter === 'pending' ? 'Nenhum pendente' : 'Nenhum concluído'
-        emptyEl.hidden = false
-    } else {
-        emptyEl.hidden = true
-    }
+    updateEmptyState(filtered)
 
     filtered = filterBySearch(filtered)
     filtered = sortSchedules(filtered)
