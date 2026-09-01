@@ -18,7 +18,7 @@ export function enableCompleteButtons() {
             if (!isConfirm) return
 
             await scheduleComplete({ id: li.dataset.id })
-            schedulesDay()
+            await schedulesDay()
         })
     })
 }

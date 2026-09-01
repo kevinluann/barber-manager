@@ -51,10 +51,9 @@ function setupEditForm(dialog) {
         const when = dayjs(dateInput.value).add(hour, 'hour')
 
         await scheduleUpdate({ id, name, when })
+        await schedulesDay()
 
         dialog.close()
-
-        schedulesDay()
     })
 
     const cancelBtn = dialog.querySelector('#edit-cancel')

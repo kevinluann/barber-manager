@@ -15,7 +15,7 @@ periods.forEach((period) => {
 
                 if (isConfirm) {
                     await scheduleCancel({ id })
-                    schedulesDay()
+                    await schedulesDay()
                 }
             }
         }

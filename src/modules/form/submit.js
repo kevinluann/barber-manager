@@ -52,8 +52,7 @@ form.addEventListener('submit', async (event) => {
         const when = dayjs(selectedDate.value).add(hour, 'hour')
 
         await scheduleNew({ name, when })
-
-        schedulesDay()
+        await schedulesDay()
 
         clientName.value = ''
     } catch (error) {
