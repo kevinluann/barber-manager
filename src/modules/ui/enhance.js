@@ -24,6 +24,26 @@ function renderDateHeader(dateString) {
   }
 }
 
+function updateNextAppointment(dailySchedules) {
+  const now = dayjs()
+
+  const mapped = dailySchedules.map((schedule) => ({
+    ...schedule,
+    when: dayjs(schedule.when)
+  }))
+
+  const filtered = mapped.filter((schedule) => {
+    return schedule.when.isAfter(now) && (schedule.status) !== 'done'
+  })
+
+  const sorted = filtered.sort((scheduleA, scheduleB) => scheduleA.when - scheduleB.when)
+
+  const nextSchedule = sorted[0]
+
+  const nextAppointmentEl = document.querySelector('#next-appointment')
+  nextAppointmentEl.textContent = nextSchedule ? `Próximo: ${nextSchedule.when.format('HH:mm')} — ${nextSchedule.name}` : ''
+}
+
 function updateCounters() {
   const morningCount = document.querySelectorAll('#period-morning li').length
   const afternoonCount = document.querySelectorAll('#period-afternoon li').length
@@ -66,10 +86,18 @@ document.addEventListener('DOMContentLoaded', () => {
   updateCounters()
 })
 
-export function refreshUI() {
+export function refreshUI(dailySchedules) {
   if (dateInput) {
     renderDateHeader(dateInput.value)
   }
 
   updateCounters()
+
+  updateNextAppointment(dailySchedules)
 }
+
+setInterval(async () => {
+  const dailySchedules = await scheduleFetchByDay({ date: dateInput.value })
+
+  updateNextAppointment(dailySchedules)
+}, 60000)

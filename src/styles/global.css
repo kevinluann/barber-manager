@@ -163,6 +163,21 @@ body {
   white-space: nowrap;
 }
 
+.next-appointment {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  color: #9A9690;
+  border-left: 1px solid #2C2B2E;
+  padding-left: 0.6rem;
+  margin-left: 0.2rem;
+  white-space: nowrap;
+}
+
+.next-appointment:empty {
+  display: none;
+}
+
 .date-nav {
   display: inline-flex;
   align-items: center;
