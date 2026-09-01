@@ -13,6 +13,7 @@ export function getEditDialog() {
     createDescription(),
     createIdField(),
     createClientField(),
+    createServiceField(),
     createHoursField(),
     createButtons()
   )
@@ -38,7 +39,7 @@ function createForm() {
   form.id = 'edit-form'
   form.method = 'dialog'
   form.noValidate = true
-  
+
   return form
 }
 
@@ -105,6 +106,40 @@ function createClientField() {
 
   wrap.append(iconWrap, input)
   fieldWrapper.append(label, wrap, errorEl)
+
+  return fieldWrapper
+}
+
+function createServiceField() {
+  const fieldWrapper = document.createElement('div')
+  fieldWrapper.className = 'field'
+
+  const label = document.createElement('label')
+  label.htmlFor = 'edit-service'
+  label.className = 'label'
+  label.textContent = 'Serviço'
+
+  const select = document.createElement('select')
+  select.id = 'edit-service'
+  select.className = 'input input--select'
+
+  const optCorte = document.createElement('option')
+  optCorte.value = 'corte'
+  optCorte.dataset.duration = '30'
+  optCorte.textContent = 'Corte - 30min'
+
+  const optBarba = document.createElement('option')
+  optBarba.value = 'barba'
+  optBarba.dataset.duration = '20'
+  optBarba.textContent = 'Barba - 20min'
+
+  const optCombo = document.createElement('option')
+  optCombo.value = 'combo'
+  optCombo.dataset.duration = '50'
+  optCombo.textContent = 'Combo - 50min'
+
+  select.append(optCorte, optBarba, optCombo)
+  fieldWrapper.append(label, select)
 
   return fieldWrapper
 }

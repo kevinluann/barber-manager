@@ -21,10 +21,11 @@ export function schedulesShow({ dailySchedules }) {
             time.textContent = dayjs(schedule.when).format('HH:mm')
             item.dataset.hour = time.textContent
             item.dataset.status = schedule.status
+            item.dataset.service = schedule.service
             if (schedule.status === 'done') {
                 item.classList.add('is-done')
             }
-            name.textContent = schedule.name
+            name.textContent = `${schedule.name} - ${schedule.service} (${schedule.duration}min)`
 
             const cancelButton = document.createElement('button')
             cancelButton.classList.add('cancel-icon')

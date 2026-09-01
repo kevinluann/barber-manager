@@ -153,6 +153,27 @@
   color-scheme: dark;
 }
 
+.input--select {
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 0.88rem;
+  color: #EDE9E3;
+  background: #121214;
+  border: 1px solid #2E2D30;
+  padding: 0 0.85rem;
+  outline: none;
+  cursor: pointer;
+}
+
+.input--select:focus {
+  border-color: var(--gold);
+}
+
+.edit-dialog .input--select {
+  background: #fff;
+  color: #1A1816;
+  border-color: #DDD2B8;
+}
+
 ::-webkit-calendar-picker-indicator {
   cursor: pointer;
   background: url("../assets/arrow-down.svg") no-repeat center;

@@ -50,7 +50,11 @@ function setupEditForm(dialog) {
         const [hour, _] = hourEl.textContent.split(':')
         const when = dayjs(dateInput.value).add(hour, 'hour')
 
-        await scheduleUpdate({ id, name, when })
+        const serviceEl = form.querySelector('#edit-service')
+        const service = serviceEl.value
+        const duration = Number(serviceEl.selectedOptions[0].dataset.duration)
+
+        await scheduleUpdate({ id, name, when, service, duration })
         await schedulesDay()
 
         dialog.close()
@@ -129,6 +133,9 @@ export function enableEditButtons() {
         button.addEventListener('click', async () => {
             const li = button.closest('li[data-id]')
             const dialog = getEditDialog()
+
+            const editServiceInput = dialog.querySelector('#edit-service')
+            editServiceInput.value = li.dataset.service
 
             setupEditForm(dialog)
 
