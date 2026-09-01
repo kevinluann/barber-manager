@@ -330,6 +330,31 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  display: inline-flex;
+  gap: 0.3rem;
+  align-items: baseline;
+}
+
+.schedule-period ul li .schedule-name {
+  font-weight: 400;
+  color: var(--ink);
+}
+
+.schedule-period ul li .schedule-service {
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  text-transform: capitalize;
+  color: #736E66 !important;
+  opacity: 1;
+}
+
+.schedule-period ul li .schedule-sep {
+  color: #C6A75C;
+  opacity: 1;
+  font-size: 0.78rem;
+  font-weight: 500;
 }
 
 .schedule-period ul li:has(span:not(:empty))::before {

@@ -25,7 +25,30 @@ export function schedulesShow({ dailySchedules }) {
             if (schedule.status === 'done') {
                 item.classList.add('is-done')
             }
-            name.textContent = `${schedule.name} - ${schedule.service} (${schedule.duration}min)`
+
+            const nameText = document.createElement('span')
+            nameText.className = 'schedule-name'
+            nameText.textContent = schedule.name
+
+            const sep = document.createElement('span')
+            sep.className = 'schedule-sep'
+            sep.textContent = '·'
+            sep.setAttribute('aria-hidden', 'true')
+
+            const serviceText = document.createElement('span')
+            serviceText.className = 'schedule-service'
+            serviceText.textContent = schedule.service
+
+            const sep2 = document.createElement('span')
+            sep2.className = 'schedule-sep'
+            sep2.textContent = '·'
+            sep2.setAttribute('aria-hidden', 'true')
+
+            const durationText = document.createElement('span')
+            durationText.className = 'schedule-service'
+            durationText.textContent = `${schedule.duration}min`
+
+            name.append(nameText, sep, serviceText, sep2, durationText)
 
             const cancelButton = document.createElement('button')
             cancelButton.classList.add('cancel-icon')
