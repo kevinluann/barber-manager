@@ -7,6 +7,7 @@ import { enableCompleteButtons } from "./complete.js"
 import { applyStatusFilter, updateEmptyState } from "./filter.js"
 import { sortSchedules } from "./sort.js"
 import { filterBySearch } from "./search.js"
+import { renderHistory } from "./history.js"
 
 const selectedDate = document.querySelector('#date')
 
@@ -23,6 +24,8 @@ export async function schedulesDay() {
     filtered = sortSchedules(filtered)
 
     schedulesShow({ dailySchedules: filtered })
+
+    await renderHistory()
 
     enableCompleteButtons()
 

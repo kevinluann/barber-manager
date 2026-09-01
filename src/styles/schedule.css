@@ -54,6 +54,23 @@
   background: var(--gold);
 }
 
+.history-7d {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin: 0.8rem 0 1rem;
+}
+
+.history-item {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  background: #fff;
+  border: 1px solid var(--line-paper-strong);
+  padding: 0.25rem 0.45rem;
+}
+
 .filter-tabs {
   display: inline-flex;
   gap: 0.4rem;
