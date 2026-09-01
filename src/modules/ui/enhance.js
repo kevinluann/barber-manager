@@ -1,4 +1,6 @@
 import dayjs from "dayjs"
+
+import { scheduleFetchByDay } from "../../services/schedule-fetch-by-day.js"
 import { monthsPtBr, weekdaysPtBr } from "../../utils/date-labels.js"
 
 const dateInput = document.querySelector('#date')
@@ -25,6 +27,8 @@ function renderDateHeader(dateString) {
 }
 
 function updateNextAppointment(dailySchedules) {
+  if (!dailySchedules) return
+
   const now = dayjs()
 
   const mapped = dailySchedules.map((schedule) => ({
