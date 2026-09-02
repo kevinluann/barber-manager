@@ -3,13 +3,23 @@ import dayjs from "dayjs"
 import { apiConfig } from "../../services/api-config.js"
 
 export async function showClientHistory(name) {
+    const history = await fetchClientHistory(name)
+    const dialog = buildHistoryDialog(name, history)
+
+    dialog.showModal()
+}
+
+async function fetchClientHistory(name) {
     const response = await fetch(`${apiConfig.baseURL}/schedules`)
     const all = await response.json()
 
     const filtered = all.filter((schedule) => schedule.name === name)
     const sorted = filtered.sort((scheduleA, scheduleB) => new Date(scheduleB.when) - new Date(scheduleA.when))
-    const history = sorted
 
+    return sorted
+}
+
+function buildHistoryDialog(name, history) {
     const dialog = document.querySelector('#client-history-dialog')
     dialog.replaceChildren()
 
@@ -21,7 +31,7 @@ export async function showClientHistory(name) {
     const list = document.createElement('div')
     list.className = 'history-list'
 
-    history.forEach(schedule => {
+    history.forEach((schedule) => {
         const service = schedule.service[0].toUpperCase() + schedule.service.slice(1)
         const status = schedule.status[0].toUpperCase() + schedule.status.slice(1)
 
@@ -48,5 +58,6 @@ export async function showClientHistory(name) {
     closeBtn.addEventListener('click', () => dialog.close())
 
     dialog.append(list, closeBtn)
-    dialog.showModal()
+
+    return dialog
 }
