@@ -1,5 +1,7 @@
 import dayjs from "dayjs"
+
 import { showToast } from "../ui/toast.js"
+import { showClientHistory } from "./history-client.js"
 
 const periodMorning = document.querySelector('#period-morning')
 const periodAfternoon = document.querySelector('#period-afternoon')
@@ -29,6 +31,13 @@ export function schedulesShow({ dailySchedules }) {
             const nameText = document.createElement('span')
             nameText.className = 'schedule-name'
             nameText.textContent = schedule.name
+            nameText.style.cursor = 'pointer'
+
+            item.addEventListener('click', (event) => {
+                if (event.target.closest('button')) return
+
+                showClientHistory(schedule.name)
+            })
 
             const sep = document.createElement('span')
             sep.className = 'schedule-sep'
