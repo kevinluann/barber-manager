@@ -117,9 +117,16 @@
         <div class="schedule-title-row">
           <h2>Agenda</h2>
           <span class="schedule-count" id="schedule-count">0 atendimentos</span>
+          <span id="next-appointment" class="next-appointment" aria-live="polite"></span>
         </div>
         <p>Atendimentos do dia</p>
         <div class="schedule-rule" aria-hidden="true"></div>
+        <div class="occupancy" aria-label="Ocupação do dia">
+          <div class="occupancy-track">
+            <div class="occupancy-bar" id="occupancy-bar"></div>
+          </div>
+          <span id="occupancy-text" class="occupancy-text"></span>
+        </div>
       </header>
 
       <div id="history-7d" class="history-7d" aria-label="Últimos 7 dias"></div>

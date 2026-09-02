@@ -54,6 +54,35 @@
   background: var(--gold);
 }
 
+.occupancy {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.8rem;
+}
+
+.occupancy-track {
+  flex: 1;
+  height: 4px;
+  background: #E9E0C8;
+  overflow: hidden;
+}
+
+.occupancy-bar {
+  height: 100%;
+  width: 0%;
+  background: #8A6D1E;
+  transition: width 0.3s ease;
+}
+
+.occupancy-text {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
 .history-7d {
   display: flex;
   gap: 0.5rem;

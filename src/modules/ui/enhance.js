@@ -58,6 +58,19 @@ function updateCounters() {
     totalCountEl.textContent = `${total} ${total === 1 ? 'atendimento' : 'atendimentos'}`
   }
 
+  const totalSlots = 14
+  const percent = Math.round((total / totalSlots) * 100)
+  const bar = document.querySelector('#occupancy-bar')
+  const text = document.querySelector('#occupancy-text')
+
+  if (bar) {
+    bar.style.width = `${percent}%`
+  }
+
+  if (text) {
+    text.textContent = `${total}/${totalSlots} ${percent}%`
+  }
+
   const morningLabel = document.querySelector('[data-period="morning"]')
   const afternoonLabel = document.querySelector('[data-period="afternoon"]')
   const nightLabel = document.querySelector('[data-period="night"]')
