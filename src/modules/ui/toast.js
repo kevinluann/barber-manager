@@ -47,8 +47,19 @@ export function showToastWithUndo(message) {
 
   const toast = document.createElement('div')
   toast.className = 'toast toast--info'
-  toast.innerHTML = `${message} <button class="toast-undo">Desfazer</button>`
   toast.style.pointerEvents = 'auto'
+
+  const messageEl = document.createElement('span')
+  messageEl.textContent = message
+
+  const undoBtn = document.createElement('button')
+  undoBtn.className = 'toast-undo'
+  undoBtn.textContent = 'Desfazer'
+
+  toast.style.display = 'inline-flex'
+  toast.style.gap = '0.6rem'
+  toast.style.alignItems = 'center'
+  toast.append(messageEl, undoBtn)
 
   container.appendChild(toast)
 

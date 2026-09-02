@@ -27,8 +27,14 @@ export async function showClientHistory(name) {
 
         const entry = document.createElement('div')
         entry.className = 'history-entry'
-        entry.innerHTML = `<span>${dayjs(schedule.when).format('DD/MM HH:mm')}</span><span>${service} — ${status}</span>`
 
+        const dateSpan = document.createElement('span')
+        dateSpan.textContent = dayjs(schedule.when).format('DD/MM HH:mm')
+
+        const infoSpan = document.createElement('span')
+        infoSpan.textContent = `${service} - ${status}`
+
+        entry.append(dateSpan, infoSpan)
         list.appendChild(entry)
     })
 

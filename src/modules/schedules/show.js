@@ -76,7 +76,12 @@ export function schedulesShow({ dailySchedules }) {
             editButton.className = 'edit-icon'
             editButton.type = 'button'
             editButton.setAttribute('aria-label', `Editar ${schedule.name}`)
-            editButton.innerHTML = '<img src="./assets/person.svg" alt="">'
+
+            const editIcon = document.createElement('img')
+            editIcon.src = './assets/person.svg'
+            editIcon.alt = ''
+            editIcon.setAttribute('aria-hidden', 'true')
+            editButton.appendChild(editIcon)
 
             const completeButton = document.createElement('button')
             completeButton.className = 'complete-icon'
