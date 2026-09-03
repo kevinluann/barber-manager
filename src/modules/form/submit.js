@@ -54,12 +54,14 @@ form.addEventListener('submit', async (event) => {
         const serviceEl = document.querySelector('#service')
         const service = serviceEl.value
         const duration = Number(serviceEl.selectedOptions[0].dataset.duration)
-        const notes = document.querySelector('#notes').value.trim()
+        const notesEl = document.querySelector('#notes')
+        const notesValue = notesEl.value.trim()
 
-        await scheduleNew({ name, when, service, duration, status: 'pending', notes })
+        await scheduleNew({ name, when, service, duration, status: 'pending', notes: notesValue })
         await schedulesDay()
 
         clientName.value = ''
+        notesEl.value = ''
     } catch (error) {
         showToast('Não foi possivel realizar o agendamento.', 'error')
         console.log(error)

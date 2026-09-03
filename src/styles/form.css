@@ -182,6 +182,9 @@
   font-family: "Instrument Sans", sans-serif;
   font-size: 0.88rem;
   line-height: 1.4;
+  color: #EDE9E3;
+  background: #121214;
+  border: 1px solid #2E2D30;
 }
 
 .edit-dialog .input--area {
