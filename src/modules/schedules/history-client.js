@@ -33,7 +33,8 @@ function buildHistoryDialog(name, history) {
 
     history.forEach((schedule) => {
         const service = schedule.service[0].toUpperCase() + schedule.service.slice(1)
-        const status = schedule.status[0].toUpperCase() + schedule.status.slice(1)
+        const statusNames = { pending: 'Pendente', done: 'Concluído' }
+        const status = statusNames[schedule.status]
 
         const entry = document.createElement('div')
         entry.className = 'history-entry'
