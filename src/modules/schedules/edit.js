@@ -53,8 +53,9 @@ function setupEditForm(dialog) {
         const serviceEl = form.querySelector('#edit-service')
         const service = serviceEl.value
         const duration = Number(serviceEl.selectedOptions[0].dataset.duration)
+        const notes = form.querySelector('#edit-notes').value.trim()
 
-        await scheduleUpdate({ id, name, when, service, duration })
+        await scheduleUpdate({ id, name, when, service, duration, notes })
         await schedulesDay()
 
         dialog.close()
@@ -145,6 +146,7 @@ export function enableEditButtons() {
 
             dialog.querySelector('#edit-id').value = li.dataset.id
             dialog.querySelector('#edit-client').value = li.dataset.name
+            dialog.querySelector('#edit-notes').value = li.dataset.notes || ''
 
             dialog.showModal()
         })

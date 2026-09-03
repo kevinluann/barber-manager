@@ -14,6 +14,7 @@ export function getEditDialog() {
     createIdField(),
     createClientField(),
     createServiceField(),
+    createNotesField(),
     createHoursField(),
     createButtons()
   )
@@ -140,6 +141,27 @@ function createServiceField() {
 
   select.append(optCorte, optBarba, optCombo)
   fieldWrapper.append(label, select)
+
+  return fieldWrapper
+}
+
+function createNotesField() {
+  const fieldWrapper = document.createElement('div')
+  fieldWrapper.className = 'field'
+
+  const label = document.createElement('label')
+  label.htmlFor = 'edit-notes'
+  label.className = 'label'
+  label.textContent = 'Notas'
+
+  const textarea = document.createElement('textarea')
+  textarea.id = 'edit-notes'
+  textarea.className = 'input input--area'
+  textarea.placeholder = 'Ex: Cliente prefere tesoura'
+  textarea.rows = 2
+  textarea.setAttribute('aria-label', 'Notas')
+
+  fieldWrapper.append(label, textarea)
 
   return fieldWrapper
 }

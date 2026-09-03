@@ -45,6 +45,15 @@ function buildHistoryDialog(name, history) {
         infoSpan.textContent = `${service} - ${status}`
 
         entry.append(dateSpan, infoSpan)
+
+        if (schedule.notes) {
+            const notesEl = document.createElement('p')
+            notesEl.className = 'history-notes'
+            notesEl.textContent = schedule.notes
+
+            entry.appendChild(notesEl)
+        }
+
         list.appendChild(entry)
     })
 

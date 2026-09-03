@@ -54,8 +54,9 @@ form.addEventListener('submit', async (event) => {
         const serviceEl = document.querySelector('#service')
         const service = serviceEl.value
         const duration = Number(serviceEl.selectedOptions[0].dataset.duration)
+        const notes = document.querySelector('#notes').value.trim()
 
-        await scheduleNew({ name, when, service, duration, status: 'pending' })
+        await scheduleNew({ name, when, service, duration, status: 'pending', notes })
         await schedulesDay()
 
         clientName.value = ''

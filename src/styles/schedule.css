@@ -536,7 +536,20 @@
   border: 1px solid #E9E0C8;
   padding: 0.4rem 0.6rem;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
+  gap: 0.3rem;
+}
+
+.history-notes {
+  width: 100%;
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 0.72rem;
+  font-style: italic;
+  color: #6B6760;
+  margin-top: 0.3rem;
+  border-top: 1px dashed #E9E0C8;
+  padding-top: 0.3rem;
 }
 
 @media (max-width: 1100px) {

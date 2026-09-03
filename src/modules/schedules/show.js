@@ -24,8 +24,14 @@ export function schedulesShow({ dailySchedules }) {
             item.dataset.hour = time.textContent
             item.dataset.status = schedule.status
             item.dataset.service = schedule.service
+            item.dataset.notes = schedule.notes || ''
             if (schedule.status === 'done') {
                 item.classList.add('is-done')
+            }
+            if (schedule.notes) {
+                const maxTitle = 40
+
+                item.title = schedule.notes.length > maxTitle ? schedule.notes.slice(0, maxTitle) + '…' : schedule.notes
             }
 
             const nameText = document.createElement('span')
