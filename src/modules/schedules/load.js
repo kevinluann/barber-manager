@@ -1,4 +1,7 @@
+import dayjs from "dayjs"
+
 import { scheduleFetchByDay } from "../../services/schedule-fetch-by-day.js"
+import { scheduleComplete } from "../../services/schedule-complete.js"
 import { hoursLoad } from "../form/hours-load.js"
 import { refreshUI } from "../ui/enhance.js"
 import { schedulesShow } from "./show.js"
@@ -16,7 +19,15 @@ export async function schedulesDay() {
 
     const dailySchedules = await scheduleFetchByDay({ date })
 
-    let filtered = applyStatusFilter(dailySchedules)
+    for (const schedule of dailySchedules) {
+        if ((schedule.status) !== 'done' && dayjs(schedule.when).isBefore(dayjs())) {
+            await scheduleComplete({ id: schedule.id })
+        }
+    }
+
+    const updated = await scheduleFetchByDay({ date })
+
+    let filtered = applyStatusFilter(updated)
 
     updateEmptyState(filtered)
 
@@ -29,7 +40,7 @@ export async function schedulesDay() {
 
     enableCompleteButtons()
 
-    hoursLoad({ date, dailySchedules })
+    hoursLoad({ date, dailySchedules: updated })
 
     refreshUI(filtered)
 
