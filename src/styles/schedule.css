@@ -386,6 +386,19 @@
   font-weight: 500;
 }
 
+.badge-fiel {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.52rem;
+  letter-spacing: 0.06em;
+  color: #9A9690;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin-left: 0.25rem;
+  opacity: 0.75;
+  vertical-align: middle;
+}
+
 .schedule-period ul li:has(span:not(:empty))::before {
   background: var(--gold);
   border-color: var(--gold);

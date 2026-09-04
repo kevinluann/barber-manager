@@ -1,5 +1,6 @@
 import dayjs from "dayjs"
 
+import { apiConfig } from "../../services/api-config.js"
 import { showToast } from "../ui/toast.js"
 import { showClientHistory } from "./history-client.js"
 
@@ -7,11 +8,21 @@ const periodMorning = document.querySelector('#period-morning')
 const periodAfternoon = document.querySelector('#period-afternoon')
 const periodNight = document.querySelector('#period-night')
 
-export function schedulesShow({ dailySchedules }) {
+export async function schedulesShow({ dailySchedules }) {
     try {
         periodMorning.replaceChildren()
         periodAfternoon.replaceChildren()
         periodNight.replaceChildren()
+
+        const response = await fetch(`${apiConfig.baseURL}/schedules`)
+        const all = await response.json()
+        const counts = {}
+
+        all.forEach((schedule) => {
+            if (!schedule.name) return
+
+            counts[schedule.name] = (counts[schedule.name] || 0) + 1
+        })
 
         dailySchedules.forEach((schedule) => {
             const item = document.createElement('li')
@@ -39,12 +50,6 @@ export function schedulesShow({ dailySchedules }) {
             nameText.textContent = schedule.name
             nameText.style.cursor = 'pointer'
 
-            item.addEventListener('click', (event) => {
-                if (event.target.closest('button')) return
-
-                showClientHistory(schedule.name)
-            })
-
             const sep = document.createElement('span')
             sep.className = 'schedule-sep'
             sep.textContent = '·'
@@ -63,7 +68,23 @@ export function schedulesShow({ dailySchedules }) {
             durationText.className = 'schedule-service'
             durationText.textContent = `${schedule.duration}min`
 
-            name.append(nameText, sep, serviceText, sep2, durationText)
+            if ((counts[schedule.name] || 0) > 3) {
+                const badge = document.createElement('span')
+                badge.className = 'badge-fiel'
+                badge.textContent = '★'
+                badge.title = 'Cliente recorrente'
+                badge.setAttribute('aria-label', 'Cliente fiel')
+
+                name.append(nameText, badge, sep, serviceText, sep2, durationText)
+            } else {
+                name.append(nameText, sep, serviceText, sep2, durationText)
+            }
+
+            item.addEventListener('click', (event) => {
+                if (event.target.closest('button')) return
+
+                showClientHistory(schedule.name)
+            })
 
             const cancelButton = document.createElement('button')
             cancelButton.classList.add('cancel-icon')
@@ -87,6 +108,7 @@ export function schedulesShow({ dailySchedules }) {
             editIcon.src = './assets/person.svg'
             editIcon.alt = ''
             editIcon.setAttribute('aria-hidden', 'true')
+
             editButton.appendChild(editIcon)
 
             const completeButton = document.createElement('button')
