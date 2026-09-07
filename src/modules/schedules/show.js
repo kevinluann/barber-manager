@@ -8,6 +8,15 @@ const periodMorning = document.querySelector('#period-morning')
 const periodAfternoon = document.querySelector('#period-afternoon')
 const periodNight = document.querySelector('#period-night')
 
+function createSep() {
+    const sep = document.createElement('span')
+    sep.className = 'schedule-sep'
+    sep.textContent = '·'
+    sep.setAttribute('aria-hidden', 'true')
+
+    return sep
+}
+
 export async function schedulesShow({ dailySchedules }) {
     try {
         periodMorning.replaceChildren()
@@ -50,19 +59,13 @@ export async function schedulesShow({ dailySchedules }) {
             nameText.textContent = schedule.name
             nameText.style.cursor = 'pointer'
 
-            const sep = document.createElement('span')
-            sep.className = 'schedule-sep'
-            sep.textContent = '·'
-            sep.setAttribute('aria-hidden', 'true')
-
             const serviceText = document.createElement('span')
             serviceText.className = 'schedule-service'
             serviceText.textContent = schedule.service
 
-            const sep2 = document.createElement('span')
-            sep2.className = 'schedule-sep'
-            sep2.textContent = '·'
-            sep2.setAttribute('aria-hidden', 'true')
+            const priceText = document.createElement('span')
+            priceText.className = 'schedule-service'
+            priceText.textContent = `R$${schedule.price}`
 
             const durationText = document.createElement('span')
             durationText.className = 'schedule-service'
@@ -75,9 +78,9 @@ export async function schedulesShow({ dailySchedules }) {
                 badge.title = 'Cliente recorrente'
                 badge.setAttribute('aria-label', 'Cliente fiel')
 
-                name.append(nameText, badge, sep, serviceText, sep2, durationText)
+                name.append(nameText, badge, createSep(), serviceText, createSep(), priceText, createSep(), durationText)
             } else {
-                name.append(nameText, sep, serviceText, sep2, durationText)
+                name.append(nameText, createSep(), serviceText, createSep(), priceText, createSep(), durationText)
             }
 
             item.addEventListener('click', (event) => {

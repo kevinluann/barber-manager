@@ -1,14 +1,14 @@
 import { apiConfig } from "./api-config.js"
 import { showToast } from "../modules/ui/toast.js"
 
-export async function scheduleUpdate({ id, name, when, service, duration, notes }) {
+export async function scheduleUpdate({ id, name, when, service, duration, price, notes }) {
     try {
         await fetch(`${apiConfig.baseURL}/schedules/${id}`, {
             method: 'PATCH',
             headers: {
                 'Content-type': 'application/json'
             },
-            body: JSON.stringify({ name, when, service, duration, notes })
+            body: JSON.stringify({ name, when, service, duration, price, notes })
         })
 
         showToast('Agendamento atualizado', 'success')

@@ -54,8 +54,9 @@ function setupEditForm(dialog) {
         const service = serviceEl.value
         const duration = Number(serviceEl.selectedOptions[0].dataset.duration)
         const notes = form.querySelector('#edit-notes').value.trim()
+        const price = Number(serviceEl.selectedOptions[0].dataset.price)
 
-        await scheduleUpdate({ id, name, when, service, duration, notes })
+        await scheduleUpdate({ id, name, when, service, duration, price, notes })
         await schedulesDay()
 
         dialog.close()

@@ -111,6 +111,15 @@ export function refreshUI(dailySchedules) {
   updateCounters()
 
   updateNextAppointment(dailySchedules)
+
+  const totalEl = document.querySelector('#day-total')
+  const totalPrice = dailySchedules.reduce((sum, schedule) => {
+    return sum + (Number(schedule.price) || 0)
+  }, 0)
+
+  if (totalEl) {
+    totalEl.textContent = totalPrice ? `R$ ${totalPrice}` : ''
+  }
 }
 
 setInterval(async () => {

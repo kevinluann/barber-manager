@@ -127,17 +127,20 @@ function createServiceField() {
   const optCorte = document.createElement('option')
   optCorte.value = 'corte'
   optCorte.dataset.duration = '30'
-  optCorte.textContent = 'Corte - 30min'
+  optCorte.dataset.price = '50'
+  optCorte.textContent = 'Corte - R$50'
 
   const optBarba = document.createElement('option')
   optBarba.value = 'barba'
   optBarba.dataset.duration = '20'
-  optBarba.textContent = 'Barba - 20min'
+  optBarba.dataset.price = '30'
+  optBarba.textContent = 'Barba - R$30'
 
   const optCombo = document.createElement('option')
   optCombo.value = 'combo'
   optCombo.dataset.duration = '50'
-  optCombo.textContent = 'Combo - 50min'
+  optCombo.dataset.price = '80'
+  optCombo.textContent = 'Combo - R$80'
 
   select.append(optCorte, optBarba, optCombo)
   fieldWrapper.append(label, select)
