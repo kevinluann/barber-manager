@@ -1,5 +1,7 @@
 import dayjs from "dayjs"
 
+import { isHourAvailable } from "../../utils/schedule-availability.js"
+import { scheduleFetchBlocked } from "../../services/schedule-block.js"
 import { scheduleFetchByDay } from "../../services/schedule-fetch-by-day.js"
 import { openingHours } from "../../utils/opening-hours.js"
 import { scheduleUpdate } from "../../services/schedule-update.js"
@@ -67,22 +69,6 @@ function setupEditForm(dialog) {
     cancelBtn.addEventListener('click', () => dialog.close())
 }
 
-async function getUnavailableHours(date) {
-    const daily = await scheduleFetchByDay({ date })
-
-    return daily.map((schedule) => {
-        return dayjs(schedule.when).format('HH:mm')
-    })
-}
-
-function isHourUnavailable(hour, selectedHour, unavailable, date) {
-    const [h, _] = hour.split(':')
-    const isPast = dayjs(date).add(h, 'hour').isBefore(dayjs())
-    const isCurrent = hour === selectedHour
-
-    return (unavailable.includes(hour) && !isCurrent) || isPast
-}
-
 function createHourElement(hour, isCurrent, isUnavailable, list) {
     const li = document.createElement('li')
     li.textContent = hour
@@ -112,12 +98,23 @@ function createHourElement(hour, isCurrent, isUnavailable, list) {
     return li
 }
 
-function buildEditHours(dialog, selectedHour, date, unavailable) {
+async function buildEditHours(dialog, selectedHour, date) {
     const list = dialog.querySelector('#edit-hours')
     list.replaceChildren()
 
+    const daily = await scheduleFetchByDay({ date })
+
+    const unavailable = daily.map((schedule) => {
+        return dayjs(schedule.when).format('HH:mm')
+    })
+
+    const blocked = await scheduleFetchBlocked({ date })
+
     openingHours.forEach(hour => {
-        const isUnavailable = isHourUnavailable(hour, selectedHour, unavailable, date)
+        const available = isHourAvailable({ hour, date, unavailable, blocked })
+        const isCurrent = hour === selectedHour
+        const isUnavailable = !available && !isCurrent
+
         const element = createHourElement(hour, selectedHour === hour, isUnavailable, list)
 
         list.appendChild(element)
@@ -141,9 +138,7 @@ export function enableEditButtons() {
 
             setupEditForm(dialog)
 
-            const unavailable = await getUnavailableHours(dateInput.value)
-
-            buildEditHours(dialog, li.dataset.hour, dateInput.value, unavailable)
+            await buildEditHours(dialog, li.dataset.hour, dateInput.value)
 
             dialog.querySelector('#edit-id').value = li.dataset.id
             dialog.querySelector('#edit-client').value = li.dataset.name

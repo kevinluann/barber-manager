@@ -34,13 +34,13 @@ export async function schedulesDay() {
     filtered = filterBySearch(filtered)
     filtered = sortSchedules(filtered)
 
-    schedulesShow({ dailySchedules: filtered })
+    await schedulesShow({ dailySchedules: filtered })
 
     await renderHistory()
 
     enableCompleteButtons()
 
-    hoursLoad({ date, dailySchedules: updated })
+    await hoursLoad({ date, dailySchedules: updated })
 
     refreshUI(filtered)
 

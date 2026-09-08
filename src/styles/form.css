@@ -359,6 +359,61 @@
   font-style: italic;
 }
 
+.field--block {
+  border-top: 1px solid #2C2B2E;
+  padding-top: 0.8rem;
+  margin-top: 0.2rem;
+}
+
+.block-summary {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6B6760;
+  cursor: pointer;
+  list-style: none;
+  opacity: 0.8;
+}
+
+.block-summary:hover {
+  color: #9A9690;
+}
+
+.field--block .block-row {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  margin-top: 0.6rem;
+}
+
+.field--block .input--small {
+  height: 2.2rem;
+  font-size: 0.78rem;
+  padding: 0 0.6rem;
+  flex: 1;
+}
+
+.block-btn {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: transparent;
+  color: #8A8680;
+  border: 1px solid #2C2B2E;
+  padding: 0 0.7rem;
+  height: 2.2rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.18s;
+}
+
+.block-btn:hover {
+  border-color: #6B6760;
+  color: #C2BEB6;
+}
+
 .control-sheet {
   padding: 0 2rem 1.8rem;
   display: flex;

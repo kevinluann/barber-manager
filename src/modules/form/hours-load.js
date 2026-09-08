@@ -1,22 +1,23 @@
 import dayjs from "dayjs"
+
+import { isHourAvailable } from "../../utils/schedule-availability.js"
+import { scheduleFetchBlocked } from "../../services/schedule-block.js"
 import { openingHours } from "../../utils/opening-hours.js"
 import { hoursClick } from "./hours-click.js"
 
 const hours = document.querySelector('#hours')
 
-export function hoursLoad({ date, dailySchedules }) {
+export async function hoursLoad({ date, dailySchedules }) {
     hours.replaceChildren()
+
+    const blocked = await scheduleFetchBlocked({ date })
 
     const unavailableHours = dailySchedules.map((schedule) => {
         return dayjs(schedule.when).format('HH:mm')
     })
 
     const opening = openingHours.map((hour) => {
-        const [scheduleHour, _] = hour.split(':')
-
-        const isHourPast = dayjs(date).add(scheduleHour, 'hour').isBefore(dayjs())
-
-        const available = !unavailableHours.includes(hour) && !isHourPast
+        const available = isHourAvailable({ hour, date, unavailable: unavailableHours, blocked })
 
         return {
             hour,
