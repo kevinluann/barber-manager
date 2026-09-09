@@ -13,6 +13,7 @@ import { sortSchedules } from "./sort.js"
 import { filterBySearch } from "./search.js"
 import { renderHistory } from "./history.js"
 import { renderBlockedList } from "./unblock.js"
+import { enableNoShowButtons } from "./no-show.js"
 
 const selectedDate = document.querySelector('#date')
 
@@ -43,15 +44,15 @@ export async function schedulesDay() {
 
     await schedulesShow({ dailySchedules: filtered })
 
-    await renderHistory()
-
     enableCompleteButtons()
+    enableNoShowButtons()
+    enableEditButtons()
+
+    await renderHistory()
 
     await hoursLoad({ date, dailySchedules: updated })
 
     await renderBlockedList()
 
     refreshUI(filtered)
-
-    enableEditButtons()
 }

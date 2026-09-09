@@ -45,8 +45,12 @@ export async function schedulesShow({ dailySchedules }) {
             item.dataset.status = schedule.status
             item.dataset.service = schedule.service
             item.dataset.notes = schedule.notes || ''
+
             if (schedule.status === 'done') {
                 item.classList.add('is-done')
+            }
+            if (schedule.status === 'no_show') {
+                item.classList.add('is-no-show')
             }
             if (schedule.notes) {
                 const maxTitle = 40
@@ -121,7 +125,14 @@ export async function schedulesShow({ dailySchedules }) {
             completeButton.setAttribute('title', 'Concluir')
             completeButton.textContent = '✓'
 
-            item.append(time, name, editButton, completeButton, cancelButton)
+            const noShowButton = document.createElement('button')
+            noShowButton.className = 'no-show-icon'
+            noShowButton.type = 'button'
+            noShowButton.setAttribute('aria-label', `Marcar falta de ${schedule.name}`)
+            noShowButton.setAttribute('title', 'Faltou')
+            noShowButton.textContent = '!'
+
+            item.append(time, name, editButton, completeButton, noShowButton, cancelButton)
 
             const hour = dayjs(schedule.when).hour()
 

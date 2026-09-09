@@ -33,11 +33,15 @@ function buildHistoryDialog(name, history) {
 
     history.forEach((schedule) => {
         const service = schedule.service[0].toUpperCase() + schedule.service.slice(1)
-        const statusNames = { pending: 'Pendente', done: 'Concluído' }
+        const statusNames = { pending: 'Pendente', done: 'Concluído', no_show: 'Faltou' }
         const status = statusNames[schedule.status]
 
         const entry = document.createElement('div')
         entry.className = 'history-entry'
+
+        if (schedule.status === 'no_show') {
+            entry.classList.add('is-no-show')
+        }
 
         const dateSpan = document.createElement('span')
         dateSpan.textContent = dayjs(schedule.when).format('DD/MM HH:mm')
