@@ -16,6 +16,7 @@ import "./modules/form/submit.js"
 import "./modules/form/date-change.js"
 import "./modules/schedules/cancel.js"
 import "./modules/schedules/block.js"
+import "./modules/schedules/unblock.js"
 
 import "./modules/ui/enhance.js"
 import "./modules/ui/date-nav.js"

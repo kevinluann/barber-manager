@@ -12,12 +12,16 @@ export async function hoursLoad({ date, dailySchedules }) {
 
     const blocked = await scheduleFetchBlocked({ date })
 
+    const blockedHours = blocked.map((block) => {
+        return block.hour
+    })
+
     const unavailableHours = dailySchedules.map((schedule) => {
         return dayjs(schedule.when).format('HH:mm')
     })
 
     const opening = openingHours.map((hour) => {
-        const available = isHourAvailable({ hour, date, unavailable: unavailableHours, blocked })
+        const available = isHourAvailable({ hour, date, unavailable: unavailableHours, blocked: blockedHours })
 
         return {
             hour,

@@ -414,6 +414,46 @@
   color: #C2BEB6;
 }
 
+.blocked-list {
+  list-style: none;
+  margin-top: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.blocked-list:empty {
+  display: none;
+}
+
+.blocked-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.68rem;
+  color: #9A9690;
+  background: #1A191C;
+  border: 1px solid #2A292C;
+  padding: 0.3rem 0.5rem;
+}
+
+.blocked-item button {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  background: transparent;
+  color: #8A8680;
+  border: 1px solid #2A292C;
+  padding: 0.2rem 0.4rem;
+  cursor: pointer;
+}
+
+.blocked-item button:hover {
+  color: #E88B8B;
+  border-color: #E88B8B;
+}
+
 .control-sheet {
   padding: 0 2rem 1.8rem;
   display: flex;

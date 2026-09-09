@@ -14,6 +14,7 @@ const blockBtn = document.querySelector('#block-btn')
 blockBtn.addEventListener('click', async () => {
     try {
         const blocked = await scheduleFetchBlocked({ date: dateInput.value })
+        const blockedHours = blocked.map(block => block.hour)
 
         const daily = await scheduleFetchByDay({ date: dateInput.value })
 
@@ -21,7 +22,7 @@ blockBtn.addEventListener('click', async () => {
             return dayjs(schedule.when).format('HH:mm')
         })
 
-        if (!isHourAvailable({ hour: blockHour.value, date: dateInput.value, unavailable, blocked })) {
+        if (!isHourAvailable({ hour: blockHour.value, date: dateInput.value, unavailable, blocked: blockedHours })) {
             return showToast('Horário indisponível para bloqueio', 'error')
         }
 

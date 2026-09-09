@@ -21,15 +21,9 @@ export async function scheduleFetchBlocked({ date }) {
         const response = await fetch(`${apiConfig.baseURL}/blocked`)
         const all = await response.json()
 
-        const filtered = all.filter((blocked) => {
+        return all.filter((blocked) => {
             return blocked.date === date
         })
-
-        const hours = filtered.map((blocked) => {
-            return blocked.hour
-        })
-
-        return hours
     } catch (error) {
         showToast('Não foi possivel buscar os agendamentos bloqueados.')
         console.log(error)

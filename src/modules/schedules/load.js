@@ -12,6 +12,7 @@ import { applyStatusFilter, updateEmptyState } from "./filter.js"
 import { sortSchedules } from "./sort.js"
 import { filterBySearch } from "./search.js"
 import { renderHistory } from "./history.js"
+import { renderBlockedList } from "./unblock.js"
 
 const selectedDate = document.querySelector('#date')
 
@@ -47,6 +48,8 @@ export async function schedulesDay() {
     enableCompleteButtons()
 
     await hoursLoad({ date, dailySchedules: updated })
+
+    await renderBlockedList()
 
     refreshUI(filtered)
 
