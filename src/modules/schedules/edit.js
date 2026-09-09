@@ -138,7 +138,12 @@ export function enableEditButtons() {
 
             setupEditForm(dialog)
 
-            await buildEditHours(dialog, li.dataset.hour, dateInput.value)
+            try {
+                await buildEditHours(dialog, li.dataset.hour, dateInput.value)
+            } catch (error) {
+                showToast('Não foi possível carregar horários para edição', 'error')
+                console.log(error)
+            }
 
             dialog.querySelector('#edit-id').value = li.dataset.id
             dialog.querySelector('#edit-client').value = li.dataset.name

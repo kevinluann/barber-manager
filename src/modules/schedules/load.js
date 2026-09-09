@@ -4,6 +4,7 @@ import { scheduleFetchByDay } from "../../services/schedule-fetch-by-day.js"
 import { scheduleComplete } from "../../services/schedule-complete.js"
 import { hoursLoad } from "../form/hours-load.js"
 import { refreshUI } from "../ui/enhance.js"
+import { showToast } from "../ui/toast.js"
 import { schedulesShow } from "./show.js"
 import { enableEditButtons } from "./edit.js"
 import { enableCompleteButtons } from "./complete.js"
@@ -19,10 +20,15 @@ export async function schedulesDay() {
 
     const dailySchedules = await scheduleFetchByDay({ date })
 
-    for (const schedule of dailySchedules) {
-        if ((schedule.status) !== 'done' && dayjs(schedule.when).isBefore(dayjs())) {
-            await scheduleComplete({ id: schedule.id })
+    try {
+        for (const schedule of dailySchedules) {
+            if ((schedule.status) !== 'done' && dayjs(schedule.when).isBefore(dayjs())) {
+                await scheduleComplete({ id: schedule.id })
+            }
         }
+    } catch (error) {
+        showToast('Erro ao atualizar passados.', 'error')
+        console.log(error)
     }
 
     const updated = await scheduleFetchByDay({ date })
