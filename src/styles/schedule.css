@@ -478,15 +478,19 @@
 }
 
 .cancel-icon img,
-.edit-icon img {
-  width: 16px;
-  height: 16px;
+.edit-icon img,
+.complete-icon img {
+  width: 13px;
+  height: 13px;
   display: block;
   pointer-events: none;
 }
 
-.complete-icon {
-  font-weight: 700;
+.no-show-icon img {
+  width: 15px;
+  height: 15px;
+  display: block;
+  pointer-events: none;
 }
 
 .schedule-period ul li:hover .cancel-icon,

@@ -100,7 +100,7 @@ export async function schedulesShow({ dailySchedules }) {
             cancelButton.setAttribute('title', 'Remover')
 
             const cancelIcon = document.createElement('img')
-            cancelIcon.setAttribute('src', './assets/cancel.svg')
+            cancelIcon.setAttribute('src', './assets/trash.svg')
             cancelIcon.setAttribute('alt', '')
             cancelIcon.setAttribute('aria-hidden', 'true')
 
@@ -112,7 +112,7 @@ export async function schedulesShow({ dailySchedules }) {
             editButton.setAttribute('aria-label', `Editar ${schedule.name}`)
 
             const editIcon = document.createElement('img')
-            editIcon.src = './assets/person.svg'
+            editIcon.src = './assets/pencil.svg'
             editIcon.alt = ''
             editIcon.setAttribute('aria-hidden', 'true')
 
@@ -123,14 +123,26 @@ export async function schedulesShow({ dailySchedules }) {
             completeButton.type = 'button'
             completeButton.setAttribute('aria-label', `Concluir agendamento de ${schedule.name}`)
             completeButton.setAttribute('title', 'Concluir')
-            completeButton.textContent = '✓'
+
+            const completeIcon = document.createElement('img')
+            completeIcon.src = './assets/check.svg'
+            completeIcon.alt = ''
+            completeIcon.setAttribute('aria-hidden', 'true')
+
+            completeButton.appendChild(completeIcon)
 
             const noShowButton = document.createElement('button')
             noShowButton.className = 'no-show-icon'
             noShowButton.type = 'button'
             noShowButton.setAttribute('aria-label', `Marcar falta de ${schedule.name}`)
             noShowButton.setAttribute('title', 'Faltou')
-            noShowButton.textContent = '!'
+
+            const noShowIcon = document.createElement('img')
+            noShowIcon.src = './assets/cancel.svg'
+            noShowIcon.alt = ''
+            noShowIcon.setAttribute('aria-hidden', 'true')
+
+            noShowButton.appendChild(noShowIcon)
 
             item.append(time, name, editButton, completeButton, noShowButton, cancelButton)
 
