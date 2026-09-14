@@ -6,6 +6,7 @@ import { scheduleFetchByDay } from "../../services/schedule-fetch-by-day.js"
 import { openingHours } from "../../utils/opening-hours.js"
 import { scheduleUpdate } from "../../services/schedule-update.js"
 import { getEditDialog } from "../ui/edit-dialog.js"
+import { refreshCustomSelect } from "../ui/custom-select.js"
 import { showToast } from "../ui/toast.js"
 import { schedulesDay } from "./load.js"
 
@@ -135,6 +136,8 @@ export function enableEditButtons() {
 
             const editServiceInput = dialog.querySelector('#edit-service')
             editServiceInput.value = li.dataset.service
+
+            refreshCustomSelect(editServiceInput)
 
             setupEditForm(dialog)
 

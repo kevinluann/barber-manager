@@ -1,3 +1,5 @@
+import { enhanceSelect } from "./custom-select.js"
+
 export function getEditDialog() {
   const existing = document.querySelector('#edit-dialog')
 
@@ -21,6 +23,12 @@ export function getEditDialog() {
 
   dialog.appendChild(form)
   document.body.appendChild(dialog)
+
+  const editService = dialog.querySelector('#edit-service')
+  
+  if (editService) {
+    enhanceSelect(editService)
+  }
 
   return dialog
 }
@@ -126,18 +134,21 @@ function createServiceField() {
 
   const optCorte = document.createElement('option')
   optCorte.value = 'corte'
+  optCorte.dataset.icon = './assets/cut.svg'
   optCorte.dataset.duration = '30'
   optCorte.dataset.price = '50'
   optCorte.textContent = 'Corte - R$50'
 
   const optBarba = document.createElement('option')
   optBarba.value = 'barba'
+  optBarba.dataset.icon = './assets/beard.svg'
   optBarba.dataset.duration = '20'
   optBarba.dataset.price = '30'
   optBarba.textContent = 'Barba - R$30'
 
   const optCombo = document.createElement('option')
   optCombo.value = 'combo'
+  optCombo.dataset.icon = './assets/combo.svg'
   optCombo.dataset.duration = '50'
   optCombo.dataset.price = '80'
   optCombo.textContent = 'Combo - R$80'

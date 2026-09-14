@@ -5,6 +5,7 @@ import { scheduleComplete } from "../../services/schedule-complete.js"
 import { hoursLoad } from "../form/hours-load.js"
 import { refreshUI } from "../ui/enhance.js"
 import { showToast } from "../ui/toast.js"
+import { initCustomSelects } from "../ui/custom-select.js"
 import { schedulesShow } from "./show.js"
 import { enableEditButtons } from "./edit.js"
 import { enableCompleteButtons } from "./complete.js"
@@ -47,6 +48,7 @@ export async function schedulesDay() {
     enableCompleteButtons()
     enableNoShowButtons()
     enableEditButtons()
+    initCustomSelects()
 
     await renderHistory()
 
