@@ -113,6 +113,12 @@
   background: #fff;
   border: 1px solid var(--line-paper-strong);
   padding: 0.25rem 0.45rem;
+  white-space: nowrap;
+}
+
+.history-item--total {
+  border-color: var(--gold);
+  font-weight: 700;
 }
 
 .filter-tabs {
