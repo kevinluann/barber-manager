@@ -253,7 +253,31 @@
     </main>
   </div>
 
-  <dialog id="client-history-dialog" class="client-history-dialog" aria-labelledby="history-title"></dialog>
+  <dialog id="client-history-dialog" class="client-history-dialog" aria-labelledby="history-title">
+    <h3 id="history-title">Histórico · Cliente</h3>
+    <p id="history-headline" class="history-headline">— cortes · último há —</p>
+
+    <div class="history-summary" aria-label="Resumo do cliente">
+      <div class="history-stat">
+        <strong id="summary-total">—</strong>
+        <span>atendimentos</span>
+      </div>
+      <div class="history-stat">
+        <strong id="summary-done">—</strong>
+        <span>concluídos</span>
+      </div>
+      <div class="history-stat">
+        <strong id="summary-noshow">—</strong>
+        <span>faltas</span>
+      </div>
+      <div class="history-stat history-stat--highlight">
+        <strong id="summary-last">—</strong>
+        <span>último corte</span>
+      </div>
+    </div>
+
+    <div class="history-list" aria-label="Histórico de cortes"></div>
+  </dialog>
 </body>
 
 </html>
