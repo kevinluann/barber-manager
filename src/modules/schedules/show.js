@@ -17,6 +17,10 @@ function createSep() {
     return sep
 }
 
+function getWeeklyRecurrenceId(name, when) {
+    return `${name}|${dayjs(when).day()}|${dayjs(when).format('HH:mm')}`
+}
+
 export async function schedulesShow({ dailySchedules }) {
     try {
         periodMorning.replaceChildren()
@@ -25,12 +29,16 @@ export async function schedulesShow({ dailySchedules }) {
 
         const response = await fetch(`${apiConfig.baseURL}/schedules`)
         const all = await response.json()
-        const counts = {}
+        const bookingsByClientName = {}
+        const weeklyRecurrenceCounts = {}
 
         all.forEach((schedule) => {
             if (!schedule.name) return
 
-            counts[schedule.name] = (counts[schedule.name] || 0) + 1
+            bookingsByClientName[schedule.name] = (bookingsByClientName[schedule.name] || 0) + 1
+
+            const recurrenceId = getWeeklyRecurrenceId(schedule.name, schedule.when)
+            weeklyRecurrenceCounts[recurrenceId] = (weeklyRecurrenceCounts[recurrenceId] || 0) + 1
         })
 
         dailySchedules.forEach((schedule) => {
@@ -75,17 +83,43 @@ export async function schedulesShow({ dailySchedules }) {
             durationText.className = 'schedule-service'
             durationText.textContent = `${schedule.duration}min`
 
-            if ((counts[schedule.name] || 0) > 3) {
+            const recurrenceId = getWeeklyRecurrenceId(schedule.name, schedule.when)
+            const isFixed = (weeklyRecurrenceCounts[recurrenceId] || 0) >= 2
+            if (isFixed) {
+                item.classList.add('is-fixed')
+            }
+
+            const badges = []
+
+            if (isFixed) {
+                const fixedBadge = document.createElement('span')
+                fixedBadge.className = 'badge-fixed'
+                fixedBadge.title = 'Cliente fixo'
+                fixedBadge.setAttribute('aria-label', 'Cliente fixo toda semana')
+
+                const fixedIcon = document.createElement('img')
+                fixedIcon.src = './assets/repeat.svg'
+                fixedIcon.alt = ''
+                fixedIcon.setAttribute('aria-hidden', 'true')
+                fixedBadge.appendChild(fixedIcon)
+
+                badges.push(fixedBadge)
+            }
+
+            if ((bookingsByClientName[schedule.name] || 0) > 3) {
                 const badge = document.createElement('span')
                 badge.className = 'badge-fiel'
                 badge.textContent = '★'
                 badge.title = 'Cliente recorrente'
                 badge.setAttribute('aria-label', 'Cliente fiel')
-
-                name.append(nameText, badge, createSep(), serviceText, createSep(), priceText, createSep(), durationText)
-            } else {
-                name.append(nameText, createSep(), serviceText, createSep(), priceText, createSep(), durationText)
+                badges.push(badge)
             }
+
+            name.append(nameText)
+            badges.forEach((badge) => {
+                name.append(badge)
+            })
+            name.append(createSep(), serviceText, createSep(), priceText, createSep(), durationText)
 
             item.addEventListener('click', (event) => {
                 if (event.target.closest('button')) return

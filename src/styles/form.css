@@ -380,6 +380,105 @@
   height: 16px;
 }
 
+.field--options .options-group {
+  margin-top: 0.7rem;
+}
+
+.field--options .options-group:first-of-type {
+  margin-top: 0.6rem;
+}
+
+.options-divider {
+  height: 1px;
+  background: #2C2B2E;
+  opacity: 0.7;
+  margin: 0.8rem 0 0.1rem;
+}
+
+.field--options .field-hint {
+  margin-bottom: 0;
+  margin-top: 0.5rem;
+}
+
+.repeat-check {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  font-size: 0.82rem;
+  color: #C2BEB6;
+}
+
+.repeat-check input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.repeat-box {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  border: 1px solid #2E2D30;
+  background: #121214;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.18s, background 0.18s;
+}
+
+.repeat-box::after {
+  content: "";
+  width: 8px;
+  height: 5px;
+  border-left: 2px solid #111011;
+  border-bottom: 2px solid #111011;
+  transform: rotate(-45deg) translateY(-1px);
+  opacity: 0;
+}
+
+.repeat-check input:checked+.repeat-box {
+  background: var(--gold);
+  border-color: var(--gold);
+}
+
+.repeat-check input:checked+.repeat-box::after {
+  opacity: 1;
+}
+
+.repeat-check input:focus-visible+.repeat-box {
+  outline: 1px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.repeat-text {
+  line-height: 1.4;
+}
+
+.repeat-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.7rem;
+}
+
+.repeat-row[hidden] {
+  display: none;
+}
+
+.label--inline {
+  margin-bottom: 0;
+  white-space: nowrap;
+}
+
+.repeat-row .input--small {
+  height: 2.2rem;
+  font-size: 0.78rem;
+  padding: 0 0.6rem;
+  flex: 1;
+}
+
 .hours {
   list-style: none;
   display: flex;
@@ -538,7 +637,8 @@
   font-style: italic;
 }
 
-.field--block {
+.field--block,
+.field--options {
   border-top: 1px solid #2C2B2E;
   padding-top: 0.8rem;
   margin-top: 0.2rem;
@@ -559,14 +659,16 @@
   color: #9A9690;
 }
 
-.field--block .block-row {
+.field--block .block-row,
+.field--options .block-row {
   display: flex;
   gap: 0.4rem;
   align-items: center;
   margin-top: 0.6rem;
 }
 
-.field--block .input--small {
+.field--block .input--small,
+.field--options .input--small {
   height: 2.2rem;
   font-size: 0.78rem;
   padding: 0 0.6rem;

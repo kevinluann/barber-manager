@@ -1,8 +1,8 @@
-import dayjs from "dayjs"
+﻿import dayjs from "dayjs"
 
-import { scheduleNew } from "../../services/schedule-new.js"
 import { schedulesDay } from "../schedules/load.js"
 import { showToast } from "../ui/toast.js"
+import { createSchedules, resetRepeat } from "./repeat.js"
 
 const form = document.querySelector('form')
 const clientName = document.querySelector('#client')
@@ -57,9 +57,15 @@ form.addEventListener('submit', async (event) => {
         const notesEl = document.querySelector('#notes')
         const notesValue = notesEl.value.trim()
         const price = Number(serviceEl.selectedOptions[0].dataset.price)
+        const optionsDetails = document.querySelector('details.field--options')
+        if (optionsDetails) {
+            optionsDetails.open = false
+        }
 
-        await scheduleNew({ name, when, service, duration, price, status: 'pending', notes: notesValue })
+        await createSchedules({ name, when, service, duration, price, notes: notesValue })
         await schedulesDay()
+
+        resetRepeat()
 
         clientName.value = ''
         notesEl.value = ''

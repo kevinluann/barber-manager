@@ -78,36 +78,59 @@
           <span id="hours-error" class="field-error" aria-live="polite"></span>
         </div>
 
-        <details class="field field--block">
-          <summary class="block-summary">Bloquear horário</summary>
-          <div class="block-row">
-            <select id="block-hour" class="input input--select input--small" aria-label="Horário para bloquear">
-              <option value="09:00">09:00</option>
-              <option value="10:00">10:00</option>
-              <option value="11:00">11:00</option>
-              <option value="12:00">12:00</option>
-              <option value="13:00">13:00</option>
-              <option value="14:00">14:00</option>
-              <option value="15:00">15:00</option>
-              <option value="16:00">16:00</option>
-              <option value="17:00">17:00</option>
-              <option value="18:00">18:00</option>
-              <option value="19:00">19:00</option>
-              <option value="20:00">20:00</option>
-              <option value="21:00">21:00</option>
-            </select>
-            <button type="button" id="block-btn" class="block-btn">Bloquear</button>
+        <details class="field field--options">
+          <summary class="block-summary">Opções</summary>
+          <div class="options-group">
+            <span class="label label--inline">Bloquear horário</span>
+            <div class="block-row">
+              <select id="block-hour" class="input input--select input--small" aria-label="Horário para bloquear">
+                <option value="09:00">09:00</option>
+                <option value="10:00">10:00</option>
+                <option value="11:00">11:00</option>
+                <option value="12:00">12:00</option>
+                <option value="13:00">13:00</option>
+                <option value="14:00">14:00</option>
+                <option value="15:00">15:00</option>
+                <option value="16:00">16:00</option>
+                <option value="17:00">17:00</option>
+                <option value="18:00">18:00</option>
+                <option value="19:00">19:00</option>
+                <option value="20:00">20:00</option>
+                <option value="21:00">21:00</option>
+              </select>
+              <button type="button" id="block-btn" class="block-btn">Bloquear</button>
+            </div>
+            <ul id="blocked-list" class="blocked-list" aria-label="Horários bloqueados"></ul>
           </div>
-          <ul id="blocked-list" class="blocked-list" aria-label="Horários bloqueados"></ul>
+          <div class="options-divider" aria-hidden="true"></div>
+          <div class="options-group">
+            <label class="repeat-check" for="repeat">
+              <input type="checkbox" id="repeat" name="repeat" />
+              <span class="repeat-box" aria-hidden="true"></span>
+              <span class="repeat-text">Cliente fixo toda semana</span>
+            </label>
+            <div class="repeat-row" id="repeat-row" hidden>
+              <label for="repeat-count" class="label label--inline">Repetir por</label>
+              <select id="repeat-count" class="input input--select input--small" aria-label="Semanas para repetir">
+                <option value="2">2 semanas</option>
+                <option value="3">3 semanas</option>
+                <option value="4">4 semanas</option>
+              </select>
+            </div>
+            <p class="field-hint">Repete no mesmo dia e horário.</p>
+          </div>
         </details>
 
         <div class="field">
           <label for="service" class="label">Serviço</label>
           <select id="service" class="input input--select" aria-label="Serviço">
-            <option value="corte" data-icon="./assets/cut.svg" data-duration="30" data-price="50">Corte - R$50</option>
-            <option value="barba" data-icon="./assets/beard.svg" data-duration="20" data-price="30">Barba - R$30
+            <option value="corte" data-icon="./assets/cut.svg" data-duration="30" data-price="50">Corte -
+              R$50</option>
+            <option value="barba" data-icon="./assets/beard.svg" data-duration="20" data-price="30">Barba -
+              R$30
             </option>
-            <option value="combo" data-icon="./assets/combo.svg" data-duration="50" data-price="80">Combo - R$80
+            <option value="combo" data-icon="./assets/combo.svg" data-duration="50" data-price="80">Combo -
+              R$80
             </option>
           </select>
         </div>
