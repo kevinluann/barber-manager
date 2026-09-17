@@ -681,6 +681,36 @@
   flex: 1;
 }
 
+.field--options select.input--small {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: #121214;
+  background-image: url("../assets/arrow-down.svg");
+  background-repeat: no-repeat;
+  background-position: right 0.6rem center;
+  background-size: 12px 12px;
+  border: 1px solid #2E2D30;
+  color: #EDE9E3;
+  padding-right: 1.8rem;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
+}
+
+.field--options select.input--small:hover {
+  border-color: #6B6760;
+}
+
+.field--options select.input--small:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px var(--gold-faint);
+}
+
+.field--options select.input--small option {
+  background: #121214;
+  color: #EDE9E3;
+}
+
 .block-btn {
   font-family: "JetBrains Mono", monospace;
   font-size: 0.62rem;
