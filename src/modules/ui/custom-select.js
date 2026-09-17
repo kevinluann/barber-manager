@@ -94,8 +94,19 @@ function buildSelectUI(selectEl) {
 }
 
 function createDropdownControls({ selectButton, list, wrapper }) {
+  function shouldOpenUpward() {
+    const buttonPositionOnScreen = selectButton.getBoundingClientRect()
+    const dropdownListHeight = list.offsetHeight || 0
+
+    const freeSpaceAboveButton = buttonPositionOnScreen.top
+    const freeSpaceBelowButton = window.innerHeight - buttonPositionOnScreen.bottom
+
+    return freeSpaceBelowButton < dropdownListHeight && freeSpaceAboveButton > freeSpaceBelowButton
+  }
+
   function openDropdown() {
     list.hidden = false
+    wrapper.classList.toggle("is-dropup", shouldOpenUpward())
     selectButton.setAttribute("aria-expanded", "true")
     wrapper.classList.add("is-open")
   }
@@ -104,6 +115,7 @@ function createDropdownControls({ selectButton, list, wrapper }) {
     list.hidden = true
     selectButton.setAttribute("aria-expanded", "false")
     wrapper.classList.remove("is-open")
+    wrapper.classList.remove("is-dropup")
   }
 
   function toggleDropdown() {
