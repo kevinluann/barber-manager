@@ -16,6 +16,7 @@ import { filterBySearch } from "./search.js"
 import { renderHistory } from "./history.js"
 import { renderBlockedList } from "./unblock.js"
 import { enableNoShowButtons } from "./no-show.js"
+import { renderRewardAlerts } from "./history-client.js"
 
 const selectedDate = document.querySelector('#date')
 
@@ -53,6 +54,7 @@ export async function schedulesDay() {
     initCustomSelects()
 
     await renderHistory()
+    await renderRewardAlerts()
 
     await hoursLoad({ date, dailySchedules: updated })
 

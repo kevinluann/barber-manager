@@ -186,6 +186,8 @@
 
       <div id="history-7d" class="history-7d" aria-label="Últimos 7 dias"></div>
 
+      <div id="reward-alerts" class="reward-alerts" aria-live="polite" aria-label="Cortes grátis disponíveis"></div>
+
       <div class="schedule-toolbar">
         <div class="filter-tabs" role="tablist" aria-label="Filtrar por status">
           <button type="button" data-filter="all" class="filter-tab filter-tab--active" role="tab"
@@ -277,6 +279,17 @@
     </div>
 
     <div class="history-list" aria-label="Histórico de cortes"></div>
+
+    <div class="loyalty" aria-label="Fidelidade">
+      <div class="loyalty-head">
+        <span class="loyalty-title">Fidelidade</span>
+        <strong id="loyalty-count">—/10</strong>
+      </div>
+      <div class="loyalty-track">
+        <div class="loyalty-bar" id="loyalty-bar"></div>
+      </div>
+      <p id="loyalty-text" class="loyalty-text">—</p>
+    </div>
   </dialog>
 </body>
 
