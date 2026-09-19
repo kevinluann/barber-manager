@@ -7,6 +7,7 @@ import { refreshUI } from "../ui/enhance.js"
 import { showToast } from "../ui/toast.js"
 import { initCustomSelects } from "../ui/custom-select.js"
 import { enableRepeatToggle } from "../form/repeat.js"
+import { initAlertsBell } from "../ui/alerts-bell.js"
 import { schedulesShow } from "./show.js"
 import { enableEditButtons } from "./edit.js"
 import { enableCompleteButtons } from "./complete.js"
@@ -16,7 +17,7 @@ import { filterBySearch } from "./search.js"
 import { renderHistory } from "./history.js"
 import { renderBlockedList } from "./unblock.js"
 import { enableNoShowButtons } from "./no-show.js"
-import { renderRewardAlerts } from "./history-client.js"
+import { renderRewardAlerts } from "./alerts.js"
 
 const selectedDate = document.querySelector('#date')
 
@@ -52,6 +53,7 @@ export async function schedulesDay() {
     enableEditButtons()
     enableRepeatToggle()
     initCustomSelects()
+    initAlertsBell()
 
     await renderHistory()
     await renderRewardAlerts()

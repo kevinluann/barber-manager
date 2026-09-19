@@ -1,7 +1,7 @@
 import dayjs from "dayjs"
 
 import { apiConfig } from "../../services/api-config.js"
-import { hasRewardFor, LOYALTY_GOAL } from "../../utils/loyalty.js"
+import { hasRewardFor, LOYALTY_GOAL } from "../../utils/client-rules.js"
 
 export async function showClientHistory(name) {
     const history = await fetchClientHistory(name)
@@ -163,83 +163,4 @@ function buildHistoryDialog(name, history) {
     }
 
     return dialog
-}
-
-const dismissedRewards = {}
-
-function buildRewardAlert(name, done, total) {
-    const alert = document.createElement("div")
-    alert.className = "reward-alert"
-    alert.setAttribute("role", "button")
-    alert.tabIndex = 0
-
-    const tag = document.createElement("span")
-    tag.className = "reward-tag"
-    tag.textContent = "GRÁTIS"
-
-    const text = document.createElement("span")
-    const strong = document.createElement("strong")
-    strong.textContent = name
-    text.append(strong, ` chegou aos ${done} cortes - corte grátis disponível!`)
-
-    const dismiss = document.createElement("button")
-    dismiss.type = "button"
-    dismiss.className = "reward-dismiss"
-    dismiss.textContent = "×"
-    dismiss.setAttribute("aria-label", `Dispensar aviso de ${name}`)
-
-    dismiss.addEventListener("click", (event) => {
-        dismissedRewards[name] = total
-
-        alert.remove()
-    })
-
-    alert.append(tag, text, dismiss)
-
-    alert.addEventListener("click", (event) => {
-        if (event.target.closest(".reward-dismiss")) return
-
-        showClientHistory(name)
-    })
-
-    alert.addEventListener("keydown", (event) => {
-        if (event.key === "Enter" || event.key === " ") {
-            event.preventDefault()
-
-            showClientHistory(name)
-        }
-    })
-
-    return alert
-}
-
-export async function renderRewardAlerts() {
-    const response = await fetch(`${apiConfig.baseURL}/schedules`)
-    const all = await response.json()
-
-    const doneByName = {}
-    const totalByName = {}
-
-    all.forEach((schedule) => {
-        totalByName[schedule.name] = (totalByName[schedule.name] || 0) + 1
-
-        if (schedule.status === "done") {
-            doneByName[schedule.name] = (doneByName[schedule.name] || 0) + 1
-        }
-    })
-
-    const box = document.querySelector("#reward-alerts")
-    box.replaceChildren()
-
-    const clientsAndTotals = Object.entries(doneByName)
-
-    clientsAndTotals.forEach(([name, done]) => {
-        if (!hasRewardFor(done)) return
-
-        if (dismissedRewards[name] === totalByName[name]) return
-
-        delete dismissedRewards[name]
-
-        box.appendChild(buildRewardAlert(name, done, totalByName[name]))
-    })
 }

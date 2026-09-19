@@ -2,11 +2,12 @@
 <html lang="pt-BR">
 
 <head>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Catamaran:wght@400;700&display=swap"
     rel="stylesheet" />
@@ -171,6 +172,25 @@
         <div class="schedule-title-row">
           <h2>Agenda</h2>
           <span class="schedule-count" id="schedule-count">0 atendimentos</span>
+          <div class="alerts-wrap">
+            <button type="button" id="alerts-bell" class="alerts-bell is-empty" aria-label="Ver avisos">
+              <img src="./assets/bell.svg" alt="" aria-hidden="true" />
+              <span id="alerts-count" class="alerts-count">0</span>
+            </button>
+            <details id="alerts-panel" class="alerts-panel">
+              <summary class="alerts-summary">
+                Avisos
+              </summary>
+              <div class="alerts-head">
+                <span class="alerts-head-title">Notificações</span>
+                <button type="button" id="alerts-close" class="alerts-close" aria-label="Fechar notificações">×</button>
+              </div>
+              <div id="reward-alerts" class="reward-alerts" aria-live="polite"
+                aria-label="Avisos: cortes grátis e clientes sumidos"></div>
+              <button type="button" id="alerts-see-all-rewards" class="alerts-see-all" hidden></button>
+              <button type="button" id="alerts-see-all-absents" class="alerts-see-all" hidden></button>
+            </details>
+          </div>
           <span id="next-appointment" class="next-appointment" aria-live="polite"></span>
         </div>
         <p>Atendimentos do dia</p>
@@ -185,8 +205,6 @@
       </header>
 
       <div id="history-7d" class="history-7d" aria-label="Últimos 7 dias"></div>
-
-      <div id="reward-alerts" class="reward-alerts" aria-live="polite" aria-label="Cortes grátis disponíveis"></div>
 
       <div class="schedule-toolbar">
         <div class="filter-tabs" role="tablist" aria-label="Filtrar por status">
