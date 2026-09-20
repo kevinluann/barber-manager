@@ -183,7 +183,12 @@
               </summary>
               <div class="alerts-head">
                 <span class="alerts-head-title">Notificações</span>
-                <button type="button" id="alerts-close" class="alerts-close" aria-label="Fechar notificações">×</button>
+                <span id="dismissed-count" class="dismissed-count" hidden></span>
+                <span class="alerts-head-actions">
+                  <button type="button" id="alerts-reset" class="alerts-reset" aria-label="Atualizar avisos">↻</button>
+                  <button type="button" id="alerts-close" class="alerts-close"
+                    aria-label="Fechar notificações">×</button>
+                </span>
               </div>
               <div id="reward-alerts" class="reward-alerts" aria-live="polite"
                 aria-label="Avisos: cortes grátis e clientes sumidos"></div>

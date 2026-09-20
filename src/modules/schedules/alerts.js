@@ -35,6 +35,8 @@ function buildRewardAlert(name, done, total) {
             ...(dismissedAlerts[name] || {}), reward: total
         }
 
+        renderRewardAlerts()
+
         alert.remove()
     })
 
@@ -82,6 +84,8 @@ function buildAbsentAlert(name, days, total) {
         dismissedAlerts[name] = {
             ...(dismissedAlerts[name] || {}), absent: total
         }
+
+        renderRewardAlerts()
 
         alert.remove()
     })
@@ -177,14 +181,27 @@ export async function renderRewardAlerts() {
 
     const initialVisible = alerts.slice(0, MAX_ALERTS)
 
-    const shownRewards = showAllRewards ? alerts.filter((item) => item.type === "reward") : initialVisible.filter((item) => item.type === "reward")
+    let shownRewards = initialVisible.filter((item) => item.type === "reward")
+    let shownAbsents = initialVisible.filter((item) => item.type === "absent")
 
-    const shownAbsents = showAllAbsents ? alerts.filter((item) => item.type === "absent") : initialVisible.filter((item) => item.type === "absent")
+    if (showAllRewards) {
+        shownRewards = alerts.filter((item) => item.type === "reward")
+
+        shownAbsents = []
+    }
+
+    if (showAllAbsents) {
+        shownAbsents = alerts.filter((item) => item.type === "absent")
+
+        shownRewards = []
+    }
 
     const totalRewards = alerts.filter((item) => item.type === "reward").length
     const totalAbsents = alerts.length - totalRewards
 
     const visibleAlerts = [...shownRewards, ...shownAbsents]
+
+    let shownCount = 0
 
     visibleAlerts.forEach((item) => {
         const alertType = item.type
@@ -194,10 +211,26 @@ export async function renderRewardAlerts() {
 
         if (dismissalRecord) {
             delete dismissalRecord[alertType]
+
+            const dismissalEntries = Object.entries(dismissalRecord)
+
+            if (dismissalEntries.length === 0) {
+                delete dismissedAlerts[item.name]
+            }
         }
 
         box.appendChild(alertType === "reward" ? buildRewardAlert(item.name, item.done, totalByName[item.name]) : buildAbsentAlert(item.name, item.days, totalByName[item.name]))
+
+        shownCount++
     })
+
+    if (shownCount === 0) {
+        const empty = document.createElement("p")
+        empty.className = "reward-empty"
+        empty.textContent = "Nenhum aviso no momento."
+
+        box.appendChild(empty)
+    }
 
     updateSeeAllButtons({
         totalRewards,
@@ -205,20 +238,54 @@ export async function renderRewardAlerts() {
         expandedRewards: showAllRewards,
         totalAbsents,
         shownAbsents: shownAbsents.length,
-        expandedAbsents: showAllAbsents
+        expandedAbsents: showAllAbsents,
+        shownCount
     })
 
-    updateAlertsBadge(box.children.length)
+    updateAlertsBadge(shownCount)
+
+    const dismissedValues = Object.values(dismissedAlerts)
+
+    const activeDismissals = dismissedValues.filter((record) => {
+        return Object.entries(record).length > 0
+    })
+
+    const dismissedCount = activeDismissals.length
+
+    const dismissedEl = document.querySelector("#dismissed-count")
+    dismissedEl.hidden = dismissedCount === 0
+    dismissedEl.textContent = `${dismissedCount} Dispensados`
 }
 
 export function toggleShowAllRewards() {
     showAllRewards = !showAllRewards
+
+    if (showAllRewards) {
+        showAllAbsents = false
+    }
 
     renderRewardAlerts()
 }
 
 export function toggleShowAllAbsents() {
     showAllAbsents = !showAllAbsents
+
+    if (showAllAbsents) {
+        showAllRewards = false
+    }
+
+    renderRewardAlerts()
+}
+
+export function resetAlerts() {
+    const dismissedEntries = Object.entries(dismissedAlerts)
+
+    dismissedEntries.forEach(([name]) => {
+        delete dismissedAlerts[name]
+    })
+
+    showAllRewards = false
+    showAllAbsents = false
 
     renderRewardAlerts()
 }

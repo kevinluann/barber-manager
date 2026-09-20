@@ -1,4 +1,4 @@
-import { toggleShowAllAbsents, toggleShowAllRewards } from "../schedules/alerts.js"
+import { resetAlerts, toggleShowAllAbsents, toggleShowAllRewards } from "../schedules/alerts.js"
 
 export function initAlertsBell() {
     const bell = document.querySelector("#alerts-bell")
@@ -15,6 +15,8 @@ export function initAlertsBell() {
     document.addEventListener("click", (event) => {
         if (!panel.open) return
 
+        if (event.target.closest(".reward-dismiss")) return
+
         if (event.target.closest(".alerts-wrap")) return
 
         panel.open = false
@@ -28,20 +30,13 @@ export function initAlertsBell() {
         bell.focus()
     })
 
-    const wrap = document.querySelector(".alerts-wrap")
-
-    wrap.addEventListener("mouseenter", () => {
-        panel.open = true
-    })
-    wrap.addEventListener("mouseleave", () => {
-        panel.open = false
-    })
-
     const seeAllRewardsBtn = document.querySelector("#alerts-see-all-rewards")
     const seeAllAbsentsBtn = document.querySelector("#alerts-see-all-absents")
+    const resetBtn = document.querySelector("#alerts-reset")
 
     seeAllRewardsBtn.addEventListener("click", () => toggleShowAllRewards())
     seeAllAbsentsBtn.addEventListener("click", () => toggleShowAllAbsents())
+    resetBtn.addEventListener("click", () => resetAlerts())
 }
 
 export function updateAlertsBadge(count) {
@@ -56,11 +51,13 @@ export function updateSeeAllButtons({ totalRewards, shownRewards, expandedReward
     const rewardsBtn = document.querySelector("#alerts-see-all-rewards")
     const absentsBtn = document.querySelector("#alerts-see-all-absents")
 
-    rewardsBtn.hidden = totalRewards <= shownRewards
+    const hasAnyAlert = totalRewards + totalAbsents > 0
 
-    rewardsBtn.textContent = expandedRewards ? "Mostrar menos grátis" : `Ver todos os grátis (${totalRewards})`
+    rewardsBtn.hidden = !hasAnyAlert || (!expandedRewards && totalRewards <= shownRewards)
 
-    absentsBtn.hidden = totalAbsents <= shownAbsents
+    rewardsBtn.textContent = expandedRewards ? "Voltar aos avisos" : `Ver cortes grátis (${totalRewards})`
 
-    absentsBtn.textContent = expandedAbsents ? "Mostrar menos sumidos" : `Ver todos os sumidos (${totalAbsents})`
+    absentsBtn.hidden = !hasAnyAlert || (!expandedAbsents && totalAbsents <= shownAbsents)
+
+    absentsBtn.textContent = expandedAbsents ? "Voltar aos avisos" : `Ver clientes ausentes (${totalAbsents})`
 }
