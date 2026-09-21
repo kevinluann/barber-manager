@@ -17,7 +17,12 @@ function buildRewardAlert(name, done, total) {
 
     const tag = document.createElement("span")
     tag.className = "reward-tag"
-    tag.textContent = "GRÁTIS"
+
+    const tagIcon = document.createElement("img")
+    tagIcon.src = "./assets/gift.svg"
+    tagIcon.alt = ""
+    tagIcon.setAttribute("aria-hidden", "true")
+    tag.append(tagIcon, "GRÁTIS")
 
     const text = document.createElement("span")
     const strong = document.createElement("strong")
@@ -27,8 +32,13 @@ function buildRewardAlert(name, done, total) {
     const dismiss = document.createElement("button")
     dismiss.type = "button"
     dismiss.className = "reward-dismiss"
-    dismiss.textContent = "×"
     dismiss.setAttribute("aria-label", `Dispensar aviso de ${name}`)
+
+    const dismissIcon = document.createElement("img")
+    dismissIcon.src = "./assets/cancel.svg"
+    dismissIcon.alt = ""
+    dismissIcon.setAttribute("aria-hidden", "true")
+    dismiss.appendChild(dismissIcon)
 
     dismiss.addEventListener("click", () => {
         dismissedAlerts[name] = {
@@ -67,7 +77,12 @@ function buildAbsentAlert(name, days, total) {
 
     const tag = document.createElement("span")
     tag.className = "reward-tag"
-    tag.textContent = "SUMIDO"
+
+    const tagIcon = document.createElement("img")
+    tagIcon.src = "./assets/user-x.svg"
+    tagIcon.alt = ""
+    tagIcon.setAttribute("aria-hidden", "true")
+    tag.append(tagIcon, "SUMIDO")
 
     const text = document.createElement("span")
     const strong = document.createElement("strong")
@@ -77,8 +92,13 @@ function buildAbsentAlert(name, days, total) {
     const dismiss = document.createElement("button")
     dismiss.type = "button"
     dismiss.className = "reward-dismiss"
-    dismiss.textContent = "×"
     dismiss.setAttribute("aria-label", `Dispensar aviso de ${name}`)
+
+    const dismissIcon = document.createElement("img")
+    dismissIcon.src = "./assets/cancel.svg"
+    dismissIcon.alt = ""
+    dismissIcon.setAttribute("aria-hidden", "true")
+    dismiss.appendChild(dismissIcon)
 
     dismiss.addEventListener("click", () => {
         dismissedAlerts[name] = {

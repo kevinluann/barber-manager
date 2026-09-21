@@ -36,6 +36,12 @@
   color: var(--gold);
 }
 
+.kicker-icon {
+  width: 12px;
+  height: 12px;
+  display: block;
+}
+
 .form-header {
   margin-bottom: 1.8rem;
 }
@@ -462,6 +468,14 @@
   line-height: 1.4;
 }
 
+.repeat-icon {
+  width: 13px;
+  height: 13px;
+  display: block;
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
 .repeat-row {
   display: flex;
   align-items: center;
@@ -627,10 +641,15 @@
 }
 
 .button-arrow {
-  font-family: "Instrument Serif", serif;
-  font-size: 1.1rem;
-  letter-spacing: 0;
-  text-transform: none;
+  width: 18px;
+  height: 18px;
+  display: block;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.button:hover .button-arrow {
+  transform: translateX(3px);
 }
 
 .control-footnote {
@@ -641,6 +660,16 @@
   border-top: 1px solid var(--line-dark);
   padding-top: 0.9rem;
   font-style: italic;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+}
+
+.control-footnote img {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
 }
 
 .field--block,
@@ -659,6 +688,27 @@
   cursor: pointer;
   list-style: none;
   opacity: 0.8;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.block-summary::-webkit-details-marker {
+  display: none;
+}
+
+.block-summary::after {
+  content: "";
+  width: 11px;
+  height: 11px;
+  background: url("../assets/arrow-down.svg") no-repeat center;
+  background-size: contain;
+  opacity: 0.6;
+  transition: transform 0.18s ease;
+}
+
+details[open]>.block-summary::after {
+  transform: rotate(180deg);
 }
 
 .block-summary:hover {
@@ -724,6 +774,16 @@
   cursor: pointer;
   white-space: nowrap;
   transition: all 0.18s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.block-btn img {
+  width: 11px;
+  height: 11px;
+  display: block;
+  pointer-events: none;
 }
 
 .block-btn:hover {
@@ -762,8 +822,23 @@
   background: transparent;
   color: #8A8680;
   border: 1px solid #2A292C;
-  padding: 0.2rem 0.4rem;
+  padding: 0.25rem;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blocked-item button img {
+  width: 11px;
+  height: 11px;
+  display: block;
+  pointer-events: none;
+  filter: brightness(0) invert(0.55);
+}
+
+.blocked-item button:hover img {
+  filter: brightness(0) invert(0.85);
 }
 
 .blocked-item button:hover {

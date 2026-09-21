@@ -113,6 +113,15 @@ body {
   border-left: 1px solid var(--line-dark);
   padding-left: 0.75rem;
   margin-left: 0.1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.brand-sub img {
+  width: 11px;
+  height: 11px;
+  display: block;
 }
 
 .topbar-rule {
@@ -183,6 +192,8 @@ body {
   align-items: center;
   gap: 0.3rem;
   margin-left: 0.4rem;
+  align-self: center;
+  transform: translateY(5px);
 }
 
 .date-nav-btn {
@@ -202,6 +213,22 @@ body {
 .date-nav-btn:hover {
   border-color: var(--gold);
   color: var(--paper);
+}
+
+.date-nav-btn img {
+  width: 12px;
+  height: 12px;
+  display: block;
+  pointer-events: none;
+}
+
+#date-prev,
+#date-next {
+  line-height: 0;
+}
+
+.date-nav-btn img.flip-x {
+  transform: scaleX(-1);
 }
 
 .date-nav-btn--today {

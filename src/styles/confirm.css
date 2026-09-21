@@ -36,6 +36,16 @@
   border: 1px solid #DDD2B8;
   cursor: pointer;
   transition: all 0.18s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.confirm-btn img {
+  width: 12px;
+  height: 12px;
+  display: block;
+  pointer-events: none;
 }
 
 .confirm-btn--cancel {

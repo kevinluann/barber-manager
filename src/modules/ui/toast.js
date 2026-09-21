@@ -27,8 +27,24 @@ export function showToast(message, type = 'info') {
   const toast = document.createElement('div')
   toast.className = `toast toast--${type}`
   toast.setAttribute('role', type === 'error' ? 'alert' : 'status')
-  toast.textContent = message
   toast.style.pointerEvents = 'auto'
+
+  const toastIcons = {
+    success: './assets/check-gold.svg',
+    error: './assets/cancel-dark.svg',
+    info: './assets/bell.svg'
+  }
+
+  const toastIcon = document.createElement('img')
+  toastIcon.className = 'toast-icon'
+  toastIcon.src = toastIcons[type] || toastIcons.info
+  toastIcon.alt = ''
+  toastIcon.setAttribute('aria-hidden', 'true')
+
+  const toastMessage = document.createElement('span')
+  toastMessage.textContent = message
+
+  toast.append(toastIcon, toastMessage)
 
   container.appendChild(toast)
 

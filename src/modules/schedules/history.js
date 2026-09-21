@@ -30,6 +30,15 @@ export async function renderHistory() {
 
     const totalEl = document.createElement('span')
     totalEl.className = 'history-item history-item--total'
-    totalEl.textContent = `Semana R$${weekTotal}`
+
+    const totalIcon = document.createElement('img')
+    totalIcon.src = './assets/coin.svg'
+    totalIcon.alt = ''
+    totalIcon.setAttribute('aria-hidden', 'true')
+
+    const totalText = document.createElement('span')
+    totalText.textContent = `Semana R$${weekTotal}`
+
+    totalEl.append(totalIcon, totalText)
     container.appendChild(totalEl)
 }

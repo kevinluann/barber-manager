@@ -25,7 +25,7 @@
       <div class="brand">
         <img src="./assets/scissors.svg" alt="BarberManager" class="brand-mark" />
         <span class="brand-wordmark">BARBERMANAGER</span>
-        <span class="brand-sub">· 09 — 21H</span>
+        <span class="brand-sub"><img src="./assets/clock.svg" alt="" aria-hidden="true" />· 09 — 21H</span>
       </div>
 
       <div class="topbar-rule" aria-hidden="true"></div>
@@ -37,9 +37,11 @@
         <span class="date-display-weekday" id="date-display-weekday">—</span>
         <span id="next-appointment" class="next-appointment" aria-live="polite"></span>
         <div class="date-nav" aria-label="Navegação de data">
-          <button type="button" id="date-prev" class="date-nav-btn" aria-label="Dia anterior">‹</button>
+          <button type="button" id="date-prev" class="date-nav-btn" aria-label="Dia anterior"><img
+              src="./assets/chevron-left.svg" alt="" aria-hidden="true" /></button>
           <button type="button" id="date-today" class="date-nav-btn date-nav-btn--today">Hoje</button>
-          <button type="button" id="date-next" class="date-nav-btn" aria-label="Próximo dia">›</button>
+          <button type="button" id="date-next" class="date-nav-btn" aria-label="Próximo dia"><img
+              src="./assets/chevron-left.svg" class="flip-x" alt="" aria-hidden="true" /></button>
         </div>
       </div>
 
@@ -56,6 +58,7 @@
       <form class="form" novalidate>
         <div class="control-kicker">
           <span class="kicker-line" aria-hidden="true"></span>
+          <img src="./assets/scissors.svg" class="kicker-icon" alt="" aria-hidden="true" />
           <span class="kicker-text">Novo agendamento</span>
         </div>
 
@@ -99,7 +102,8 @@
                 <option value="20:00">20:00</option>
                 <option value="21:00">21:00</option>
               </select>
-              <button type="button" id="block-btn" class="block-btn">Bloquear</button>
+              <button type="button" id="block-btn" class="block-btn"><img src="./assets/lock.svg" alt=""
+                  aria-hidden="true" />Bloquear</button>
             </div>
             <ul id="blocked-list" class="blocked-list" aria-label="Horários bloqueados"></ul>
           </div>
@@ -108,6 +112,7 @@
             <label class="repeat-check" for="repeat">
               <input type="checkbox" id="repeat" name="repeat" />
               <span class="repeat-box" aria-hidden="true"></span>
+              <img src="./assets/repeat.svg" class="repeat-icon" alt="" aria-hidden="true" />
               <span class="repeat-text">Cliente fixo toda semana</span>
             </label>
             <div class="repeat-row" id="repeat-row" hidden>
@@ -154,10 +159,11 @@
 
         <button type="submit" class="button">
           <span class="button-label">Agendar atendimento</span>
-          <span class="button-arrow" aria-hidden="true">—→</span>
+          <img src="./assets/arrow-right.svg" class="button-arrow" alt="" aria-hidden="true" />
         </button>
 
-        <p class="control-footnote">Os horários indisponíveis ficam desativados.</p>
+        <p class="control-footnote"><img src="./assets/info.svg" alt="" aria-hidden="true" />Os horários indisponíveis
+          ficam desativados.</p>
       </form>
 
       <div class="control-sheet" aria-hidden="true">
@@ -185,9 +191,10 @@
                 <span class="alerts-head-title">Notificações</span>
                 <span id="dismissed-count" class="dismissed-count" hidden></span>
                 <span class="alerts-head-actions">
-                  <button type="button" id="alerts-reset" class="alerts-reset" aria-label="Atualizar avisos">↻</button>
-                  <button type="button" id="alerts-close" class="alerts-close"
-                    aria-label="Fechar notificações">×</button>
+                  <button type="button" id="alerts-reset" class="alerts-reset" aria-label="Atualizar avisos"><img
+                      src="./assets/refresh.svg" alt="" aria-hidden="true" /></button>
+                  <button type="button" id="alerts-close" class="alerts-close" aria-label="Fechar notificações"><img
+                      src="./assets/cancel-dark.svg" alt="" aria-hidden="true" /></button>
                 </span>
               </div>
               <div id="reward-alerts" class="reward-alerts" aria-live="polite"
@@ -215,14 +222,15 @@
         <div class="filter-tabs" role="tablist" aria-label="Filtrar por status">
           <button type="button" data-filter="all" class="filter-tab filter-tab--active" role="tab"
             aria-selected="true">Todos</button>
-          <button type="button" data-filter="pending" class="filter-tab" role="tab"
-            aria-selected="false">Pendentes</button>
-          <button type="button" data-filter="done" class="filter-tab" role="tab"
-            aria-selected="false">Concluídos</button>
+          <button type="button" data-filter="pending" class="filter-tab" role="tab" aria-selected="false"><img
+              src="./assets/calendar.svg" alt="" aria-hidden="true" />Pendentes</button>
+          <button type="button" data-filter="done" class="filter-tab" role="tab" aria-selected="false"><img
+              src="./assets/check-gold.svg" alt="" aria-hidden="true" />Concluídos</button>
         </div>
 
         <div class="toolbar-actions">
           <div class="search-wrap">
+            <img src="./assets/search.svg" class="search-icon" alt="" aria-hidden="true" />
             <input type="search" id="search" class="search-input" placeholder="Buscar cliente"
               aria-label="Buscar cliente" autocomplete="off" />
           </div>
@@ -272,7 +280,7 @@
       </section>
 
       <footer class="ledger-footer">
-        <span aria-hidden="true" class="ledger-mark">— ✦ —</span>
+        <span aria-hidden="true" class="ledger-mark">— <img src="./assets/scissors.svg" alt="" /> —</span>
         <span>BarberManager · Sua agenda, organizada.</span>
       </footer>
     </main>
@@ -305,7 +313,10 @@
 
     <div class="loyalty" aria-label="Fidelidade">
       <div class="loyalty-head">
-        <span class="loyalty-title">Fidelidade</span>
+        <span class="loyalty-name">
+          <img src="./assets/star.svg" class="loyalty-icon" alt="" aria-hidden="true" />
+          <span class="loyalty-title">Fidelidade</span>
+        </span>
         <strong id="loyalty-count">—/10</strong>
       </div>
       <div class="loyalty-track">

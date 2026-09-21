@@ -19,7 +19,7 @@ export async function renderBlockedList() {
     blocked.forEach((block) => {
         const li = document.createElement('li')
         li.className = 'blocked-item'
-        li.innerHTML = `<span>${block.hour}</span><button type="button" data-unblock-id="${block.id}">Desbloquear</button>`
+        li.innerHTML = `<span>${block.hour}</span><button type="button" data-unblock-id="${block.id}" aria-label="Desbloquear horário ${block.hour}"><img src="./assets/cancel.svg" alt="" aria-hidden="true" /></button>`
 
         blockedList.appendChild(li)
     })

@@ -35,13 +35,29 @@ function buildDialogContent(popup, message, confirmText, cancelText) {
   cancelBtn.type = 'button'
   cancelBtn.className = 'confirm-btn confirm-btn--cancel'
   cancelBtn.value = 'cancel'
-  cancelBtn.textContent = cancelText
+
+  const cancelIcon = document.createElement('img')
+  cancelIcon.src = './assets/cancel-dark.svg'
+  cancelIcon.alt = ''
+  cancelIcon.setAttribute('aria-hidden', 'true')
+
+  const cancelLabel = document.createElement('span')
+  cancelLabel.textContent = cancelText
+  cancelBtn.append(cancelIcon, cancelLabel)
 
   const confirmBtn = document.createElement('button')
   confirmBtn.type = 'button'
   confirmBtn.className = 'confirm-btn confirm-btn--confirm'
   confirmBtn.value = 'confirm'
-  confirmBtn.textContent = confirmText
+
+  const confirmIcon = document.createElement('img')
+  confirmIcon.src = './assets/check-paper.svg'
+  confirmIcon.alt = ''
+  confirmIcon.setAttribute('aria-hidden', 'true')
+
+  const confirmLabel = document.createElement('span')
+  confirmLabel.textContent = confirmText
+  confirmBtn.append(confirmIcon, confirmLabel)
 
   actionsEl.append(cancelBtn, confirmBtn)
   popup.append(messageEl, actionsEl)
