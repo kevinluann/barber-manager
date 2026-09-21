@@ -18,6 +18,7 @@
   --line-paper-strong: #DDD2B8;
   --gold: #C6A75C;
   --gold-deep: #B8952E;
+  --gold-dark: #8A6D1E;
   --gold-faint: rgba(198, 167, 92, 0.18);
   --gold-focus: rgba(198, 167, 92, 0.28);
   --radius: 0;
@@ -248,7 +249,7 @@ body {
   font-size: 0.62rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #6B6760;
+  color: var(--ink-soft);
 }
 
 .topbar-dot {
@@ -292,8 +293,6 @@ body {
   min-height: calc(100vh - 64px);
   position: relative;
 }
-
-
 
 @media (max-width: 1100px) {
   .topbar-inner {

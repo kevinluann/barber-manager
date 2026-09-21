@@ -12,9 +12,9 @@
 .toast {
   min-width: 280px;
   max-width: 380px;
-  background: #FDFBF5;
-  color: #1A1816;
-  border: 1px solid #DDD2B8;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--line-paper-strong);
   border-left: 3px solid #C6A75C;
   padding: 0.75rem 1rem;
   font-family: "Instrument Sans", sans-serif;
@@ -51,7 +51,7 @@
 }
 
 .toast--info {
-  border-left-color: #6B6760;
+  border-left-color: var(--ink-soft);
 }
 
 .toast-undo {
@@ -60,9 +60,9 @@
   font-size: 0.72rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  background: #1A1816;
-  color: #FDFBF5;
-  border: 1px solid #1A1816;
+  background: var(--ink);
+  color: var(--paper);
+  border: 1px solid var(--ink);
   padding: 0.25rem 0.5rem;
   cursor: pointer;
   pointer-events: auto;
@@ -70,10 +70,6 @@
 
 .toast-undo:hover {
   background: #2C2B2E;
-}
-
-#toast-container {
-  pointer-events: none;
 }
 
 #toast-container .toast {

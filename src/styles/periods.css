@@ -1,0 +1,366 @@
+.schedule-period {
+  border: none;
+  border-radius: 0;
+  margin-bottom: 1.4rem;
+  background: transparent;
+  position: relative;
+}
+
+.schedule-period header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  border-bottom: 1px solid var(--line-paper);
+  padding: 0.7rem 0;
+  background: transparent;
+}
+
+.period-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  opacity: 0.9;
+  flex-shrink: 0;
+}
+
+.schedule-period header strong,
+.schedule-period header h3 {
+  flex: 0 0 auto;
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0;
+}
+
+.period-range {
+  font-family: "JetBrains Mono", monospace !important;
+  font-size: 0.68rem !important;
+  color: var(--ink-faint) !important;
+  letter-spacing: 0.04em;
+}
+
+.period-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--line-paper), transparent);
+  margin-left: 0.4rem;
+}
+
+.period-count {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+.schedule-period ul {
+  list-style: none;
+  padding: 0.35rem 0 0.6rem;
+  position: relative;
+}
+
+.schedule-period ul::before {
+  content: "";
+  position: absolute;
+  left: 11px;
+  top: 0.6rem;
+  bottom: 0.6rem;
+  width: 1px;
+  background: var(--line-paper);
+  opacity: 0.9;
+}
+
+.schedule-period ul li {
+  height: auto;
+  min-height: 2.35rem;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  display: grid;
+  grid-template-columns: 72px 1fr auto auto auto auto;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.35rem 0 0.35rem 0;
+  border-bottom: 1px solid rgba(233, 224, 200, 0.55);
+  position: relative;
+  transition: background 0.18s;
+}
+
+.schedule-period ul li.is-no-show {
+  opacity: 1;
+  background: #FDE8E8;
+  border-left: 3px solid #B55242;
+}
+
+.schedule-period ul li.is-no-show strong,
+.schedule-period ul li.is-no-show span {
+  text-decoration: line-through;
+  text-decoration-color: #B55242;
+  color: #8B3A2A;
+}
+
+.schedule-period ul li.is-no-show::before {
+  background: #B55242;
+  border-color: #B55242;
+  box-shadow: 0 0 0 3px rgba(181, 82, 66, 0.18);
+}
+
+.schedule-period ul li.is-done {
+  opacity: 0.55;
+}
+
+.schedule-period ul li.is-done strong,
+.schedule-period ul li.is-done span {
+  text-decoration: line-through;
+  text-decoration-color: var(--ink-faint);
+}
+
+.schedule-period ul li.is-done::before {
+  background: var(--ink-faint);
+  border-color: var(--ink-faint);
+  box-shadow: none;
+}
+
+.schedule-period ul li:last-child {
+  border-bottom: none;
+}
+
+.schedule-period ul li::before {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid var(--line-paper-strong);
+  z-index: 1;
+}
+
+.schedule-period ul li strong {
+  margin-right: 0;
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 500;
+  font-size: 0.88rem;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  padding-left: 1.9rem;
+  position: relative;
+}
+
+.schedule-period ul li span {
+  flex: unset;
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 0.88rem;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-flex;
+  gap: 0.3rem;
+  align-items: baseline;
+}
+
+.schedule-period ul li .schedule-name {
+  font-weight: 400;
+  color: var(--ink);
+}
+
+.schedule-period ul li .schedule-service {
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  text-transform: capitalize;
+  color: var(--ink-faint) !important;
+  opacity: 1;
+}
+
+.schedule-period ul li .schedule-sep {
+  color: #C6A75C;
+  opacity: 1;
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.badge-fiel {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.52rem;
+  letter-spacing: 0.06em;
+  color: #9A9690;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin-left: 0.25rem;
+  opacity: 0.75;
+  vertical-align: middle;
+}
+
+.badge-reward {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  background: var(--gold);
+  padding: 0.12rem 0.35rem;
+  margin-left: 0.3rem;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.badge-fixed {
+  display: inline-flex;
+  align-items: center;
+  align-self: center;
+  margin-left: 0.35rem;
+  opacity: 0.85;
+  vertical-align: middle;
+  transform: translateY(1px);
+}
+
+.badge-fixed img {
+  width: 13px;
+  height: 13px;
+  display: block;
+  pointer-events: none;
+}
+
+.schedule-period ul li:has(span:not(:empty))::before {
+  background: var(--gold);
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(198, 167, 92, 0.18);
+}
+
+.schedule-period ul li:hover {
+  background: rgba(242, 235, 216, 0.45);
+}
+
+.schedule-period ul:empty::after {
+  content: "Nenhum atendimento";
+  display: block;
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-size: 0.82rem;
+  color: var(--ink-faint);
+  padding: 0.7rem 0 0.7rem 3.4rem;
+  border-bottom: 1px dashed var(--line-paper);
+  background: url("../assets/empty-slot.svg") no-repeat 1.9rem center;
+  background-size: 18px 18px;
+  opacity: 0.8;
+}
+
+.cancel-icon,
+.edit-icon,
+.complete-icon,
+.no-show-icon {
+  cursor: pointer;
+  transition: all 0.18s;
+  width: 20px;
+  height: 20px;
+  opacity: 0;
+  transform: scale(0.9);
+  border: none;
+  padding: 0;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  appearance: none;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 14px;
+  line-height: 1;
+  color: #5C4A1A;
+}
+
+.cancel-icon img,
+.edit-icon img,
+.complete-icon img {
+  width: 13px;
+  height: 13px;
+  display: block;
+  pointer-events: none;
+}
+
+.no-show-icon img {
+  width: 15px;
+  height: 15px;
+  display: block;
+  pointer-events: none;
+}
+
+.schedule-period ul li:hover .cancel-icon,
+.schedule-period ul li:hover .edit-icon,
+.schedule-period ul li:hover .complete-icon,
+.schedule-period ul li:hover .no-show-icon {
+  opacity: 0.9;
+  transform: scale(1);
+}
+
+.cancel-icon:hover,
+.edit-icon:hover,
+.complete-icon:hover,
+.no-show-icon:hover {
+  opacity: 1 !important;
+  transform: scale(1.05);
+}
+
+.cancel-icon:focus-visible,
+.edit-icon:focus-visible,
+.complete-icon:focus-visible,
+.no-show-icon:focus-visible {
+  opacity: 1;
+  outline: 1px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.schedule-period ul li.is-done .complete-icon,
+.schedule-period ul li.is-no-show .complete-icon,
+.schedule-period ul li.is-no-show .no-show-icon {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.schedule-period ul li.is-done .edit-icon,
+.schedule-period ul li.is-done .cancel-icon,
+.schedule-period ul li.is-no-show .edit-icon,
+.schedule-period ul li.is-no-show .cancel-icon {
+  opacity: 0.35;
+}
+
+.schedule-period ul li img:hover {
+  opacity: 1 !important;
+}
+
+@media (max-width: 640px) {
+  .schedule-period ul li {
+    grid-template-columns: 64px 1fr auto;
+    gap: 0.5rem;
+  }
+
+  .schedule-period ul li strong {
+    padding-left: 1.6rem;
+    font-size: 0.82rem;
+  }
+
+  .schedule-period ul::before {
+    left: 9px;
+  }
+
+  .schedule-period ul li::before {
+    left: 5px;
+    width: 8px;
+    height: 8px;
+  }
+
+  .cancel-icon {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+}

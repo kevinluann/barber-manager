@@ -1,6 +1,6 @@
 .edit-dialog {
-  border: 1px solid #DDD2B8;
-  background: #FDFBF5;
+  border: 1px solid var(--line-paper-strong);
+  background: var(--paper);
   padding: 1.5rem;
   max-width: 420px;
   width: calc(100% - 2rem);
@@ -17,13 +17,13 @@
   font-family: "Instrument Serif", serif;
   font-size: 1.4rem;
   font-weight: 400;
-  color: #1A1816;
+  color: var(--ink);
   margin: 0 0 0.3rem;
 }
 
 .edit-hint {
   font-size: 0.78rem;
-  color: #6B6760;
+  color: var(--ink-soft);
   margin: 0 0 1.2rem;
 }
 
@@ -36,7 +36,7 @@
 }
 
 .edit-dialog .input input {
-  color: #1A1816;
+  color: var(--ink);
 }
 
 .edit-dialog #edit-hours {
