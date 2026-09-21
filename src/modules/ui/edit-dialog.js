@@ -1,3 +1,4 @@
+import { SERVICES } from "../../data/service-catalog.js"
 import { enhanceSelect } from "./custom-select.js"
 
 export function getEditDialog() {
@@ -25,7 +26,7 @@ export function getEditDialog() {
   document.body.appendChild(dialog)
 
   const editService = dialog.querySelector('#edit-service')
-  
+
   if (editService) {
     enhanceSelect(editService)
   }
@@ -132,28 +133,22 @@ function createServiceField() {
   select.id = 'edit-service'
   select.className = 'input input--select'
 
-  const optCorte = document.createElement('option')
-  optCorte.value = 'corte'
-  optCorte.dataset.icon = './assets/cut.svg'
-  optCorte.dataset.duration = '30'
-  optCorte.dataset.price = '50'
-  optCorte.textContent = 'Corte - R$50'
+  const servicesAvailable = SERVICES.filter((service) => {
+    return service.active !== false
+  })
 
-  const optBarba = document.createElement('option')
-  optBarba.value = 'barba'
-  optBarba.dataset.icon = './assets/beard.svg'
-  optBarba.dataset.duration = '20'
-  optBarba.dataset.price = '30'
-  optBarba.textContent = 'Barba - R$30'
+  servicesAvailable.forEach((service) => {
+    const option = document.createElement("option")
 
-  const optCombo = document.createElement('option')
-  optCombo.value = 'combo'
-  optCombo.dataset.icon = './assets/combo.svg'
-  optCombo.dataset.duration = '50'
-  optCombo.dataset.price = '80'
-  optCombo.textContent = 'Combo - R$80'
+    option.value = service.value
+    option.dataset.icon = service.icon
+    option.dataset.duration = String(service.duration)
+    option.dataset.price = String(service.price)
+    option.textContent = `${service.label} - R$${service.price}`
 
-  select.append(optCorte, optBarba, optCombo)
+    select.appendChild(option)
+  })
+
   fieldWrapper.append(label, select)
 
   return fieldWrapper

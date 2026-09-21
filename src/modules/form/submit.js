@@ -1,5 +1,6 @@
 ﻿import dayjs from "dayjs"
 
+import { getService } from "../../data/service-catalog.js"
 import { schedulesDay } from "../schedules/load.js"
 import { showToast } from "../ui/toast.js"
 import { createSchedules, resetRepeat } from "./repeat.js"
@@ -51,18 +52,25 @@ form.addEventListener('submit', async (event) => {
 
         const when = dayjs(selectedDate.value).add(hour, 'hour')
 
-        const serviceEl = document.querySelector('#service')
-        const service = serviceEl.value
-        const duration = Number(serviceEl.selectedOptions[0].dataset.duration)
+        const serviceValue = document.querySelector('#service').value
+        const selectedService = getService(serviceValue)
+
+        if (!selectedService) {
+            showToast("Serviço inválido.", "error")
+            return
+        }
+
         const notesEl = document.querySelector('#notes')
         const notesValue = notesEl.value.trim()
-        const price = Number(serviceEl.selectedOptions[0].dataset.price)
+        const { duration, price } = selectedService
+
         const optionsDetails = document.querySelector('details.field--options')
+
         if (optionsDetails) {
             optionsDetails.open = false
         }
 
-        await createSchedules({ name, when, service, duration, price, notes: notesValue })
+        await createSchedules({ name, when, service: serviceValue, duration, price, notes: notesValue })
         await schedulesDay()
 
         resetRepeat()

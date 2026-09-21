@@ -5,6 +5,7 @@ import { scheduleFetchBlocked } from "../../services/schedule-block.js"
 import { scheduleFetchByDay } from "../../services/schedule-fetch-by-day.js"
 import { openingHours } from "../../utils/opening-hours.js"
 import { scheduleUpdate } from "../../services/schedule-update.js"
+import { getService } from "../../data/service-catalog.js"
 import { getEditDialog } from "../ui/edit-dialog.js"
 import { refreshCustomSelect } from "../ui/custom-select.js"
 import { showToast } from "../ui/toast.js"
@@ -53,13 +54,18 @@ function setupEditForm(dialog) {
         const [hour, _] = hourEl.textContent.split(':')
         const when = dayjs(dateInput.value).add(hour, 'hour')
 
-        const serviceEl = form.querySelector('#edit-service')
-        const service = serviceEl.value
-        const duration = Number(serviceEl.selectedOptions[0].dataset.duration)
-        const notes = form.querySelector('#edit-notes').value.trim()
-        const price = Number(serviceEl.selectedOptions[0].dataset.price)
+        const serviceValue = form.querySelector('#edit-service').value
+        const selectedService = getService(serviceValue)
 
-        await scheduleUpdate({ id, name, when, service, duration, price, notes })
+        if (!selectedService) {
+            showToast("Serviço inválido.", "error")
+            return
+        }
+
+        const notes = form.querySelector('#edit-notes').value.trim()
+        const { duration, price } = selectedService
+
+        await scheduleUpdate({ id, name, when, service: serviceValue, duration, price, notes })
         await schedulesDay()
 
         dialog.close()

@@ -18,6 +18,7 @@ import { renderHistory } from "./history.js"
 import { renderBlockedList } from "./unblock.js"
 import { enableNoShowButtons } from "./no-show.js"
 import { renderRewardAlerts } from "./alerts.js"
+import { buildServiceOptions } from "../form/service-options.js"
 
 const selectedDate = document.querySelector('#date')
 
@@ -52,6 +53,7 @@ export async function schedulesDay() {
     enableNoShowButtons()
     enableEditButtons()
     enableRepeatToggle()
+    buildServiceOptions()
     initCustomSelects()
     initAlertsBell()
 
