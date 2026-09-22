@@ -43,9 +43,13 @@ function updateNextAppointment(dailySchedules) {
   const sorted = filtered.sort((scheduleA, scheduleB) => scheduleA.when - scheduleB.when)
 
   const nextSchedule = sorted[0]
+  const nextText = nextSchedule ? `Próximo: ${nextSchedule.when.format('HH:mm')} — ${nextSchedule.name}` : ''
 
-  const nextAppointmentEl = document.querySelector('#next-appointment')
-  nextAppointmentEl.textContent = nextSchedule ? `Próximo: ${nextSchedule.when.format('HH:mm')} — ${nextSchedule.name}` : ''
+  const nextAppointmentElements = document.querySelectorAll('.next-appointment')
+
+  nextAppointmentElements.forEach((element) => {
+    element.textContent = nextText
+  })
 }
 
 function updateCounters() {
