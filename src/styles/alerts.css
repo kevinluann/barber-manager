@@ -72,6 +72,16 @@
   margin: 0;
 }
 
+.reward-more {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-faint);
+  text-align: center;
+  padding: 0.2rem 0 0;
+  margin: 0;
+}
+
 .reward-empty::before {
   content: "";
   display: block;
