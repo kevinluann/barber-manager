@@ -12,7 +12,7 @@ export function enableNoShowButtons() {
 
         button.addEventListener('click', async () => {
             const li = button.closest('li[data-id]')
-            const ok = await showConfirm(`Marcar falta de ${li.dataset.name}?`, 'Faltou', 'Manter')
+            const { confirmed: ok } = await showConfirm(`Marcar falta de ${li.dataset.name}?`, 'Faltou', 'Manter')
 
             if (!ok) return
 

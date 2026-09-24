@@ -21,6 +21,25 @@
   margin: 0 0 1rem;
 }
 
+.confirm-paid {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 0.82rem;
+  color: var(--ink);
+  margin: 0 0 1rem;
+  cursor: pointer;
+}
+
+.confirm-paid input {
+  width: 15px;
+  height: 15px;
+  accent-color: var(--gold-dark);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
 .confirm-actions {
   display: flex;
   justify-content: flex-end;

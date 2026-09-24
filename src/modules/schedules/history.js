@@ -7,20 +7,21 @@ export async function renderHistory() {
     container.replaceChildren()
 
     let weekTotal = 0
+    let weekToReceive = 0
 
     for (const i of [6, 5, 4, 3, 2, 1, 0]) {
         const date = dayjs().subtract(i, 'day').format('YYYY-MM-DD')
         const schedules = await scheduleFetchByDay({ date }) || []
         const label = dayjs(date).format('DD/MM')
 
-        const doneSchedules = schedules.filter((schedule) => {
-            return schedule.status === 'done'
-        })
-        const dayRevenue = doneSchedules.reduce((sum, schedule) => {
-            return sum + (Number(schedule.price) || 0)
-        }, 0)
+        const paidSchedules = schedules.filter((schedule) => schedule.status === "done" && schedule.paid)
+        const unpaidSchedules = schedules.filter((schedule) => schedule.status === "done" && !schedule.paid)
+
+        const dayRevenue = sum(paidSchedules)
+        const dayToReceive = sum(unpaidSchedules)
 
         weekTotal += dayRevenue
+        weekToReceive += dayToReceive
 
         const item = document.createElement('span')
         item.className = 'history-item'
@@ -37,8 +38,14 @@ export async function renderHistory() {
     totalIcon.setAttribute('aria-hidden', 'true')
 
     const totalText = document.createElement('span')
-    totalText.textContent = `Semana R$${weekTotal}`
+    totalText.textContent = weekToReceive > 0 ? `Semana R$${weekTotal} (+R$${weekToReceive} a receber)` : `Semana R$${weekTotal}`
 
     totalEl.append(totalIcon, totalText)
     container.appendChild(totalEl)
+}
+
+function sum(list) {
+    return list.reduce((total, schedule) => {
+        return total + (Number(schedule.price) || 0)
+    }, 0)
 }

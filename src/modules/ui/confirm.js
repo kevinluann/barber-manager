@@ -1,12 +1,12 @@
-export function showConfirm(message, confirmText, cancelText) {
+export function showConfirm(message, confirmText, cancelText, { showPaid = false } = {}) {
   return new Promise((resolve) => {
     const popup = createPopup()
 
-    const { cancelBtn, confirmBtn } = buildDialogContent(popup, message, confirmText, cancelText)
+    const { cancelBtn, confirmBtn, paidBox } = buildDialogContent(popup, message, confirmText, cancelText, showPaid)
 
     document.body.appendChild(popup)
 
-    bindDialogEvents(popup, resolve, cancelBtn, confirmBtn)
+    bindDialogEvents(popup, resolve, cancelBtn, confirmBtn, paidBox)
 
     openPopup(popup)
   })
@@ -23,7 +23,7 @@ function createPopup() {
   return popup
 }
 
-function buildDialogContent(popup, message, confirmText, cancelText) {
+function buildDialogContent(popup, message, confirmText, cancelText, showPaid) {
   const messageEl = document.createElement('p')
   messageEl.className = 'confirm-message'
   messageEl.textContent = message
@@ -60,17 +60,36 @@ function buildDialogContent(popup, message, confirmText, cancelText) {
   confirmBtn.append(confirmIcon, confirmLabel)
 
   actionsEl.append(cancelBtn, confirmBtn)
-  popup.append(messageEl, actionsEl)
 
-  return { cancelBtn, confirmBtn }
+  let paidBox = null
+
+  if (showPaid) {
+    const paidLabel = document.createElement("label")
+    paidLabel.className = "confirm-paid"
+
+    paidBox = document.createElement("input")
+    paidBox.type = "checkbox"
+    paidBox.checked = true
+
+    paidLabel.append(paidBox, " Pagamento recebido")
+
+    popup.append(messageEl, paidLabel, actionsEl)
+  } else {
+    popup.append(messageEl, actionsEl)
+  }
+
+  return { cancelBtn, confirmBtn, paidBox }
 }
 
-function bindDialogEvents(popup, resolve, cancelBtn, confirmBtn) {
+function bindDialogEvents(popup, resolve, cancelBtn, confirmBtn, paidBox) {
   function close(value) {
     popup.close()
     popup.remove()
 
-    resolve(value === 'confirm')
+    resolve({
+      confirmed: value === "confirm",
+      paid: paidBox ? paidBox.checked : false
+    })
   }
 
   cancelBtn.addEventListener('click', () => close('cancel'))

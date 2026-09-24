@@ -13,11 +13,11 @@ export function enableCompleteButtons() {
         button.addEventListener('click', async () => {
             const li = button.closest('li[data-id]')
 
-            const isConfirm = await showConfirm(`Concluir agendamento de ${li.dataset.name}?`, 'Concluir', 'Cancelar')
+            const { confirmed, paid } = await showConfirm(`Concluir agendamento de ${li.dataset.name}?`, 'Concluir', 'Cancelar', { showPaid: true })
 
-            if (!isConfirm) return
+            if (!confirmed) return
 
-            await scheduleComplete({ id: li.dataset.id })
+            await scheduleComplete({ id: li.dataset.id, paid })
             await schedulesDay()
         })
     })
