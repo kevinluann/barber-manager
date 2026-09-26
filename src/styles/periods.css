@@ -306,6 +306,32 @@
   color: #FDFBF5;
 }
 
+.badge-paid,
+.badge-unpaid {
+  cursor: pointer;
+  font: inherit;
+}
+
+.badge-paid:focus-visible,
+.badge-unpaid:focus-visible {
+  outline: 1px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.badge-paid:hover {
+  background: #2A4F39;
+  border-color: #2A4F39;
+  transform: scale(1.01);
+  box-shadow: 0 0 0 3px var(--gold-faint);
+}
+
+.badge-unpaid:hover {
+  background: #7E3325;
+  border-color: #7E3325;
+  transform: scale(1.01);
+  box-shadow: 0 0 0 3px var(--gold-faint);
+}
+
 .schedule-period ul li:has(span:not(:empty))::before {
   background: var(--gold);
   border-color: var(--gold);

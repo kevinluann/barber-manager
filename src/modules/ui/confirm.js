@@ -1,8 +1,8 @@
-export function showConfirm(message, confirmText, cancelText, { showPaid = false } = {}) {
+export function showConfirm(message, confirmText, cancelText, { showPaid = false, tone = "confirm" } = {}) {
   return new Promise((resolve) => {
     const popup = createPopup()
 
-    const { cancelBtn, confirmBtn, paidBox } = buildDialogContent(popup, message, confirmText, cancelText, showPaid)
+    const { cancelBtn, confirmBtn, paidBox } = buildDialogContent(popup, message, confirmText, cancelText, showPaid, tone)
 
     document.body.appendChild(popup)
 
@@ -23,7 +23,7 @@ function createPopup() {
   return popup
 }
 
-function buildDialogContent(popup, message, confirmText, cancelText, showPaid) {
+function buildDialogContent(popup, message, confirmText, cancelText, showPaid, tone) {
   const messageEl = document.createElement('p')
   messageEl.className = 'confirm-message'
   messageEl.textContent = message
@@ -47,7 +47,7 @@ function buildDialogContent(popup, message, confirmText, cancelText, showPaid) {
 
   const confirmBtn = document.createElement('button')
   confirmBtn.type = 'button'
-  confirmBtn.className = 'confirm-btn confirm-btn--confirm'
+  confirmBtn.className = `confirm-btn confirm-btn--${tone}`
   confirmBtn.value = 'confirm'
 
   const confirmIcon = document.createElement('img')

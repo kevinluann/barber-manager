@@ -87,6 +87,28 @@
   border-color: #6B4E07;
 }
 
+.confirm-btn--success {
+  background: #3E6B4F;
+  border-color: #3E6B4F;
+  color: var(--paper);
+}
+
+.confirm-btn--success:hover {
+  background: #2A4F39;
+  border-color: #2A4F39;
+}
+
+.confirm-btn--danger {
+  background: #8B3A2A;
+  border-color: #8B3A2A;
+  color: var(--paper);
+}
+
+.confirm-btn--danger:hover {
+  background: #7E3325;
+  border-color: #7E3325;
+}
+
 .confirm-btn:focus-visible {
   outline: 1px solid #C6A75C;
   outline-offset: 2px;

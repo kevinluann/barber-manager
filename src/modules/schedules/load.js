@@ -20,6 +20,7 @@ import { renderHistory } from "./history.js"
 import { renderBlockedList } from "./unblock.js"
 import { enableNoShowButtons } from "./no-show.js"
 import { renderRewardAlerts } from "./alerts.js"
+import { enablePaidToggle } from "./toggle-paid.js"
 
 const selectedDate = document.querySelector('#date')
 
@@ -54,6 +55,7 @@ export async function schedulesDay() {
     enableNoShowButtons()
     enableEditButtons()
     enableRepeatToggle()
+    enablePaidToggle()
     buildServiceOptions()
     initCustomSelects()
     initAlertsBell()

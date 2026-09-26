@@ -117,7 +117,9 @@ export async function schedulesShow({ dailySchedules }) {
 
             if (schedule.status === "done") {
                 const isPaid = schedule.paid === true
-                const paidBadge = document.createElement("span")
+
+                const paidBadge = document.createElement("button")
+                paidBadge.type = "button"
                 paidBadge.className = isPaid ? "badge-paid" : "badge-unpaid"
 
                 const paidIcon = document.createElement("img")
@@ -126,7 +128,12 @@ export async function schedulesShow({ dailySchedules }) {
                 paidIcon.setAttribute("aria-hidden", "true")
 
                 paidBadge.append(paidIcon, isPaid ? "PAGO" : "A RECEBER")
-                paidBadge.title = isPaid ? "Pagamento recebido" : "Pagamento em aberto"
+                paidBadge.title = isPaid ? "Pago - clique para marcar como não pago" : "Em aberto - clique para marcar como pago"
+                paidBadge.dataset.id = schedule.id
+                paidBadge.dataset.paid = String(isPaid)
+                paidBadge.dataset.name = schedule.name
+                paidBadge.dataset.price = String(schedule.price)
+
                 badges.push(paidBadge)
             }
 
