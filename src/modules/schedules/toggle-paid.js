@@ -9,16 +9,31 @@ export function enablePaidToggle() {
         if (badge.dataset.bound) return
         badge.dataset.bound = "true"
 
-        badge.addEventListener("click", async (event) => {
-            const { id } = badge.dataset
-            const isPaid = badge.dataset.paid === "true"
+        badge.addEventListener("click", async () => {
+            const paymentChanged = await togglePaidStatus({
+                id: badge.dataset.id,
+                name: badge.dataset.name,
+                detail: `R$${badge.dataset.price}`,
+                isPaid: badge.dataset.paid === "true",
+            })
 
-            const { confirmed } = await showConfirm(`Marcar corte de ${badge.dataset.name} (R$${badge.dataset.price}) como ${isPaid ? "não pago" : "pago"}?`, isPaid ? "Desmarcar" : "Marcar pago", "Manter", { tone: isPaid ? "danger" : "success" })
-
-            if (!confirmed) return
-
-            await scheduleTogglePaid({ id, paid: !isPaid })
-            await schedulesDay()
+            if (paymentChanged) {
+                await schedulesDay()
+            }
         })
     })
+}
+
+export async function togglePaidStatus({ id, name, detail, isPaid }) {
+    const { confirmed } = await showConfirm(
+        `Marcar corte de ${name} (${detail}) como ${isPaid ? "não pago" : "pago"}?`,
+        isPaid ? "Desmarcar" : "Marcar pago", "Manter",
+        { tone: isPaid ? "danger" : "success" }
+    )
+
+    if (!confirmed) return false
+
+    await scheduleTogglePaid({ id, paid: !isPaid })
+
+    return true
 }

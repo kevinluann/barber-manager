@@ -249,6 +249,36 @@
   color: #8B3A2A;
 }
 
+.history-paid,
+.history-unpaid {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 0.08rem 0.3rem;
+  white-space: nowrap;
+  border: none;
+  cursor: pointer;
+}
+
+.history-paid {
+  color: #3E6B4F;
+  background: rgba(62, 107, 79, 0.12);
+}
+
+.history-paid:hover {
+  background: rgba(62, 107, 79, 0.22);
+}
+
+.history-unpaid {
+  color: #FDFBF5;
+  background: #8B3A2A;
+}
+
+.history-unpaid:hover {
+  background: #A84633;
+}
+
 @media (max-width: 480px) {
   .history-summary {
     grid-template-columns: repeat(2, 1fr);

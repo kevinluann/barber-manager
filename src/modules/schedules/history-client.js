@@ -2,6 +2,7 @@ import dayjs from "dayjs"
 
 import { apiConfig } from "../../services/api-config.js"
 import { hasRewardFor, LOYALTY_GOAL } from "../../utils/client-rules.js"
+import { togglePaidStatus } from "./toggle-paid.js"
 
 export async function showClientHistory(name) {
     const history = await fetchClientHistory(name)
@@ -133,6 +134,26 @@ function buildHistoryDialog(name, history) {
         const infoSpan = document.createElement('span')
         infoSpan.textContent = `${service} - ${status}`
 
+        if (schedule.status === "done") {
+            const isPaid = schedule.paid === true
+
+            const paidTag = document.createElement("button")
+            paidTag.type = "button"
+            paidTag.className = isPaid ? "history-paid" : "history-unpaid"
+            paidTag.textContent = isPaid ? "PAGO" : "EM ABERTO"
+
+            paidTag.addEventListener("click", async () => {
+                const paymentChanged = await togglePaidStatus({ id: schedule.id, name, detail: dayjs(schedule.when).format("DD/MM"), isPaid })
+
+                if (paymentChanged) {
+                    dialog.close()
+                    showClientHistory(name)
+                }
+            })
+
+            entry.append(paidTag)
+        }
+
         entry.append(dateSpan, infoSpan)
 
         if (schedule.notes) {
@@ -150,7 +171,7 @@ function buildHistoryDialog(name, history) {
         list.textContent = 'Nenhum histórico'
     }
 
-    let closeBtn = dialog.querySelector('button')
+    let closeBtn = dialog.querySelector('.confirm-btn')
 
     if (!closeBtn) {
         closeBtn = document.createElement('button')
