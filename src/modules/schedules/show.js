@@ -115,6 +115,25 @@ export async function schedulesShow({ dailySchedules }) {
                 badges.push(badge)
             }
 
+            if (schedule.status === "done") {
+                const isPaid = schedule.paid === true
+                const paidBadge = document.createElement("span")
+                paidBadge.className = isPaid ? "badge-paid" : "badge-unpaid"
+
+                const paidIcon = document.createElement("img")
+                paidIcon.src = isPaid ? "./assets/coin.svg" : "./assets/alert.svg"
+                paidIcon.alt = ""
+                paidIcon.setAttribute("aria-hidden", "true")
+
+                paidBadge.append(paidIcon, isPaid ? "PAGO" : "A RECEBER")
+                paidBadge.title = isPaid ? "Pagamento recebido" : "Pagamento em aberto"
+                badges.push(paidBadge)
+            }
+
+            if (schedule.status === "done") {
+                item.classList.add(schedule.paid ? "is-paid" : "is-unpaid")
+            }
+
             name.append(nameText)
             badges.forEach((badge) => {
                 name.append(badge)
