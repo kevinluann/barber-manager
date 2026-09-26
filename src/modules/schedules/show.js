@@ -170,6 +170,7 @@ export async function schedulesShow({ dailySchedules }) {
             editButton.className = 'edit-icon'
             editButton.type = 'button'
             editButton.setAttribute('aria-label', `Editar ${schedule.name}`)
+            editButton.setAttribute('title', 'Editar')
 
             const editIcon = document.createElement('img')
             editIcon.src = './assets/pencil.svg'
