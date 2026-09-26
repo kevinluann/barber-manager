@@ -3,6 +3,7 @@ import dayjs from "dayjs"
 import { apiConfig } from "../../services/api-config.js"
 import { schedulesDay } from "../schedules/load.js"
 import { showToast } from "./toast.js"
+import { updateCalendarSelectedDate } from "./calendar.js"
 
 const dateInput = document.querySelector('#date')
 const prevButton = document.querySelector('#date-prev')
@@ -16,6 +17,8 @@ async function shiftDate(days) {
     if (next < dateInput.min || next > dateInput.max) return
 
     dateInput.value = next
+
+    updateCalendarSelectedDate()
 
     await schedulesDay()
 }
@@ -43,6 +46,8 @@ async function goToPreviousDayWithSchedules() {
 
     dateInput.value = previousDayWithSchedules.format("YYYY-MM-DD")
 
+    updateCalendarSelectedDate()
+
     await schedulesDay()
 }
 
@@ -52,6 +57,8 @@ nextButton.addEventListener('click', () => shiftDate(+1))
 todayButton.addEventListener('click', async () => {
     const today = dayjs().format('YYYY-MM-DD')
     dateInput.value = today
+
+    updateCalendarSelectedDate()
 
     await schedulesDay()
 })

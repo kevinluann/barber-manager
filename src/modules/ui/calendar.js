@@ -42,7 +42,7 @@ const calendarDaysGrid = document.querySelector("#calendar-grid")
 const prevMonthButton = document.querySelector("#calendar-prev")
 const nextMonthButton = document.querySelector("#calendar-next")
 
-function updateCalendarSelectedDate() {
+export function updateCalendarSelectedDate() {
     calendarSelectedDate.textContent = dayjs(dateInput.value).format("DD/MM/YYYY")
 }
 
