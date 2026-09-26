@@ -1,26 +1,57 @@
 import dayjs from "dayjs"
+
+import { apiConfig } from "../../services/api-config.js"
 import { schedulesDay } from "../schedules/load.js"
+import { showToast } from "./toast.js"
 
 const dateInput = document.querySelector('#date')
 const prevButton = document.querySelector('#date-prev')
 const nextButton = document.querySelector('#date-next')
 const todayButton = document.querySelector('#date-today')
 
-function shiftDate(days) {
-    const current = dayjs(dateInput.value)
-    const next = current.add(days, 'day').format('YYYY-MM-DD')
+async function shiftDate(days) {
+    const selectedDay = dayjs(dateInput.value)
+    const next = selectedDay.add(days, 'day').format('YYYY-MM-DD')
 
     if (next < dateInput.min || next > dateInput.max) return
 
     dateInput.value = next
-    schedulesDay()
+
+    await schedulesDay()
 }
 
-prevButton.addEventListener('click', () => shiftDate(-1))
+async function goToPreviousDayWithSchedules() {
+    const response = await fetch(`${apiConfig.baseURL}/schedules`)
+    const all = await response.json()
+
+    const selectedDay = dayjs(dateInput.value).startOf("day")
+    let previousDayWithSchedules = null
+
+    all.forEach((schedule) => {
+        const scheduleDay = dayjs(schedule.when).startOf("day")
+
+        if (scheduleDay.isBefore(selectedDay) && (!previousDayWithSchedules || scheduleDay.isAfter(previousDayWithSchedules))) {
+            previousDayWithSchedules = scheduleDay
+        }
+    })
+
+    if (!previousDayWithSchedules) {
+        showToast("Sem agendamentos em dias anteriores.")
+
+        return
+    }
+
+    dateInput.value = previousDayWithSchedules.format("YYYY-MM-DD")
+
+    await schedulesDay()
+}
+
+prevButton.addEventListener("click", () => goToPreviousDayWithSchedules())
 nextButton.addEventListener('click', () => shiftDate(+1))
 
-todayButton.addEventListener('click', () => {
+todayButton.addEventListener('click', async () => {
     const today = dayjs().format('YYYY-MM-DD')
     dateInput.value = today
-    schedulesDay()
+
+    await schedulesDay()
 })

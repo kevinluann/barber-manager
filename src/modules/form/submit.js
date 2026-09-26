@@ -11,10 +11,8 @@ const selectedDate = document.querySelector('#date')
 const clientError = document.querySelector('#client-error')
 const hoursError = document.querySelector('#hours-error')
 
-const inputToday = dayjs().format('YYYY-MM-DD')
-
-selectedDate.value = inputToday
-selectedDate.min = inputToday
+selectedDate.value = dayjs().format('YYYY-MM-DD')
+selectedDate.min = dayjs().subtract(6, "month").format("YYYY-MM-DD")
 selectedDate.max = dayjs().add(1, 'month').format('YYYY-MM-DD')
 
 clientName.addEventListener('input', () => {
@@ -34,6 +32,12 @@ form.addEventListener('submit', async (event) => {
             clientName.setAttribute('aria-invalid', 'true')
             clientName.classList.add('input--error')
             clientName.focus()
+
+            return
+        }
+
+        if (dayjs(selectedDate.value).isBefore(dayjs().startOf("day"))) {
+            showToast("Não é possível agendar em data passada.", "error")
 
             return
         }

@@ -73,6 +73,22 @@
             <i aria-hidden="true"><img src="./assets/calendar.svg" alt="" /></i>
             <input type="date" id="date" name="date" required />
           </div>
+          <div class="calendar-wrap">
+            <button type="button" id="calendar-toggle" class="calendar-toggle" aria-haspopup="dialog">
+              <span id="calendar-toggle-text">Selecionar data</span>
+            </button>
+            <div id="calendar-popover" class="calendar-popover" role="dialog" aria-label="Escolher data" hidden>
+              <div class="calendar-head">
+                <button type="button" id="calendar-prev" class="calendar-nav" aria-label="Mês anterior">‹</button>
+                <strong id="calendar-title">—</strong>
+                <button type="button" id="calendar-next" class="calendar-nav" aria-label="Próximo mês">›</button>
+              </div>
+              <div class="calendar-weekdays" aria-hidden="true">
+                <span>D</span><span>S</span><span>T</span><span>Q</span><span>Q</span><span>S</span><span>S</span>
+              </div>
+              <div id="calendar-grid" class="calendar-grid"></div>
+            </div>
+          </div>
         </div>
 
         <div class="field">

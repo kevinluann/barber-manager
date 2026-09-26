@@ -8,6 +8,8 @@ import { showToast } from "../ui/toast.js"
 import { initCustomSelects } from "../ui/custom-select.js"
 import { enableRepeatToggle } from "../form/repeat.js"
 import { initAlertsBell } from "../ui/alerts-bell.js"
+import { buildServiceOptions } from "../form/service-options.js"
+import { initCalendar } from "../ui/calendar.js"
 import { schedulesShow } from "./show.js"
 import { enableEditButtons } from "./edit.js"
 import { enableCompleteButtons } from "./complete.js"
@@ -18,7 +20,6 @@ import { renderHistory } from "./history.js"
 import { renderBlockedList } from "./unblock.js"
 import { enableNoShowButtons } from "./no-show.js"
 import { renderRewardAlerts } from "./alerts.js"
-import { buildServiceOptions } from "../form/service-options.js"
 
 const selectedDate = document.querySelector('#date')
 
@@ -56,6 +57,8 @@ export async function schedulesDay() {
     buildServiceOptions()
     initCustomSelects()
     initAlertsBell()
+
+    initCalendar()
 
     await renderHistory()
     await renderRewardAlerts()
