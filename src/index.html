@@ -30,6 +30,7 @@
 
       <div class="topbar-rule" aria-hidden="true"></div>
 
+      <!-- Cabeçalho da data: valores via JS (modules/ui/enhance.js + date-nav.js) -->
       <div class="date-display" id="date-display">
         <span class="date-display-label">Agenda de</span>
         <span class="date-display-value" id="date-display-value">—</span>
@@ -69,10 +70,14 @@
 
         <div class="field">
           <label for="date" class="label">Data</label>
+
+          <!-- Valor e limites (min/max) definidos via JS (modules/form/submit.js) -->
           <div class="input">
             <i aria-hidden="true"><img src="./assets/calendar.svg" alt="" /></i>
             <input type="date" id="date" name="date" required />
           </div>
+
+          <!-- Calendário próprio: texto, título e grade preenchidos via JS (modules/ui/calendar.js) -->
           <div class="calendar-wrap">
             <button type="button" id="calendar-toggle" class="calendar-toggle" aria-haspopup="dialog">
               <span id="calendar-toggle-text">Selecionar data</span>
@@ -94,7 +99,11 @@
         <div class="field">
           <span class="label" id="hours-label">Horário</span>
           <p class="field-hint">Selecione um horário disponível.</p>
+
+          <!-- Horários do dia: botões montados via JS (modules/form/hours-load.js) -->
           <ul id="hours" class="hours" aria-labelledby="hours-label"></ul>
+
+          <!-- Erro de validação: texto via JS (modules/form/submit.js) -->
           <span id="hours-error" class="field-error" aria-live="polite"></span>
         </div>
 
@@ -121,6 +130,8 @@
               <button type="button" id="block-btn" class="block-btn"><img src="./assets/lock.svg" alt=""
                   aria-hidden="true" />Bloquear</button>
             </div>
+
+            <!-- Horários bloqueados: itens montados via JS (modules/schedules/unblock.js) -->
             <ul id="blocked-list" class="blocked-list" aria-label="Horários bloqueados"></ul>
           </div>
           <div class="options-divider" aria-hidden="true"></div>
@@ -145,6 +156,8 @@
 
         <div class="field">
           <label for="service" class="label">Serviço</label>
+
+          <!-- Opções de serviço: montadas via JS (modules/form/service-options.js) -->
           <select id="service" class="input input--select" aria-label="Serviço">
           </select>
         </div>
@@ -156,6 +169,8 @@
             <input type="text" id="client" name="client" placeholder="Nome do cliente" required autocomplete="off"
               aria-describedby="client-error" />
           </div>
+
+          <!-- Erro de validação: texto via JS (modules/form/submit.js) -->
           <span id="client-error" class="field-error" aria-live="polite"></span>
         </div>
 
@@ -185,7 +200,11 @@
       <header class="schedule-header">
         <div class="schedule-title-row">
           <h2>Agenda</h2>
+
+          <!-- Contador do dia: texto via JS (modules/ui/enhance.js) -->
           <span class="schedule-count" id="schedule-count">0 atendimentos</span>
+
+          <!-- Sino de avisos: badge via JS (modules/ui/alerts-bell.js), lista via JS (modules/schedules/alerts.js) -->
           <div class="alerts-wrap">
             <button type="button" id="alerts-bell" class="alerts-bell is-empty" aria-label="Ver avisos">
               <img src="./assets/bell.svg" alt="" aria-hidden="true" />
@@ -211,10 +230,14 @@
               <button type="button" id="alerts-see-all-absents" class="alerts-see-all" hidden></button>
             </details>
           </div>
+
+          <!-- Próximo agendamento: texto via JS (modules/ui/enhance.js) -->
           <span class="next-appointment" aria-live="polite"></span>
         </div>
         <p>Atendimentos do dia</p>
         <div class="schedule-rule" aria-hidden="true"></div>
+
+        <!-- Ocupação e total do dia: valores via JS (modules/ui/enhance.js) -->
         <div class="occupancy" aria-label="Ocupação do dia">
           <div class="occupancy-track">
             <div class="occupancy-bar" id="occupancy-bar"></div>
@@ -224,6 +247,7 @@
         </div>
       </header>
 
+      <!-- Resumo dos últimos 7 dias: etiquetas montadas via JS (modules/schedules/history.js) -->
       <div id="history-7d" class="history-7d" aria-label="Últimos 7 dias"></div>
 
       <div class="schedule-toolbar">
@@ -255,6 +279,7 @@
         </div>
       </div>
 
+      <!-- Aviso de filtro vazio: texto via JS (modules/schedules/filter.js) -->
       <p id="empty-filtered" class="empty-filtered" hidden aria-live="polite"></p>
 
       <section class="schedule-period">
@@ -265,6 +290,8 @@
           <span class="period-line" aria-hidden="true"></span>
           <span class="period-count" data-period="morning">—</span>
         </header>
+
+        <!-- Atendimentos do período: itens montados via JS (modules/schedules/show.js) -->
         <ul id="period-morning" class="period"></ul>
       </section>
 
@@ -276,6 +303,8 @@
           <span class="period-line" aria-hidden="true"></span>
           <span class="period-count" data-period="afternoon">—</span>
         </header>
+
+        <!-- Atendimentos do período: itens montados via JS (modules/schedules/show.js) -->
         <ul id="period-afternoon" class="period"></ul>
       </section>
 
@@ -287,6 +316,8 @@
           <span class="period-line" aria-hidden="true"></span>
           <span class="period-count" data-period="night">—</span>
         </header>
+
+        <!-- Atendimentos do período: itens montados via JS (modules/schedules/show.js) -->
         <ul id="period-night" class="period"></ul>
       </section>
 
@@ -297,6 +328,7 @@
     </main>
   </div>
 
+  <!-- Histórico do cliente: resumo, fidelidade e lista via JS (modules/schedules/history-client.js) -->
   <dialog id="client-history-dialog" class="client-history-dialog" aria-labelledby="history-title">
     <h3 id="history-title">Histórico · Cliente</h3>
     <p id="history-headline" class="history-headline">— cortes · último há —</p>
@@ -322,6 +354,7 @@
 
     <div class="history-list" aria-label="Histórico de cortes"></div>
 
+    <!-- Fidelidade: valores via JS (modules/schedules/history-client.js) -->
     <div class="loyalty" aria-label="Fidelidade">
       <div class="loyalty-head">
         <span class="loyalty-name">
@@ -337,6 +370,7 @@
     </div>
   </dialog>
 
+  <!-- Histórico geral: lista e contador via JS (modules/schedules/general-history.js) -->
   <dialog id="general-history-dialog" class="general-history-dialog" aria-labelledby="general-history-title">
     <h3 id="general-history-title">Histórico geral</h3>
     <div class="search-wrap general-history-search">
