@@ -249,6 +249,9 @@
             <option value="name-asc">Nome A-Z</option>
             <option value="name-desc">Nome Z-A</option>
           </select>
+
+          <button type="button" id="general-history-open" class="history-open-btn"><img src="./assets/clock.svg" alt=""
+              aria-hidden="true" />Histórico</button>
         </div>
       </div>
 
@@ -332,6 +335,18 @@
       </div>
       <p id="loyalty-text" class="loyalty-text">—</p>
     </div>
+  </dialog>
+
+  <dialog id="general-history-dialog" class="general-history-dialog" aria-labelledby="general-history-title">
+    <h3 id="general-history-title">Histórico geral</h3>
+    <div class="search-wrap general-history-search">
+      <img src="./assets/search.svg" class="search-icon" alt="" aria-hidden="true" />
+      <input type="search" id="general-history-search" class="search-input" placeholder="Buscar cliente ou serviço"
+        aria-label="Buscar no histórico" autocomplete="off" />
+    </div>
+    <p id="general-history-count" class="general-history-count" aria-live="polite"></p>
+    <div id="general-history-list" class="history-list" aria-label="Todos os agendamentos"></div>
+    <button type="button" id="general-history-close" class="confirm-btn confirm-btn--cancel">Fechar</button>
   </dialog>
 </body>
 

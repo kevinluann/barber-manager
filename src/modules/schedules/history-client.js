@@ -2,6 +2,7 @@ import dayjs from "dayjs"
 
 import { apiConfig } from "../../services/api-config.js"
 import { hasRewardFor, LOYALTY_GOAL } from "../../utils/client-rules.js"
+import { buildHistoryEntry } from "./history-entry.js"
 import { togglePaidStatus } from "./toggle-paid.js"
 
 export async function showClientHistory(name) {
@@ -117,54 +118,26 @@ function buildHistoryDialog(name, history) {
     list.replaceChildren()
 
     history.forEach((schedule) => {
-        const service = schedule.service[0].toUpperCase() + schedule.service.slice(1)
-        const statusNames = { pending: 'Pendente', done: 'Concluído', no_show: 'Faltou' }
-        const status = statusNames[schedule.status]
+        const historyEntry = buildHistoryEntry(schedule, { clientName: name })
+        const paidTag = historyEntry.querySelector(".history-paid, .history-unpaid")
 
-        const entry = document.createElement('div')
-        entry.className = 'history-entry'
-
-        if (schedule.status === 'no_show') {
-            entry.classList.add('is-no-show')
-        }
-
-        const dateSpan = document.createElement('span')
-        dateSpan.textContent = dayjs(schedule.when).format('DD/MM HH:mm')
-
-        const infoSpan = document.createElement('span')
-        infoSpan.textContent = `${service} - ${status}`
-
-        if (schedule.status === "done") {
-            const isPaid = schedule.paid === true
-
-            const paidTag = document.createElement("button")
-            paidTag.type = "button"
-            paidTag.className = isPaid ? "history-paid" : "history-unpaid"
-            paidTag.textContent = isPaid ? "PAGO" : "EM ABERTO"
-
+        if (paidTag) {
             paidTag.addEventListener("click", async () => {
-                const paymentChanged = await togglePaidStatus({ id: schedule.id, name, detail: dayjs(schedule.when).format("DD/MM"), isPaid })
+                const paymentChanged = await togglePaidStatus({
+                    id: schedule.id,
+                    name,
+                    detail: dayjs(schedule.when).format("DD/MM"),
+                    isPaid: schedule.paid === true,
+                })
 
                 if (paymentChanged) {
                     dialog.close()
                     showClientHistory(name)
                 }
             })
-
-            entry.append(paidTag)
         }
 
-        entry.append(dateSpan, infoSpan)
-
-        if (schedule.notes) {
-            const notesEl = document.createElement('p')
-            notesEl.className = 'history-notes'
-            notesEl.textContent = schedule.notes
-
-            entry.appendChild(notesEl)
-        }
-
-        list.appendChild(entry)
+        list.appendChild(historyEntry)
     })
 
     if (history.length === 0) {

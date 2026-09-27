@@ -133,6 +133,38 @@
   outline-offset: 2px;
 }
 
+.history-open-btn {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--line-paper-strong);
+  padding: 0.35rem 0.6rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: border-color 0.18s;
+}
+
+.history-open-btn:hover {
+  border-color: var(--gold);
+}
+
+.history-open-btn:focus-visible {
+  outline: 1px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.history-open-btn img {
+  width: 11px;
+  height: 11px;
+  display: block;
+  pointer-events: none;
+}
+
 .empty-filtered {
   font-family: "Instrument Serif", serif;
   font-style: italic;
