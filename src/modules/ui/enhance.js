@@ -80,15 +80,15 @@ function updateCounters() {
   const nightLabel = document.querySelector('[data-period="night"]')
 
   if (morningLabel) {
-    morningLabel.textContent = morningCount ? `${morningCount} —` : 'Nenhum atendimento'
+    morningLabel.textContent = `${morningCount} —`
   }
 
   if (afternoonLabel) {
-    afternoonLabel.textContent = afternoonCount ? `${afternoonCount} —` : 'Nenhum atendimento'
+    afternoonLabel.textContent = `${afternoonCount} —`
   }
 
   if (nightLabel) {
-    nightLabel.textContent = nightCount ? `${nightCount} —` : 'Nenhum atendimento'
+    nightLabel.textContent = `${nightCount} —`
   }
 }
 
