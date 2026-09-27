@@ -140,11 +140,11 @@
   background: #fff;
   color: var(--ink);
   border: 1px solid var(--line-paper-strong);
-  padding: 0.35rem 0.6rem;
+  padding: 0.35rem 0.45rem;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  justify-content: center;
   transition: border-color 0.18s;
 }
 
@@ -158,8 +158,8 @@
 }
 
 .history-open-btn img {
-  width: 11px;
-  height: 11px;
+  width: 12px;
+  height: 12px;
   display: block;
   pointer-events: none;
 }
