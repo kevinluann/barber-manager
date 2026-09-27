@@ -125,12 +125,27 @@
   color: var(--ink-faint);
 }
 
-.ledger-mark {
+.footer-strip {
   color: var(--gold);
   letter-spacing: 0.2em;
+  overflow: hidden;
+  flex: 1;
+  white-space: nowrap;
 }
 
-.ledger-mark img {
+.footer-strip-track {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer-strip-unit {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.footer-strip img {
   width: 11px;
   height: 11px;
   display: inline-block;
