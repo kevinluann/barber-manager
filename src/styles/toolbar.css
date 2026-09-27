@@ -1,7 +1,6 @@
 .filter-tabs {
   display: inline-flex;
   gap: 0.4rem;
-  margin-top: 1rem;
 }
 
 .filter-tab {
