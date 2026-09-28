@@ -24,6 +24,17 @@ async function shiftDate(days) {
 }
 
 async function goToPreviousDayWithSchedules() {
+    const previousDay = dayjs(dateInput.value).subtract(1, "day").startOf("day")
+    const today = dayjs().startOf("day")
+
+    if (!previousDay.isBefore(today)) {
+        dateInput.value = previousDay.format("YYYY-MM-DD")
+        updateCalendarSelectedDate()
+        await schedulesDay()
+
+        return
+    }
+
     const response = await fetch(`${apiConfig.baseURL}/schedules`)
     const all = await response.json()
 
