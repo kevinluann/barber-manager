@@ -22,6 +22,7 @@ import { enableNoShowButtons } from "./no-show.js"
 import { renderRewardAlerts } from "./alerts.js"
 import { enableSchedulePaidToggle } from "./toggle-paid.js"
 import { initGeneralHistory } from "./general-history.js"
+import { renderTomorrowPreview } from "./tomorrow-preview.js"
 
 const selectedDate = document.querySelector('#date')
 
@@ -65,6 +66,8 @@ export async function schedulesDay() {
 
     await renderHistory()
     await renderRewardAlerts()
+
+    await renderTomorrowPreview()
 
     await hoursLoad({ date, dailySchedules: updated })
 

@@ -36,7 +36,12 @@
         <span class="date-display-value" id="date-display-value">—</span>
         <span class="date-display-dot" aria-hidden="true">·</span>
         <span class="date-display-weekday" id="date-display-weekday">—</span>
-        <span class="next-appointment" aria-live="polite"></span>
+
+        <!-- Prévia do dia seguinte: texto via JS (modules/schedules/tomorrow-preview.js) -->
+        <p id="tomorrow-preview" class="tomorrow-preview" aria-live="polite">
+          <img src="./assets/calendar.svg" alt="" aria-hidden="true" />
+          <span id="tomorrow-preview-text">Amanhã: —</span>
+        </p>
         <div class="date-nav" aria-label="Navegação de data">
           <button type="button" id="date-prev" class="date-nav-btn" aria-label="Dia anterior"><img
               src="./assets/chevron-left.svg" alt="" aria-hidden="true" /></button>
