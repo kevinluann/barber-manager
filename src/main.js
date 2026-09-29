@@ -17,6 +17,7 @@ import "./styles/alerts.css"
 import "./styles/toast.css"
 import "./styles/confirm.css"
 import "./styles/edit.css"
+import "./styles/counter-mode.css"
 
 //JS
 import "./modules/form/submit.js"

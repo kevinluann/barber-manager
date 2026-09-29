@@ -1,0 +1,325 @@
+body.balcao {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html:has(body.balcao)::-webkit-scrollbar,
+body.balcao ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+body.balcao .date-nav-btn {
+  padding: 0.7rem 0.9rem;
+  font-size: 0.78rem;
+}
+
+body.balcao .date-nav-btn img {
+  width: 15px;
+  height: 15px;
+}
+
+body.balcao .date-display-weekday {
+  font-size: 0.76rem;
+  padding: 0.3rem 0.55rem;
+}
+
+@media (min-width: 1101px) {
+  body.balcao .container {
+    grid-template-columns: 400px 1fr;
+  }
+
+  body.balcao .control {
+    top: 74px;
+    min-height: calc(100vh - 74px);
+  }
+
+  body.balcao .schedule {
+    min-height: calc(100vh - 74px);
+  }
+}
+
+body.balcao .input {
+  height: 3.4rem;
+}
+
+body.balcao .input input {
+  font-size: 0.95rem;
+}
+
+body.balcao .input--area {
+  min-height: 4.5rem;
+  font-size: 0.95rem;
+}
+
+body.balcao .label {
+  font-size: 0.7rem;
+}
+
+body.balcao .kicker-text {
+  font-size: 0.7rem;
+}
+
+body.balcao .field-hint {
+  font-size: 0.8rem;
+}
+
+body.balcao .field-error {
+  font-size: 0.8rem;
+}
+
+body.balcao .button {
+  height: 3.5rem;
+  font-size: 0.78rem;
+}
+
+body.balcao .calendar-toggle {
+  height: 3.4rem;
+  font-size: 0.95rem;
+}
+
+body.balcao .calendar-popover {
+  width: 320px;
+}
+
+body.balcao .calendar-nav {
+  width: 34px;
+  height: 34px;
+}
+
+body.balcao .calendar-day {
+  font-size: 0.85rem;
+}
+
+body.balcao .custom-select-trigger {
+  height: 3.4rem;
+  font-size: 0.95rem;
+}
+
+body.balcao .custom-select-option {
+  padding: 0.85rem;
+  font-size: 0.95rem;
+}
+
+body.balcao .hours {
+  gap: 0.5rem 0.55rem;
+}
+
+body.balcao .hour {
+  min-width: 4.4rem;
+  height: 2.75rem;
+  font-size: 0.88rem;
+}
+
+body.balcao .field--block .input--small,
+body.balcao .field--options .input--small,
+body.balcao .repeat-row .input--small {
+  height: 2.75rem;
+  font-size: 0.88rem;
+}
+
+body.balcao .block-btn {
+  height: 2.75rem;
+  font-size: 0.72rem;
+}
+
+body.balcao .block-summary {
+  font-size: 0.7rem;
+  padding: 0.35rem 0;
+}
+
+body.balcao .repeat-box {
+  width: 20px;
+  height: 20px;
+}
+
+body.balcao .repeat-text {
+  font-size: 0.9rem;
+}
+
+body.balcao .blocked-item button {
+  padding: 0.6rem;
+}
+
+body.balcao .blocked-item button img {
+  width: 14px;
+  height: 14px;
+}
+
+body.balcao .filter-tab {
+  padding: 0.75rem 1.05rem;
+  font-size: 0.72rem;
+}
+
+body.balcao .filter-tab img {
+  width: 14px;
+  height: 14px;
+}
+
+body.balcao .history-open-btn {
+  padding: 0.7rem 0.75rem;
+}
+
+body.balcao .history-open-btn img {
+  width: 16px;
+  height: 16px;
+}
+
+body.balcao .search-input,
+body.balcao .sort-select {
+  font-size: 0.74rem;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+}
+
+body.balcao .schedule-toolbar .search-input {
+  width: 200px;
+}
+
+body.balcao .balcao-toggle {
+  width: 54px;
+  height: 54px;
+}
+
+body.balcao .balcao-toggle img {
+  width: 24px;
+  height: 24px;
+}
+
+body.balcao .schedule-period ul li {
+  min-height: 3rem;
+  font-size: 0.95rem;
+}
+
+body.balcao .schedule-period ul li strong {
+  font-size: 0.95rem;
+}
+
+body.balcao .badge-paid,
+body.balcao .badge-unpaid {
+  font-size: 0.66rem;
+  padding: 0.28rem 0.5rem;
+  gap: 0.4rem;
+}
+
+body.balcao .badge-paid img,
+body.balcao .badge-unpaid img {
+  width: 12px;
+  height: 12px;
+}
+
+body.balcao .complete-icon,
+body.balcao .edit-icon,
+body.balcao .no-show-icon,
+body.balcao .cancel-icon {
+  opacity: 1;
+  transform: scale(1);
+  width: 40px;
+  height: 40px;
+}
+
+body.balcao .complete-icon img,
+body.balcao .edit-icon img,
+body.balcao .no-show-icon img,
+body.balcao .cancel-icon img {
+  width: 22px;
+  height: 22px;
+}
+
+body.balcao .schedule-count {
+  font-size: 0.7rem;
+  padding: 0.35rem 0.6rem;
+}
+
+body.balcao .occupancy-text {
+  font-size: 0.7rem;
+}
+
+body.balcao .day-total {
+  font-size: 0.7rem;
+}
+
+body.balcao .history-paid,
+body.balcao .history-unpaid {
+  font-size: 0.68rem;
+  padding: 0.28rem 0.5rem;
+}
+
+body.balcao .history-entry {
+  font-size: 0.78rem;
+}
+
+body.balcao .history-list {
+  max-height: 280px;
+}
+
+body.balcao .general-history-dialog .history-list {
+  max-height: 380px;
+}
+
+body.balcao #toast-container {
+  bottom: 5.5rem;
+}
+
+body.balcao .toast {
+  font-size: 0.92rem;
+  padding: 0.9rem 1.1rem;
+}
+
+body.balcao .toast-undo {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.78rem;
+}
+
+body.balcao .alerts-bell {
+  width: 42px;
+  height: 42px;
+}
+
+body.balcao .alerts-bell img {
+  width: 20px;
+  height: 20px;
+}
+
+body.balcao .alerts-panel {
+  width: 360px;
+}
+
+body.balcao .alerts-panel .reward-alerts {
+  max-height: 320px;
+}
+
+body.balcao .reward-alert {
+  font-size: 0.88rem;
+  padding: 0.7rem 0.85rem;
+}
+
+body.balcao .reward-dismiss {
+  width: 36px;
+  height: 36px;
+}
+
+body.balcao .alerts-reset,
+body.balcao .alerts-close {
+  width: 36px;
+  height: 36px;
+}
+
+body.balcao .alerts-see-all {
+  padding: 0.75rem;
+  font-size: 0.68rem;
+}
+
+body.balcao .confirm-btn {
+  padding: 0.85rem 1.1rem;
+  font-size: 0.78rem;
+}
+
+body.balcao .confirm-paid {
+  font-size: 0.9rem;
+}
+
+body.balcao .confirm-paid input {
+  width: 22px;
+  height: 22px;
+}
