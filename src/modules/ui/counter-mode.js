@@ -1,16 +1,18 @@
 export function initCounterMode() {
-    const toggle = document.querySelector("#balcao-toggle")
+    const counterToggle = document.querySelector("#balcao-toggle")
 
-    if (!toggle || toggle.dataset.bound) return
-    toggle.dataset.bound = "true"
+    if (!counterToggle || counterToggle.dataset.bound) return
+    counterToggle.dataset.bound = "true"
 
     if (window.matchMedia("(pointer: coarse)").matches) {
         document.body.classList.add("balcao")
-        toggle.setAttribute("aria-pressed", "true")
+        counterToggle.setAttribute("aria-pressed", "true")
     }
 
-    toggle.addEventListener("click", () => {
-        const active = document.body.classList.toggle("balcao")
-        toggle.setAttribute("aria-pressed", String(active))
+    counterToggle.addEventListener("click", () => {
+        document.body.classList.toggle("balcao")
+
+        const isCounterModeActive = document.body.classList.contains("balcao")
+        counterToggle.setAttribute("aria-pressed", String(isCounterModeActive))
     })
 }
