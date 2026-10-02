@@ -9,18 +9,22 @@
   pointer-events: none;
 }
 
+#toast-container .toast {
+  pointer-events: auto;
+}
+
 .toast {
   min-width: 280px;
   max-width: 380px;
   background: var(--paper);
   color: var(--ink);
   border: 1px solid var(--line-paper-strong);
-  border-left: 3px solid #C6A75C;
-  padding: 0.75rem 1rem;
-  font-family: "Instrument Sans", sans-serif;
+  border-left: 2px solid var(--gold);
+  padding: 0.7rem 0.9rem;
+  font-family: var(--font-sans);
   font-size: 0.84rem;
   line-height: 1.4;
-  box-shadow: 0 4px 16px rgba(14, 14, 16, 0.12);
+  box-shadow: 0 6px 20px rgba(14, 14, 16, 0.14);
   opacity: 0;
   transform: translateY(6px);
   transition: opacity 0.22s ease, transform 0.22s ease;
@@ -30,10 +34,10 @@
 }
 
 .toast-icon {
-  width: 15px;
-  height: 15px;
+  width: 14px;
+  height: 14px;
   flex-shrink: 0;
-  margin-top: 0.15rem;
+  margin-top: 0.2rem;
   pointer-events: none;
 }
 
@@ -43,11 +47,11 @@
 }
 
 .toast--success {
-  border-left-color: #C6A75C;
+  border-left-color: var(--gold-deep);
 }
 
 .toast--error {
-  border-left-color: #8B3A2A;
+  border-left-color: var(--red-deep);
 }
 
 .toast--info {
@@ -56,24 +60,27 @@
 
 .toast-undo {
   margin-left: 0.8rem;
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   background: var(--ink);
   color: var(--paper);
   border: 1px solid var(--ink);
-  padding: 0.25rem 0.5rem;
+  padding: 0.3rem 0.55rem;
   cursor: pointer;
   pointer-events: auto;
+  transition: background 0.15s;
 }
 
 .toast-undo:hover {
-  background: #2C2B2E;
+  background: #2A292F;
+  border-color: #2A292F;
 }
 
-#toast-container .toast {
-  pointer-events: auto;
+.toast-undo:focus-visible {
+  outline: 1px solid var(--gold);
+  outline-offset: 2px;
 }
 
 @media (max-width: 640px) {

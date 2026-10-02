@@ -1,11 +1,10 @@
 .schedule {
-  grid-area: unset;
-  padding: 2.2rem 2.4rem 2rem;
+  padding: 2.5rem 2.8rem 2.6rem;
 }
 
 .schedule-header {
-  margin-bottom: 1.8rem;
-  padding-bottom: 1.2rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.25rem;
   border-bottom: 1px solid var(--line-paper);
   position: relative;
 }
@@ -13,177 +12,51 @@
 .schedule-title-row {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.9rem;
   flex-wrap: wrap;
 }
 
-.schedule-header h1,
 .schedule-header h2 {
-  font-family: "Instrument Serif", serif;
-  font-size: 2.6rem;
+  font-family: var(--font-serif);
+  font-size: 2.05rem;
   font-weight: 400;
   line-height: 1;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.03em;
   color: var(--ink);
 }
 
 .schedule-count {
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.62rem;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ink-soft);
-  border: 1px solid var(--line-paper-strong);
-  padding: 0.25rem 0.5rem;
-  background: rgba(255, 255, 255, 0.6);
+  white-space: nowrap;
+  padding-left: 0.75rem;
+  border-left: 1px solid var(--line-paper-strong);
 }
 
 .schedule-header p {
-  margin-top: 0.5rem;
-  font-size: 0.82rem;
+  margin-top: 0.45rem;
+  font-size: 0.8rem;
   color: var(--ink-soft);
-  max-width: 30rem;
-}
-
-.schedule-rule {
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  width: 72px;
-  height: 2px;
-  background: var(--gold);
-}
-
-.occupancy {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  margin-top: 0.8rem;
-}
-
-.occupancy-track {
-  flex: 1;
-  height: 4px;
-  background: var(--line-paper);
-  overflow: hidden;
-}
-
-.occupancy-bar {
-  height: 100%;
-  width: 0%;
-  background: var(--gold-dark);
-  transition: width 0.3s ease;
-}
-
-.occupancy-text {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.06em;
-  color: var(--ink-soft);
-  white-space: nowrap;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-}
-
-.occupancy-text:not(:empty)::before {
-  content: "";
-  width: 12px;
-  height: 12px;
-  flex-shrink: 0;
-  background: url("../assets/users.svg") no-repeat center;
-  background-size: contain;
-}
-
-.day-total {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.06em;
-  color: var(--ink);
-  background: #fff url("../assets/coin.svg") no-repeat 0.35rem center;
-  background-size: 12px 12px;
-  border: 1px solid var(--line-paper-strong);
-  padding: 0.15rem 0.4rem 0.15rem 1.4rem;
-  white-space: nowrap;
-}
-
-.day-total:empty {
-  display: none;
-}
-
-.ledger-footer {
-  margin-top: 1.6rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--line-paper);
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-}
-
-.footer-strip {
-  color: var(--gold);
-  letter-spacing: 0.2em;
-  overflow: hidden;
-  flex: 1;
-  white-space: nowrap;
-}
-
-.footer-strip-track {
-  display: flex;
-  justify-content: space-between;
-}
-
-.footer-strip-unit {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-shrink: 0;
-}
-
-.footer-strip img {
-  width: 11px;
-  height: 11px;
-  display: inline-block;
-  vertical-align: middle;
-}
-
-.tomorrow-preview {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  margin: 0;
-  padding-left: 0.6rem;
-  margin-left: 0.2rem;
-  border-left: 1px solid #2C2B2E;
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.06em;
-  color: #9A9690;
-  white-space: nowrap;
-}
-
-.tomorrow-preview img {
-  width: 12px;
-  height: 12px;
-  display: block;
-  flex-shrink: 0;
-  opacity: 0.8;
-  filter: brightness(0) invert(0.6);
-}
-
-.tomorrow-preview:empty {
-  display: none;
 }
 
 .next-appointment {
+  order: 2;
+  margin-left: auto;
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+.next-appointment:empty {
+  display: none;
 }
 
 .next-appointment:not(:empty)::before {
@@ -195,26 +68,91 @@
   background-size: contain;
 }
 
+.schedule-title-row:has(.next-appointment:empty) .alerts-wrap {
+  margin-left: auto;
+}
+
+.schedule-rule {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 64px;
+  height: 2px;
+  background: var(--gold);
+}
+
+.occupancy {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: 1.1rem;
+}
+
+.occupancy-track {
+  flex: 1;
+  height: 3px;
+  background: var(--line-paper);
+  overflow: hidden;
+}
+
+.occupancy-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--gold-dark);
+  transition: width 0.4s ease;
+}
+
+.occupancy-text {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.05em;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+.occupancy-text strong {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.day-total {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.05em;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  border-left: 1px solid var(--line-paper-strong);
+  padding-left: 0.7rem;
+}
+
+.day-total strong {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.day-total:empty {
+  display: none;
+}
+
 @media (max-width: 1100px) {
   .schedule {
-    padding: 1.6rem 1.25rem 1.4rem;
+    padding: 1.8rem 1.5rem 1.8rem;
   }
 
   .schedule-header h1,
   .schedule-header h2 {
-    font-size: 2.1rem;
+    font-size: 1.9rem;
   }
 }
 
 @media (max-width: 640px) {
   .schedule {
-    padding: 1.25rem 1rem 1.2rem;
+    padding: 1.4rem 1.05rem 1.5rem;
   }
 
-  .ledger-footer {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.3rem;
+  .schedule-header h1,
+  .schedule-header h2 {
+    font-size: 1.75rem;
   }
 }
 
@@ -225,6 +163,15 @@
 
   .schedule-header h1,
   .schedule-header h2 {
-    font-size: 1.8rem;
+    font-size: 1.55rem;
+  }
+
+  .occupancy {
+    flex-wrap: wrap;
+    row-gap: 0.45rem;
+  }
+
+  .occupancy-track {
+    flex-basis: 100%;
   }
 }

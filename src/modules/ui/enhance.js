@@ -72,7 +72,13 @@ function updateCounters() {
   }
 
   if (text) {
-    text.textContent = `${total}/${totalSlots} ${percent}%`
+    const slots = document.createElement('strong')
+    slots.textContent = `${total}/${totalSlots}`
+
+    const pct = document.createElement('strong')
+    pct.textContent = `${percent}%`
+
+    text.replaceChildren('Ocupação ', slots, ' · ', pct)
   }
 
   const morningLabel = document.querySelector('[data-period="morning"]')
@@ -122,7 +128,14 @@ export function refreshUI(dailySchedules) {
   }, 0)
 
   if (totalEl) {
-    totalEl.textContent = totalPrice ? `R$ ${totalPrice}` : ''
+    if (totalPrice) {
+      const value = document.createElement('strong')
+      value.textContent = `R$ ${totalPrice}`
+
+      totalEl.replaceChildren('Faturamento ', value)
+    } else {
+      totalEl.replaceChildren()
+    }
   }
 }
 

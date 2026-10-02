@@ -1,18 +1,19 @@
+/* Faixa dos últimos 7 dias */
 .history-7d {
   display: flex;
-  gap: 0.5rem;
+  gap: 6px;
   flex-wrap: wrap;
-  margin: 0.8rem 0 1rem;
+  margin: 0.9rem 0 1.35rem;
 }
 
 .history-item {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.06em;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.04em;
   color: var(--ink-soft);
-  background: #fff;
-  border: 1px solid var(--line-paper-strong);
-  padding: 0.25rem 0.45rem;
+  background: transparent;
+  border: 1px solid var(--line-paper);
+  padding: 0.3rem 0.5rem;
   white-space: nowrap;
   display: inline-flex;
   align-items: center;
@@ -27,17 +28,21 @@
 }
 
 .history-item--total {
-  border-color: var(--gold);
-  font-weight: 700;
+  border-color: var(--gold-line);
+  background: rgba(198, 167, 92, 0.08);
+  color: var(--ink);
+  font-weight: 500;
 }
+
+/* ---------- Diálogo: histórico do cliente ---------- */
 
 .client-history-dialog {
   border: 1px solid var(--line-paper-strong);
   background: var(--paper);
-  padding: 1.5rem;
+  padding: 1.6rem;
   max-width: 420px;
   width: calc(100% - 2rem);
-  box-shadow: 0 8px 24px rgba(14, 14, 16, 0.18);
+  box-shadow: 0 12px 32px rgba(14, 14, 16, 0.22);
   margin: auto;
 }
 
@@ -51,33 +56,27 @@
 }
 
 .client-history-dialog h3 {
-  font-family: "Instrument Serif", serif;
+  font-family: var(--font-serif);
   font-size: 1.3rem;
   font-weight: 400;
-  font-style: normal;
   letter-spacing: -0.01em;
-  word-spacing: 0.12em;
   color: var(--ink);
   margin: 0;
   border-bottom: 1px solid var(--line-paper);
-  padding-bottom: 0.6rem;
+  padding-bottom: 0.65rem;
 }
 
 .history-headline {
-  font-family: "Instrument Sans", sans-serif;
-  font-style: normal;
+  font-family: var(--font-sans);
   font-weight: 400;
   font-size: 0.88rem;
   line-height: 1.45;
-  letter-spacing: -0.01em;
-  word-spacing: 0.12em;
   color: var(--ink);
-  background: #fff;
+  background: var(--paper-card);
   border: 1px solid var(--line-paper);
-  border-left: 3px solid var(--gold);
+  border-left: 2px solid var(--gold);
   padding: 0.6rem 0.75rem;
-  margin: 0.7rem 0 0;
-  box-shadow: 0 1px 3px rgba(26, 24, 22, 0.06);
+  margin: 0.8rem 0 0;
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
@@ -85,7 +84,7 @@
 }
 
 .history-headline strong {
-  font-weight: 400;
+  font-weight: 600;
 }
 
 .history-headline .headline-sep {
@@ -96,23 +95,23 @@
 .history-summary {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 0.5rem;
+  gap: 6px;
   margin: 0.8rem 0 0;
 }
 
 .history-stat {
-  background: #fff;
+  background: var(--paper-card);
   border: 1px solid var(--line-paper);
-  padding: 0.5rem 0.4rem;
+  padding: 0.55rem 0.4rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.15rem;
+  gap: 0.2rem;
   text-align: center;
 }
 
 .history-stat strong {
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.95rem;
   font-weight: 700;
   color: var(--ink);
@@ -120,29 +119,28 @@
 }
 
 .history-stat span {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.58rem;
-  letter-spacing: 0.08em;
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ink-soft);
 }
 
 .history-stat--highlight {
-  border-color: var(--gold);
-  background: rgba(198, 167, 92, 0.12);
+  border-color: var(--gold-line);
 }
 
 .history-stat--highlight strong {
   color: var(--gold-dark);
 }
 
+/* Fidelidade */
 .loyalty {
-  background: #fff;
+  background: var(--paper-card);
   border: 1px solid var(--line-paper);
-  border-left: 3px solid var(--gold);
-  padding: 0.6rem 0.75rem;
+  border-left: 2px solid var(--gold);
+  padding: 0.65rem 0.75rem;
   margin: 0.8rem 0 0;
-  box-shadow: 0 1px 3px rgba(26, 24, 22, 0.06);
 }
 
 .loyalty-head {
@@ -153,16 +151,16 @@
 }
 
 .loyalty-head strong {
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.8rem;
   font-weight: 700;
   color: var(--ink);
 }
 
 .loyalty-title {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.08em;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ink-soft);
 }
@@ -174,15 +172,15 @@
 }
 
 .loyalty-icon {
-  width: 14px;
-  height: 14px;
+  width: 13px;
+  height: 13px;
   display: block;
 }
 
 .loyalty-track {
-  height: 4px;
+  height: 3px;
   background: var(--line-paper);
-  margin-top: 0.5rem;
+  margin-top: 0.55rem;
   overflow: hidden;
 }
 
@@ -198,10 +196,10 @@
 }
 
 .loyalty-text {
-  font-family: "Instrument Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: 0.78rem;
   color: var(--ink-soft);
-  margin-top: 0.45rem;
+  margin-top: 0.5rem;
 }
 
 .loyalty.is-complete .loyalty-text {
@@ -209,23 +207,24 @@
   font-weight: 600;
 }
 
+/* Lista de histórico */
 .history-list {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  margin: 0.8rem 0 1rem;
-  max-height: 220px;
+  gap: 6px;
+  margin: 0.85rem 0 1.05rem;
+  max-height: 230px;
   overflow-y: auto;
-  padding-right: 0.25rem;
+  padding-right: 4px;
 }
 
 .history-entry {
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.72rem;
   color: var(--ink);
-  background: #fff;
+  background: var(--paper-card);
   border: 1px solid var(--line-paper);
-  padding: 0.4rem 0.6rem;
+  padding: 0.45rem 0.6rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -234,7 +233,7 @@
 
 .history-notes {
   width: 100%;
-  font-family: "Instrument Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: 0.72rem;
   font-style: italic;
   color: var(--ink-soft);
@@ -244,18 +243,57 @@
 }
 
 .history-entry.is-no-show {
-  background: #FDE8E8;
-  border-color: #B55242;
-  color: #8B3A2A;
+  background: #FBEDEB;
+  border-color: rgba(181, 82, 66, 0.45);
+  color: var(--red-deep);
 }
+
+.history-paid,
+.history-unpaid {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 0.12rem 0.4rem;
+  white-space: nowrap;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.history-paid {
+  color: var(--green);
+  background: rgba(62, 107, 79, 0.12);
+}
+
+.history-paid:hover {
+  background: rgba(62, 107, 79, 0.22);
+}
+
+.history-unpaid {
+  color: #FDFBF5;
+  background: var(--red-deep);
+}
+
+.history-unpaid:hover {
+  background: #A84633;
+}
+
+.history-paid:focus-visible,
+.history-unpaid:focus-visible {
+  outline: 1px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* ---------- Diálogo: histórico geral ---------- */
 
 .general-history-dialog {
   border: 1px solid var(--line-paper-strong);
   background: var(--paper);
-  padding: 1.5rem;
+  padding: 1.6rem;
   max-width: 560px;
   width: calc(100% - 2rem);
-  box-shadow: 0 8px 24px rgba(14, 14, 16, 0.18);
+  box-shadow: 0 12px 32px rgba(14, 14, 16, 0.22);
   margin: auto;
 }
 
@@ -265,14 +303,13 @@
 }
 
 .general-history-dialog h3 {
-  font-family: "Instrument Serif", serif;
+  font-family: var(--font-serif);
   font-size: 1.3rem;
   font-weight: 400;
-  font-style: normal;
   color: var(--ink);
   margin: 0;
   border-bottom: 1px solid var(--line-paper);
-  padding-bottom: 0.6rem;
+  padding-bottom: 0.65rem;
 }
 
 .general-history-search {
@@ -285,8 +322,8 @@
 }
 
 .general-history-count {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.62rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
   letter-spacing: 0.06em;
   color: var(--ink-faint);
   margin: 0.6rem 0 0;
@@ -297,41 +334,11 @@
 }
 
 .general-history-dialog .history-list {
-  max-height: 320px;
+  max-height: 340px;
 }
 
 .general-history-dialog .confirm-btn {
   margin-top: 1rem;
-}
-
-.history-paid,
-.history-unpaid {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.6rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  padding: 0.08rem 0.3rem;
-  white-space: nowrap;
-  border: none;
-  cursor: pointer;
-}
-
-.history-paid {
-  color: #3E6B4F;
-  background: rgba(62, 107, 79, 0.12);
-}
-
-.history-paid:hover {
-  background: rgba(62, 107, 79, 0.22);
-}
-
-.history-unpaid {
-  color: #FDFBF5;
-  background: #8B3A2A;
-}
-
-.history-unpaid:hover {
-  background: #A84633;
 }
 
 @media (max-width: 480px) {

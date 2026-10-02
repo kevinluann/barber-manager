@@ -1,4 +1,5 @@
 body.balcao {
+  --topbar-h: 93px;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
 }
@@ -9,6 +10,7 @@ body.balcao ::-webkit-scrollbar {
   height: 10px;
 }
 
+/* Cabeçalho maior para toque */
 body.balcao .date-nav-btn {
   padding: 0.7rem 0.9rem;
   font-size: 0.78rem;
@@ -20,25 +22,31 @@ body.balcao .date-nav-btn img {
 }
 
 body.balcao .date-display-weekday {
-  font-size: 0.76rem;
+  font-size: 0.74rem;
   padding: 0.3rem 0.55rem;
 }
 
+body.balcao .tomorrow-preview {
+  font-size: 0.68rem;
+}
+
+/* Coluna de agendamento mais larga */
 @media (min-width: 1101px) {
   body.balcao .container {
     grid-template-columns: 400px 1fr;
   }
 
   body.balcao .control {
-    top: 74px;
-    min-height: calc(100vh - 74px);
+    top: var(--topbar-h);
+    min-height: calc(100vh - var(--topbar-h));
   }
 
   body.balcao .schedule {
-    min-height: calc(100vh - 74px);
+    min-height: calc(100vh - var(--topbar-h));
   }
 }
 
+/* Campos maiores */
 body.balcao .input {
   height: 3.4rem;
 }
@@ -53,11 +61,11 @@ body.balcao .input--area {
 }
 
 body.balcao .label {
-  font-size: 0.7rem;
+  font-size: 0.68rem;
 }
 
 body.balcao .kicker-text {
-  font-size: 0.7rem;
+  font-size: 0.68rem;
 }
 
 body.balcao .field-hint {
@@ -101,6 +109,7 @@ body.balcao .custom-select-option {
   font-size: 0.95rem;
 }
 
+/* Horários maiores */
 body.balcao .hours {
   gap: 0.5rem 0.55rem;
 }
@@ -111,9 +120,12 @@ body.balcao .hour {
   font-size: 0.88rem;
 }
 
-body.balcao .field--block .input--small,
-body.balcao .field--options .input--small,
-body.balcao .repeat-row .input--small {
+body.balcao .hour-period {
+  font-size: 0.66rem;
+}
+
+/* Opções e bloqueio */
+body.balcao .input--small {
   height: 2.75rem;
   font-size: 0.88rem;
 }
@@ -124,7 +136,7 @@ body.balcao .block-btn {
 }
 
 body.balcao .block-summary {
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   padding: 0.35rem 0;
 }
 
@@ -146,6 +158,7 @@ body.balcao .blocked-item button img {
   height: 14px;
 }
 
+/* Agenda */
 body.balcao .filter-tab {
   padding: 0.75rem 1.05rem;
   font-size: 0.72rem;
@@ -195,11 +208,20 @@ body.balcao .schedule-period ul li strong {
   font-size: 0.95rem;
 }
 
+body.balcao .schedule-period ul li .schedule-name {
+  font-size: 1rem;
+}
+
 body.balcao .badge-paid,
 body.balcao .badge-unpaid {
   font-size: 0.66rem;
   padding: 0.28rem 0.5rem;
   gap: 0.4rem;
+}
+
+body.balcao .badge-noshow {
+  font-size: 0.66rem;
+  padding: 0.28rem 0.5rem;
 }
 
 body.balcao .badge-paid img,
@@ -208,12 +230,12 @@ body.balcao .badge-unpaid img {
   height: 12px;
 }
 
+/* Ações sempre visíveis e amplas no balcão */
 body.balcao .complete-icon,
 body.balcao .edit-icon,
 body.balcao .no-show-icon,
 body.balcao .cancel-icon {
   opacity: 1;
-  transform: scale(1);
   width: 40px;
   height: 40px;
 }
@@ -257,6 +279,7 @@ body.balcao .general-history-dialog .history-list {
   max-height: 380px;
 }
 
+/* Avisos e toasts */
 body.balcao #toast-container {
   bottom: 5.5rem;
 }

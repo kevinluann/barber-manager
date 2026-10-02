@@ -1,10 +1,10 @@
 .edit-dialog {
   border: 1px solid var(--line-paper-strong);
   background: var(--paper);
-  padding: 1.5rem;
+  padding: 1.6rem;
   max-width: 420px;
   width: calc(100% - 2rem);
-  box-shadow: 0 8px 24px rgba(14, 14, 16, 0.18);
+  box-shadow: 0 12px 32px rgba(14, 14, 16, 0.22);
   margin: auto;
 }
 
@@ -14,7 +14,7 @@
 }
 
 .edit-dialog h3 {
-  font-family: "Instrument Serif", serif;
+  font-family: var(--font-serif);
   font-size: 1.4rem;
   font-weight: 400;
   color: var(--ink);
@@ -31,12 +31,32 @@
   margin-bottom: 1rem;
 }
 
+.edit-dialog .label {
+  color: var(--ink-soft);
+}
+
 .edit-dialog .input {
   background: #fff;
+  border-color: var(--line-paper-strong);
+}
+
+.edit-dialog .input:focus-within {
+  background: #FFFEFA;
+  border-color: #C6A75C;
+  box-shadow: 0 0 0 2px var(--gold-faint);
 }
 
 .edit-dialog .input input {
   color: var(--ink);
+}
+
+.edit-dialog .input input::placeholder {
+  color: var(--ink-faint);
+}
+
+.edit-dialog .input i img {
+  filter: none;
+  opacity: 0.75;
 }
 
 .edit-dialog #edit-hours {
@@ -46,17 +66,52 @@
 .edit-dialog .field-error {
   color: #6B1A1A;
   font-weight: 600;
-  background: #FDE8E8;
-  border-left: 3px solid #6B1A1A;
-  padding: 0.3rem 0.5rem;
-  display: block;
+  background: #FBEDEB;
+  border-left: 2px solid #6B1A1A;
+  padding: 0.35rem 0.55rem;
+  margin-top: 0.45rem;
 }
 
 .edit-dialog .field-error:empty {
   display: none;
+}
+
+/* Horários dentro do diálogo de edição: versão clara */
+.edit-dialog .hour {
+  background: var(--paper-card);
+  border-color: var(--line-paper-strong);
+  color: var(--ink-soft);
+}
+
+.edit-dialog .hour-available:hover {
+  border-color: var(--gold);
+  color: var(--ink);
+  background: var(--paper-soft);
+}
+
+.edit-dialog .hour-available:active {
+  background: #EBE2C9;
+  color: var(--ink);
+}
+
+.edit-dialog .hour-selected {
+  border-color: var(--gold);
+  color: var(--gold-dark);
+  background: rgba(198, 167, 92, 0.14);
+}
+
+.edit-dialog .hour-selected:hover {
+  border-color: var(--gold);
+  color: var(--gold-dark);
+  background: rgba(198, 167, 92, 0.18);
+}
+
+.edit-dialog .hour-unavailable {
+  border-color: transparent;
   background: transparent;
-  border: none;
-  padding: 0;
+  color: #8F8577;
+  text-decoration-color: #8F8577;
+  cursor: not-allowed;
 }
 
 .edit-actions {

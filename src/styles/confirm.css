@@ -1,10 +1,10 @@
 .confirm-dialog {
   border: 1px solid var(--line-paper-strong);
   background: var(--paper);
-  padding: 1.25rem 1.25rem 1rem;
+  padding: 1.35rem 1.35rem 1.1rem;
   max-width: 360px;
   width: calc(100% - 2rem);
-  box-shadow: 0 8px 24px rgba(14, 14, 16, 0.18);
+  box-shadow: 0 12px 32px rgba(14, 14, 16, 0.22);
   margin: auto;
 }
 
@@ -14,7 +14,7 @@
 }
 
 .confirm-message {
-  font-family: "Instrument Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: 0.88rem;
   line-height: 1.5;
   color: var(--ink);
@@ -25,7 +25,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: "Instrument Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: 0.82rem;
   color: var(--ink);
   margin: 0 0 1rem;
@@ -47,17 +47,17 @@
 }
 
 .confirm-btn {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  padding: 0.6rem 0.9rem;
+  padding: 0.55rem 0.9rem;
   border: 1px solid var(--line-paper-strong);
   cursor: pointer;
-  transition: all 0.18s;
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
 }
 
 .confirm-btn img {
@@ -68,12 +68,12 @@
 }
 
 .confirm-btn--cancel {
-  background: #fff;
+  background: var(--paper-card);
   color: var(--ink);
 }
 
 .confirm-btn--cancel:hover {
-  background: #F2EBD8;
+  background: var(--paper-soft);
 }
 
 .confirm-btn--confirm {
@@ -110,6 +110,6 @@
 }
 
 .confirm-btn:focus-visible {
-  outline: 1px solid #C6A75C;
+  outline: 1px solid var(--gold);
   outline-offset: 2px;
 }

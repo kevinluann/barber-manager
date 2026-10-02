@@ -142,6 +142,14 @@ export async function schedulesShow({ dailySchedules }) {
             }
 
             name.append(nameText)
+
+            if (schedule.status === 'no_show') {
+                const noShowLabel = document.createElement('span')
+                noShowLabel.className = 'badge-noshow'
+                noShowLabel.textContent = 'Faltou'
+                name.append(noShowLabel)
+            }
+
             badges.forEach((badge) => {
                 name.append(badge)
             })

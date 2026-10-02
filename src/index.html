@@ -25,30 +25,32 @@
       <div class="brand">
         <img src="./assets/scissors.svg" alt="BarberManager" class="brand-mark" />
         <span class="brand-wordmark">BARBERMANAGER</span>
-        <span class="brand-sub"><img src="./assets/clock.svg" alt="" aria-hidden="true" />· 09 — 21H</span>
+        <span class="brand-sub"><img src="./assets/clock.svg" alt="" aria-hidden="true" />09 — 21H</span>
       </div>
-
-      <div class="topbar-rule" aria-hidden="true"></div>
 
       <!-- Cabeçalho da data: valores via JS (modules/ui/enhance.js + date-nav.js) -->
       <div class="date-display" id="date-display">
         <span class="date-display-label">Agenda de</span>
-        <span class="date-display-value" id="date-display-value">—</span>
-        <span class="date-display-dot" aria-hidden="true">·</span>
-        <span class="date-display-weekday" id="date-display-weekday">—</span>
 
-        <!-- Prévia do dia seguinte: texto via JS (modules/schedules/tomorrow-preview.js) -->
-        <p id="tomorrow-preview" class="tomorrow-preview" aria-live="polite">
-          <img src="./assets/calendar.svg" alt="" aria-hidden="true" />
-          <span id="tomorrow-preview-text">Amanhã: —</span>
-        </p>
-        <div class="date-nav" aria-label="Navegação de data">
+        <div class="date-display-row">
+          <span class="date-display-value" id="date-display-value">—</span>
+          <span class="date-display-dot" aria-hidden="true">·</span>
+          <span class="date-display-weekday" id="date-display-weekday">—</span>
+        </div>
+
+        <div class="date-nav" role="group" aria-label="Navegação de data">
           <button type="button" id="date-prev" class="date-nav-btn" aria-label="Dia anterior"><img
               src="./assets/chevron-left.svg" alt="" aria-hidden="true" /></button>
           <button type="button" id="date-today" class="date-nav-btn date-nav-btn--today">Hoje</button>
           <button type="button" id="date-next" class="date-nav-btn" aria-label="Próximo dia"><img
               src="./assets/chevron-left.svg" class="flip-x" alt="" aria-hidden="true" /></button>
         </div>
+
+        <!-- Prévia do dia seguinte: texto via JS (modules/schedules/tomorrow-preview.js) -->
+        <p id="tomorrow-preview" class="tomorrow-preview" aria-live="polite">
+          <img src="./assets/calendar.svg" alt="" aria-hidden="true" />
+          <span id="tomorrow-preview-text">Amanhã: —</span>
+        </p>
       </div>
 
       <div class="topbar-meta">
@@ -70,7 +72,6 @@
 
         <header class="form-header">
           <h1>Agendar atendimento</h1>
-          <p>Selecione a data, o horário e informe o cliente.</p>
         </header>
 
         <div class="field">
@@ -289,7 +290,6 @@
 
       <section class="schedule-period">
         <header>
-          <img src="./assets/morning.svg" alt="" class="period-icon" aria-hidden="true" />
           <h3>Manhã</h3>
           <span class="period-range">09h — 12h</span>
           <span class="period-line" aria-hidden="true"></span>
@@ -302,7 +302,6 @@
 
       <section class="schedule-period">
         <header>
-          <img src="./assets/afternoon.svg" alt="" class="period-icon" aria-hidden="true" />
           <h3>Tarde</h3>
           <span class="period-range">13h — 17h</span>
           <span class="period-line" aria-hidden="true"></span>
@@ -315,7 +314,6 @@
 
       <section class="schedule-period">
         <header>
-          <img src="./assets/night.svg" alt="" class="period-icon" aria-hidden="true" />
           <h3>Noite</h3>
           <span class="period-range">18h — 21h</span>
           <span class="period-line" aria-hidden="true"></span>
@@ -325,13 +323,6 @@
         <!-- Atendimentos do período: itens montados via JS (modules/schedules/show.js) -->
         <ul id="period-night" class="period"></ul>
       </section>
-
-      <footer class="ledger-footer">
-
-        <!-- Faixa decorativa: unidades clonadas via JS (modules/ui/footer-strip.js) -->
-        <span aria-hidden="true" class="footer-strip"><span class="footer-strip-track"><span class="footer-strip-unit">—
-              <img src="./assets/sparkle.svg" alt="" /> —</span></span></span>
-      </footer>
     </main>
   </div>
 

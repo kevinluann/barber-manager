@@ -1,39 +1,91 @@
-.reward-alerts {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin: 0.8rem 0 0;
-}
-
-.reward-alerts:empty {
-  display: none;
-}
-
 .alerts-wrap {
   position: relative;
   display: inline-flex;
   align-self: center;
+  order: 3;
+  margin-left: 0.9rem;
 }
 
+.alerts-bell {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  border: 1px solid var(--line-paper);
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.alerts-bell:hover {
+  border-color: var(--gold);
+}
+
+.alerts-bell:focus-visible {
+  outline: 1px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.alerts-bell img {
+  width: 14px;
+  height: 14px;
+  display: block;
+  pointer-events: none;
+}
+
+.alerts-bell.is-empty {
+  opacity: 0.55;
+}
+
+.alerts-count {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  min-width: 15px;
+  height: 15px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  font-family: var(--font-mono);
+  font-size: 0.56rem;
+  font-weight: 700;
+  color: #FDFBF5;
+  background: var(--gold-dark);
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.alerts-bell.is-empty .alerts-count {
+  display: none;
+}
+
+.alerts-wrap:has(#alerts-panel[open]) .alerts-bell {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px var(--gold-faint);
+}
+
+/* Painel */
 .alerts-panel {
   position: absolute;
-  top: calc(100% + 8px);
-  left: 0;
-  width: 320px;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 330px;
   max-width: calc(100vw - 2rem);
   margin: 0;
   background: var(--paper);
   border: 1px solid var(--line-paper-strong);
-  box-shadow: 0 10px 28px rgba(14, 14, 16, 0.18);
+  box-shadow: 0 12px 32px rgba(14, 14, 16, 0.22);
   z-index: 30;
-  overflow: visible;
 }
 
 .alerts-panel::before {
   content: "";
   position: absolute;
   top: -6px;
-  left: 9px;
+  right: 11px;
   width: 10px;
   height: 10px;
   background: var(--paper);
@@ -43,7 +95,7 @@
 }
 
 .alerts-panel[open] {
-  animation: alerts-expand 0.22s ease;
+  animation: alerts-expand 0.18s ease;
 }
 
 @keyframes alerts-expand {
@@ -56,41 +108,6 @@
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-.alerts-panel:not([open]):has(.reward-alerts:empty) {
-  display: none;
-}
-
-.reward-empty {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.06em;
-  color: var(--ink-faint);
-  text-align: center;
-  padding: 0.4rem 0;
-  margin: 0;
-}
-
-.reward-more {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.06em;
-  color: var(--ink-faint);
-  text-align: center;
-  padding: 0.2rem 0 0;
-  margin: 0;
-}
-
-.reward-empty::before {
-  content: "";
-  display: block;
-  width: 20px;
-  height: 20px;
-  margin: 0 auto 0.4rem;
-  background: url("../assets/bell.svg") no-repeat center;
-  background-size: contain;
-  opacity: 0.45;
 }
 
 .alerts-panel:not([open]) {
@@ -110,21 +127,21 @@
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
-  padding: 0.55rem 0.6rem 0.55rem 0.75rem;
+  padding: 0.55rem 0.65rem 0.55rem 0.8rem;
   border-bottom: 1px solid var(--line-paper);
 }
 
 .alerts-head-title {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.08em;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink-soft);
 }
 
 .dismissed-count {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.68rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
   letter-spacing: 0.06em;
   color: var(--ink-faint);
   white-space: nowrap;
@@ -150,22 +167,12 @@
   background: transparent;
   border: 1px solid transparent;
   color: var(--ink-soft);
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.95rem;
-  line-height: 1;
   cursor: pointer;
-  transition: border-color 0.18s, color 0.18s;
+  transition: border-color 0.15s, color 0.15s;
 }
 
 .alerts-close img,
 .alerts-reset img {
-  width: 12px;
-  height: 12px;
-  display: block;
-  pointer-events: none;
-}
-
-.reward-dismiss img {
   width: 12px;
   height: 12px;
   display: block;
@@ -189,18 +196,18 @@
   background: transparent;
   border: none;
   border-top: 1px solid var(--line-paper);
-  padding: 0.5rem 0.75rem;
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.08em;
+  padding: 0.55rem 0.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--gold-dark);
   cursor: pointer;
-  transition: background 0.18s;
+  transition: background 0.15s;
 }
 
 .alerts-see-all:hover {
-  background: rgba(198, 167, 92, 0.12);
+  background: var(--gold-faint);
 }
 
 .alerts-see-all:focus-visible {
@@ -216,94 +223,41 @@
   border-top: none;
 }
 
-.alerts-count {
-  position: absolute;
-  top: -7px;
-  right: -7px;
-  min-width: 16px;
-  height: 16px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 4px;
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.58rem;
-  font-weight: 700;
-  color: var(--paper);
-  background: var(--gold-dark);
-  border-radius: 999px;
-  white-space: nowrap;
-}
-
-.alerts-bell {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  background: rgba(255, 255, 255, 0.6);
-  border: 1px solid var(--line-paper-strong);
-  cursor: pointer;
-  transition: border-color 0.18s, background 0.18s, box-shadow 0.18s;
-}
-
-.alerts-bell:hover {
-  border-color: var(--gold);
-}
-
-.alerts-bell:focus-visible {
-  outline: 1px solid var(--gold);
-  outline-offset: 2px;
-}
-
-.alerts-bell img {
-  width: 15px;
-  height: 15px;
-  display: block;
-  pointer-events: none;
-}
-
-.alerts-bell.is-empty {
-  opacity: 0.55;
-}
-
-.alerts-bell.is-empty .alerts-count {
-  display: none;
-}
-
-.alerts-wrap:has(#alerts-panel[open]) .alerts-bell {
-  border-color: var(--gold);
-  background: #fff;
-  box-shadow: 0 0 0 3px var(--gold-faint);
-}
-
+/* Lista de avisos */
 .alerts-panel .reward-alerts {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
   margin: 0;
-  padding: 0.75rem;
-  max-height: 260px;
+  padding: 0.7rem;
+  max-height: 270px;
   overflow-y: auto;
+}
+
+.reward-alerts:empty {
+  display: none;
 }
 
 .reward-alert {
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  background: rgba(198, 167, 92, 0.12);
-  border: 1px solid var(--gold);
-  border-left: 3px solid var(--gold-dark);
-  padding: 0.55rem 0.75rem;
-  font-family: "Instrument Sans", sans-serif;
+  background: rgba(198, 167, 92, 0.1);
+  border: 1px solid var(--gold-line);
+  border-left: 2px solid var(--gold-dark);
+  padding: 0.6rem 0.7rem;
+  font-family: var(--font-sans);
   font-size: 0.82rem;
+  line-height: 1.35;
   color: var(--ink);
   cursor: pointer;
   width: 100%;
   text-align: left;
-  transition: background 0.18s;
+  transition: background 0.15s;
 }
 
 .reward-alert:hover {
-  background: rgba(198, 167, 92, 0.22);
+  background: rgba(198, 167, 92, 0.18);
 }
 
 .reward-alert:focus-visible {
@@ -315,27 +269,53 @@
   font-weight: 700;
 }
 
+.reward-tag {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #FDFBF5;
+  background: var(--gold-dark);
+  padding: 0.18rem 0.4rem;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
+.reward-tag img {
+  width: 9px;
+  height: 9px;
+  display: block;
+  pointer-events: none;
+}
+
 .reward-dismiss {
   margin-left: auto;
   flex-shrink: 0;
-  width: 26px;
-  height: 26px;
+  width: 24px;
+  height: 24px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   background: transparent;
   border: 1px solid transparent;
   color: var(--gold-dark);
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.95rem;
-  line-height: 1;
   cursor: pointer;
-  transition: border-color 0.18s, background 0.18s;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.reward-dismiss img {
+  width: 11px;
+  height: 11px;
+  display: block;
+  pointer-events: none;
 }
 
 .reward-dismiss:hover {
-  border-color: var(--gold-dark);
-  background: rgba(138, 109, 30, 0.12);
+  border-color: var(--gold-line);
+  background: var(--gold-faint);
 }
 
 .reward-dismiss:focus-visible {
@@ -343,46 +323,58 @@
   outline-offset: 2px;
 }
 
-.reward-alert .reward-tag {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.58rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: var(--paper);
-  background: var(--gold-dark);
-  padding: 0.15rem 0.4rem;
-  white-space: nowrap;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-}
-
-.reward-alert .reward-tag img {
-  width: 10px;
-  height: 10px;
-  display: block;
-  pointer-events: none;
-}
-
+/* Cliente sumido */
 .reward-alert--absent {
-  background: rgba(181, 82, 66, 0.08);
-  border-color: #B55242;
-  border-left-color: #8B3A2A;
+  background: rgba(181, 82, 66, 0.07);
+  border-color: rgba(181, 82, 66, 0.5);
+  border-left-color: var(--red-deep);
 }
 
 .reward-alert--absent:hover {
-  background: rgba(181, 82, 66, 0.14);
+  background: rgba(181, 82, 66, 0.13);
 }
 
 .reward-alert--absent .reward-tag {
-  background: #8B3A2A;
+  background: var(--red-deep);
 }
 
 .reward-alert--absent .reward-dismiss {
-  color: #8B3A2A;
+  color: var(--red-deep);
 }
 
 .reward-alert--absent .reward-dismiss:hover {
-  border-color: #8B3A2A;
+  border-color: rgba(181, 82, 66, 0.5);
   background: rgba(139, 58, 42, 0.1);
+}
+
+/* Vazio */
+.reward-empty {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-faint);
+  text-align: center;
+  padding: 0.4rem 0;
+  margin: 0;
+}
+
+.reward-empty::before {
+  content: "";
+  display: block;
+  width: 20px;
+  height: 20px;
+  margin: 0 auto 0.4rem;
+  background: url("../assets/bell.svg") no-repeat center;
+  background-size: contain;
+  opacity: 0.45;
+}
+
+.reward-more {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-faint);
+  text-align: center;
+  padding: 0.2rem 0 0;
+  margin: 0;
 }

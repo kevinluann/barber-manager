@@ -3,35 +3,30 @@
 }
 
 .form {
-  grid-area: unset;
-  max-width: none;
-  background: transparent;
-  border-radius: 0;
-  padding: 2.2rem 2rem 1.5rem;
+  padding: 2.4rem 2.1rem 1.7rem;
   display: flex;
   flex-direction: column;
-  overflow: visible;
   flex: 1;
 }
 
 .control-kicker {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  margin-bottom: 1.6rem;
+  gap: 0.55rem;
+  margin-bottom: 0.8rem;
 }
 
 .kicker-line {
-  width: 22px;
+  width: 26px;
   height: 1px;
   background: var(--gold);
   display: inline-block;
 }
 
 .kicker-text {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.16em;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--gold);
 }
@@ -40,86 +35,87 @@
   width: 12px;
   height: 12px;
   display: block;
+  opacity: 0.9;
 }
 
 .form-header {
-  margin-bottom: 1.8rem;
+  margin-bottom: 1.95rem;
 }
 
 .form-header h1 {
-  font-family: "Instrument Serif", serif;
-  font-size: 2.4rem;
+  font-family: var(--font-serif);
+  font-size: 1.7rem;
   font-weight: 400;
-  line-height: 0.95;
-  letter-spacing: -0.03em;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
   color: var(--paper);
-  margin-bottom: 0.55rem;
-}
-
-.form-header p {
-  font-size: 0.82rem;
-  line-height: 1.5;
-  color: #9A9690;
-  max-width: 22rem;
 }
 
 .field {
+  margin-bottom: 1.2rem;
+}
+
+/* Separação entre grupos: Data | Horário | Opções | Serviço–Cliente–Notas */
+.field:has(#date) {
   margin-bottom: 1.45rem;
+}
+
+.field:has(#hours) {
+  margin-bottom: 1.6rem;
 }
 
 .label {
   display: block;
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.14em;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #B8B2A6;
+  color: var(--text-soft);
   font-weight: 500;
-  margin-bottom: 0.55rem;
+  margin-bottom: 0.6rem;
 }
 
 .field-hint {
   font-size: 0.72rem;
-  color: #9A9690;
-  margin-bottom: 0.75rem;
-  margin-top: -0.2rem;
+  line-height: 1.45;
+  color: var(--text-faint);
+  margin: -0.15rem 0 0.75rem;
 }
 
 .field-error {
-  display: block;
-  min-height: 1rem;
+  display: none;
   font-size: 0.72rem;
-  color: #E88B8B;
-  margin-top: 0.4rem;
-  line-height: 1.3;
+  line-height: 1.35;
+  color: #E08E84;
   font-weight: 600;
 }
 
 .field-error:not(:empty) {
-  background: #2D1A1A;
-  border-left: 3px solid #E88B8B;
-  padding: 0.3rem 0.5rem;
+  display: block;
+  background: #2A1717;
+  border-left: 2px solid var(--red);
+  padding: 0.35rem 0.55rem;
+  margin-top: 0.45rem;
 }
 
-.field-error:empty {
-  display: none;
+.input:has(.input--error) {
+  border-color: var(--red);
 }
 
-.input--error {
-  border-color: #B55242 !important;
+.input:has(.input--error):focus-within {
+  border-color: var(--red);
+  box-shadow: 0 0 0 2px rgba(181, 82, 66, 0.2);
 }
 
 .input {
   width: 100%;
-  height: 2.9rem;
-  border: 1px solid #2E2D30;
+  height: 2.75rem;
+  border: 1px solid #2B2A31;
   padding: 0 0.85rem;
-  border-radius: 0;
   display: flex;
   align-items: center;
-  margin-bottom: 0;
-  background: #121214;
-  transition: border-color 0.2s, background 0.2s;
+  background: var(--field);
+  transition: border-color 0.16s, background 0.16s, box-shadow 0.16s;
 }
 
 .input i {
@@ -129,16 +125,16 @@
 }
 
 .input i img {
-  width: 16px;
-  height: 16px;
-  filter: brightness(0) invert(0.7);
+  width: 15px;
+  height: 15px;
+  filter: brightness(0) invert(0.72);
 }
 
 .input input {
   flex: 1;
-  font-family: "Instrument Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: 0.88rem;
-  color: #EDE9E3;
+  color: var(--text);
   background: transparent;
   outline: none;
   border: none;
@@ -146,13 +142,13 @@
 }
 
 .input input::placeholder {
-  color: #5A5752;
+  color: var(--text-dim);
 }
 
 .input:focus-within {
   border-color: var(--gold);
-  background: #16151A;
-  box-shadow: 0 0 0 3px var(--gold-faint);
+  background: var(--field-focus);
+  box-shadow: 0 0 0 2px var(--gold-focus);
 }
 
 .input input[type="date"] {
@@ -163,40 +159,42 @@
   display: none;
 }
 
+/* ---------- Calendário ---------- */
+
 .calendar-wrap {
   position: relative;
 }
 
 .calendar-toggle {
   width: 100%;
-  height: 2.9rem;
-  border: 1px solid #2E2D30;
-  background: #121214;
-  color: #EDE9E3;
+  height: 2.75rem;
+  border: 1px solid #2B2A31;
+  background: var(--field);
+  color: var(--text);
   padding: 0 0.85rem;
   display: flex;
   align-items: center;
   gap: 0.6rem;
   cursor: pointer;
-  font-family: "Instrument Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: 0.88rem;
-  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  transition: border-color 0.16s, background 0.16s, box-shadow 0.16s;
 }
 
 .calendar-toggle::before {
   content: "";
-  width: 16px;
-  height: 16px;
+  width: 15px;
+  height: 15px;
   flex-shrink: 0;
   background: url("../assets/calendar-light.svg") no-repeat center;
   background-size: contain;
-  opacity: 0.7;
+  opacity: 0.75;
 }
 
 .calendar-toggle::after {
   content: "";
-  width: 14px;
-  height: 14px;
+  width: 13px;
+  height: 13px;
   flex-shrink: 0;
   margin-left: auto;
   background: url("../assets/arrow-down.svg") no-repeat center;
@@ -210,26 +208,26 @@
 }
 
 .calendar-toggle:hover {
-  border-color: var(--ink-soft);
+  border-color: var(--text-faint);
 }
 
 .calendar-toggle:focus-visible {
   outline: none;
   border-color: var(--gold);
-  box-shadow: 0 0 0 3px var(--gold-faint);
+  box-shadow: 0 0 0 2px var(--gold-focus);
 }
 
 .calendar-popover {
   position: absolute;
-  top: calc(100% + 4px);
+  top: calc(100% + 6px);
   left: 0;
-  width: 280px;
+  width: 288px;
   max-width: calc(100vw - 2rem);
-  background: #121214;
-  border: 1px solid #2E2D30;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+  background: #131218;
+  border: 1px solid #33313A;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
   z-index: 20;
-  padding: 0.7rem 0.7rem 0.8rem;
+  padding: 0.75rem 0.75rem 0.85rem;
 }
 
 .calendar-popover[hidden] {
@@ -240,35 +238,41 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.55rem;
 }
 
 .calendar-head strong {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #EDE9E3;
+  color: var(--text);
+  font-weight: 500;
 }
 
 .calendar-nav {
-  width: 26px;
-  height: 26px;
+  width: 24px;
+  height: 24px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   background: transparent;
-  border: 1px solid #2C2B2E;
-  color: #9A9690;
+  border: 1px solid var(--line-dark);
+  color: var(--text-soft);
   font-size: 0.95rem;
   line-height: 1;
   cursor: pointer;
-  transition: border-color 0.18s, color 0.18s;
+  transition: border-color 0.15s, color 0.15s;
 }
 
 .calendar-nav:hover {
-  border-color: var(--gold);
+  border-color: var(--gold-line);
   color: var(--paper);
+}
+
+.calendar-nav:focus-visible {
+  outline: 1px solid var(--gold);
+  outline-offset: 2px;
 }
 
 .calendar-weekdays {
@@ -279,9 +283,9 @@
 
 .calendar-weekdays span {
   text-align: center;
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.6rem;
-  color: #5A5752;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: var(--text-dim);
   padding: 0.2rem 0;
 }
 
@@ -298,24 +302,26 @@
   justify-content: center;
   background: transparent;
   border: 1px solid transparent;
-  color: #C2BEB6;
-  font-family: "JetBrains Mono", monospace;
+  color: #C7C2B8;
+  font-family: var(--font-mono);
   font-size: 0.72rem;
   cursor: pointer;
   position: relative;
-  transition: border-color 0.14s, background 0.14s;
+  transition: border-color 0.12s, color 0.12s, background 0.12s;
 }
 
 .calendar-day:hover {
-  border-color: var(--gold);
+  border-color: var(--gold-line);
 }
 
 .calendar-day.has-events::after {
   content: "";
   position: absolute;
   bottom: 4px;
-  width: 4px;
-  height: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 3px;
   border-radius: 50%;
   background: var(--gold);
 }
@@ -323,12 +329,15 @@
 .calendar-day.is-selected {
   border-color: var(--gold);
   color: var(--gold);
-  background: rgba(198, 167, 92, 0.08);
+  background: var(--gold-faint);
 }
 
 .calendar-day.is-today {
   color: var(--paper);
   font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: var(--gold);
+  text-underline-offset: 3px;
 }
 
 .calendar-day:disabled {
@@ -337,16 +346,23 @@
   text-decoration: line-through;
 }
 
+.calendar-day:focus-visible {
+  outline: 1px solid var(--gold);
+  outline-offset: 1px;
+}
+
 .calendar-day--empty {
   visibility: hidden;
 }
 
+/* ---------- Selects nativos (fallback) ---------- */
+
 .input--select {
-  font-family: "Instrument Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: 0.88rem;
-  color: #EDE9E3;
-  background: #121214;
-  border: 1px solid #2E2D30;
+  color: var(--text);
+  background: var(--field);
+  border: 1px solid #2B2A31;
   padding: 0 0.85rem;
   outline: none;
   cursor: pointer;
@@ -364,15 +380,26 @@
 
 .input--area {
   height: auto;
-  min-height: 3.5rem;
-  padding: 0.7rem 0.85rem;
+  min-height: 3.4rem;
+  padding: 0.65rem 0.85rem;
   resize: vertical;
-  font-family: "Instrument Sans", sans-serif;
+  font-family: var(--font-sans);
   font-size: 0.88rem;
-  line-height: 1.4;
-  color: #EDE9E3;
-  background: #121214;
-  border: 1px solid #2E2D30;
+  line-height: 1.45;
+  color: var(--text);
+  background: var(--field);
+  border: 1px solid #2B2A31;
+  transition: border-color 0.16s, background 0.16s, box-shadow 0.16s;
+}
+
+.input--area:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px var(--gold-focus);
+}
+
+.input--area::placeholder {
+  color: var(--text-dim);
 }
 
 .edit-dialog .input--area {
@@ -389,80 +416,82 @@
   height: 16px;
 }
 
+/* ---------- Botão principal ---------- */
+
 .button {
-  height: 3rem;
-  border-radius: 0;
+  height: 2.9rem;
   border: 1px solid var(--gold);
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   font-weight: 500;
   background: var(--gold);
-  color: #111011;
-  padding: 0 1.1rem;
+  color: #191307;
+  padding: 0 1rem;
   cursor: pointer;
-  transition: all 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  margin-top: 0.4rem;
+  margin-top: 1.45rem;
+  transition: background 0.16s, border-color 0.16s;
 }
 
 .button:hover {
-  background: #D4B86A;
-  border-color: #D4B86A;
-  transform: translateY(-1px);
+  background: var(--gold-bright);
+  border-color: var(--gold-bright);
 }
 
 .button:active {
-  transform: translateY(0);
+  background: var(--gold-deep);
+  border-color: var(--gold-deep);
 }
 
 .button:focus-visible {
-  outline: 2px solid var(--gold);
+  outline: 1px solid var(--gold);
   outline-offset: 2px;
 }
 
 .button-arrow {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   display: block;
   flex-shrink: 0;
-  transition: transform 0.2s ease;
+  transition: transform 0.18s ease;
 }
 
 .button:hover .button-arrow {
   transform: translateX(3px);
 }
 
+/* ---------- Nota de rodapé ---------- */
+
 .control-footnote {
-  margin-top: 1.1rem;
+  margin-top: 1.25rem;
   font-size: 0.68rem;
   line-height: 1.5;
-  color: #5A5752;
-  border-top: 1px solid var(--line-dark);
-  padding-top: 0.9rem;
-  font-style: italic;
+  color: var(--text-dim);
+  border-top: 1px solid var(--line-dark-soft);
+  padding-top: 0.85rem;
   display: flex;
   align-items: flex-start;
   gap: 0.45rem;
 }
 
 .control-footnote img {
-  width: 13px;
-  height: 13px;
+  width: 12px;
+  height: 12px;
   flex-shrink: 0;
-  margin-top: 0.1rem;
+  margin-top: 0.15rem;
 }
 
 .control-sheet {
-  padding: 0 2rem 1.8rem;
+  padding: 0 2.1rem 1.8rem;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  opacity: 0.35;
+  gap: 7px;
+  opacity: 0.5;
 }
 
 .sheet-line {
@@ -480,11 +509,11 @@
 
 @media (max-width: 1100px) {
   .form {
-    padding: 1.6rem 1.25rem 1.2rem;
+    padding: 1.8rem 1.35rem 1.4rem;
   }
 
   .form-header h1 {
-    font-size: 2rem;
+    font-size: 1.55rem;
   }
 
   .control-sheet {
@@ -494,6 +523,6 @@
 
 @media (max-width: 640px) {
   .form-header h1 {
-    font-size: 1.85rem;
+    font-size: 1.45rem;
   }
 }
