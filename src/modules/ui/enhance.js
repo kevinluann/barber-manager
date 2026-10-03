@@ -2,6 +2,7 @@ import dayjs from "dayjs"
 
 import { scheduleFetchByDay } from "../../services/schedule-fetch-by-day.js"
 import { monthsPtBr, weekdaysPtBr } from "../../utils/date-labels.js"
+import { openingHours } from "../../utils/opening-hours.js"
 
 const dateInput = document.querySelector('#date')
 const dateValueEl = document.querySelector('#date-display-value')
@@ -62,7 +63,7 @@ function updateCounters() {
     totalCountEl.textContent = `${total} ${total === 1 ? 'atendimento' : 'atendimentos'}`
   }
 
-  const totalSlots = 14
+  const totalSlots = openingHours.length
   const percent = Math.round((total / totalSlots) * 100)
   const bar = document.querySelector('#occupancy-bar')
   const text = document.querySelector('#occupancy-text')
