@@ -4,6 +4,7 @@ import { apiConfig } from "../../services/api-config.js"
 import { hasRewardFor, LOYALTY_GOAL } from "../../utils/client-rules.js"
 import { buildHistoryEntry } from "./history-entry.js"
 import { togglePaidStatus } from "./toggle-paid.js"
+import { schedulesDay } from "./load.js"
 
 export async function showClientHistory(name) {
     const history = await fetchClientHistory(name)
@@ -131,6 +132,7 @@ function buildHistoryDialog(name, history) {
                 })
 
                 if (paymentChanged) {
+                    await schedulesDay()
                     dialog.close()
                     showClientHistory(name)
                 }

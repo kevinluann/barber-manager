@@ -4,6 +4,7 @@ import { apiConfig } from "../../services/api-config.js"
 import { buildHistoryEntry } from "./history-entry.js"
 import { togglePaidStatus } from "./toggle-paid.js"
 import { showClientHistory } from "./history-client.js"
+import { schedulesDay } from "./load.js"
 
 const dialog = document.querySelector("#general-history-dialog")
 const list = document.querySelector("#general-history-list")
@@ -63,6 +64,8 @@ async function renderGeneralHistory() {
     })
 
     count.textContent = `Mostrando ${visible.length} de ${filtered.length}`
+
+    await schedulesDay()
 }
 
 export async function openGeneralHistory() {
