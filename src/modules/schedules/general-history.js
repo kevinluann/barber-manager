@@ -3,6 +3,7 @@ import dayjs from "dayjs"
 import { apiConfig } from "../../services/api-config.js"
 import { buildHistoryEntry } from "./history-entry.js"
 import { togglePaidStatus } from "./toggle-paid.js"
+import { showClientHistory } from "./history-client.js"
 
 const dialog = document.querySelector("#general-history-dialog")
 const list = document.querySelector("#general-history-list")
@@ -51,6 +52,12 @@ async function renderGeneralHistory() {
                 }
             })
         }
+
+        historyEntry.addEventListener("click", (event) => {
+            if (event.target.closest("button")) return
+
+            showClientHistory(schedule.name)
+        })
 
         list.appendChild(historyEntry)
     })

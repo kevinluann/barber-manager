@@ -248,6 +248,14 @@
   color: var(--red-deep);
 }
 
+#general-history-list .history-entry {
+  cursor: pointer;
+}
+
+#general-history-list .history-entry:hover {
+  border-color: var(--gold);
+}
+
 .history-paid,
 .history-unpaid {
   font-family: var(--font-mono);
