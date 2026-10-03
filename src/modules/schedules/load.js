@@ -29,10 +29,10 @@ const selectedDate = document.querySelector('#date')
 export async function schedulesDay() {
     const date = selectedDate.value
 
-    const dailySchedules = await scheduleFetchByDay({ date })
+    const initialSchedules = await scheduleFetchByDay({ date })
 
     try {
-        for (const schedule of dailySchedules) {
+        for (const schedule of initialSchedules) {
             if (schedule.status === 'pending' && dayjs(schedule.when).isBefore(dayjs())) {
                 await scheduleComplete({ id: schedule.id, paid: false })
             }
@@ -42,16 +42,16 @@ export async function schedulesDay() {
         console.log(error)
     }
 
-    const updated = await scheduleFetchByDay({ date })
+    const freshSchedules = await scheduleFetchByDay({ date })
 
-    let filtered = applyStatusFilter(updated)
+    let visibleSchedules = applyStatusFilter(freshSchedules)
 
-    updateEmptyState(filtered)
+    updateEmptyState(visibleSchedules)
 
-    filtered = filterBySearch(filtered)
-    filtered = sortSchedules(filtered)
+    visibleSchedules = filterBySearch(visibleSchedules)
+    visibleSchedules = sortSchedules(visibleSchedules)
 
-    await schedulesShow({ dailySchedules: filtered })
+    await schedulesShow({ dailySchedules: visibleSchedules })
 
     enableCompleteButtons()
     enableNoShowButtons()
@@ -69,9 +69,9 @@ export async function schedulesDay() {
 
     await renderTomorrowPreview()
 
-    await hoursLoad({ date, dailySchedules: updated })
+    await hoursLoad({ date, dailySchedules: freshSchedules })
 
     await renderBlockedList()
 
-    refreshUI(updated)
+    refreshUI(freshSchedules)
 }
