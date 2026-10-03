@@ -124,14 +124,23 @@ export function refreshUI(dailySchedules) {
   updateNextAppointment(dailySchedules)
 
   const totalEl = document.querySelector('#day-total')
-  const totalPrice = dailySchedules.reduce((sum, schedule) => {
+
+  const totalPaid = dailySchedules.reduce((sum, schedule) => {
+    if (schedule.status !== 'done' || schedule.paid !== true) return sum
+
+    return sum + (Number(schedule.price) || 0)
+  }, 0)
+
+  const totalToReceive = dailySchedules.reduce((sum, schedule) => {
+    if (schedule.status !== 'done' || schedule.paid === true) return sum
+
     return sum + (Number(schedule.price) || 0)
   }, 0)
 
   if (totalEl) {
-    if (totalPrice) {
+    if (totalPaid || totalToReceive) {
       const value = document.createElement('strong')
-      value.textContent = `R$ ${totalPrice}`
+      value.textContent = totalToReceive > 0 ? `R$ ${totalPaid} (+R$ ${totalToReceive} a receber)` : `R$ ${totalPaid}`
 
       totalEl.replaceChildren('Faturamento ', value)
     } else {
