@@ -53,10 +53,21 @@ function updateNextAppointment(dailySchedules) {
   })
 }
 
-function updateCounters() {
-  const morningCount = document.querySelectorAll('#period-morning li').length
-  const afternoonCount = document.querySelectorAll('#period-afternoon li').length
-  const nightCount = document.querySelectorAll('#period-night li').length
+function updateCounters(dailySchedules = []) {
+  const morningCount = dailySchedules.filter((schedule) => {
+    const hour = dayjs(schedule.when).hour()
+
+    return hour <= 12
+  }).length
+
+  const afternoonCount = dailySchedules.filter((schedule) => {
+    const hour = dayjs(schedule.when).hour()
+
+    return hour > 12 && hour < 18
+  }).length
+
+  const nightCount = dailySchedules.length - morningCount - afternoonCount
+
   const total = morningCount + afternoonCount + nightCount
 
   if (totalCountEl) {
@@ -119,7 +130,7 @@ export function refreshUI(dailySchedules) {
     renderDateHeader(dateInput.value)
   }
 
-  updateCounters()
+  updateCounters(dailySchedules)
 
   updateNextAppointment(dailySchedules)
 
