@@ -33,7 +33,7 @@ export async function schedulesDay() {
 
     try {
         for (const schedule of dailySchedules) {
-            if ((schedule.status) !== 'done' && dayjs(schedule.when).isBefore(dayjs())) {
+            if (schedule.status === 'pending' && dayjs(schedule.when).isBefore(dayjs())) {
                 await scheduleComplete({ id: schedule.id, paid: false })
             }
         }
