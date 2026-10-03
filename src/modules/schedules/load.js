@@ -73,5 +73,5 @@ export async function schedulesDay() {
 
     await renderBlockedList()
 
-    refreshUI(filtered)
+    refreshUI(updated)
 }
