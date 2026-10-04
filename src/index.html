@@ -210,6 +210,11 @@
           <!-- Contador do dia: texto via JS (modules/ui/enhance.js) -->
           <span class="schedule-count" id="schedule-count">0 atendimentos</span>
 
+          <!-- Ação global do dia: conclui pendentes e marca como pagos (modules/schedules/mark-day-paid.js) -->
+          <button type="button" id="mark-day-paid" class="day-close-btn"
+            aria-label="Fechar dia: concluir e marcar como pagos os atendimentos do dia"><img
+              src="./assets/check-gold.svg" alt="" aria-hidden="true" />Fechar dia</button>
+
           <!-- Sino de avisos: badge via JS (modules/ui/alerts-bell.js), lista via JS (modules/schedules/alerts.js) -->
           <div class="alerts-wrap">
             <button type="button" id="alerts-bell" class="alerts-bell is-empty" aria-label="Ver avisos">

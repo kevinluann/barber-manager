@@ -23,55 +23,57 @@ import { renderRewardAlerts } from "./alerts.js"
 import { enableSchedulePaidToggle } from "./toggle-paid.js"
 import { initGeneralHistory } from "./general-history.js"
 import { renderTomorrowPreview } from "./tomorrow-preview.js"
+import { enableMarkDayPaid } from "./mark-day-paid.js"
 
 const selectedDate = document.querySelector('#date')
 
 export async function schedulesDay() {
-    const date = selectedDate.value
+  const date = selectedDate.value
 
-    const initialSchedules = await scheduleFetchByDay({ date })
+  const initialSchedules = await scheduleFetchByDay({ date })
 
-    try {
-        for (const schedule of initialSchedules) {
-            if (schedule.status === 'pending' && dayjs(schedule.when).isBefore(dayjs())) {
-                await scheduleComplete({ id: schedule.id, paid: false })
-            }
-        }
-    } catch (error) {
-        showToast('Erro ao atualizar passados.', 'error')
-        console.log(error)
+  try {
+    for (const schedule of initialSchedules) {
+      if (schedule.status === 'pending' && dayjs(schedule.when).isBefore(dayjs())) {
+        await scheduleComplete({ id: schedule.id, paid: false })
+      }
     }
+  } catch (error) {
+    showToast('Erro ao atualizar passados.', 'error')
+    console.log(error)
+  }
 
-    const freshSchedules = await scheduleFetchByDay({ date })
+  const freshSchedules = await scheduleFetchByDay({ date })
 
-    let visibleSchedules = applyStatusFilter(freshSchedules)
+  let visibleSchedules = applyStatusFilter(freshSchedules)
 
-    updateEmptyState(visibleSchedules)
+  updateEmptyState(visibleSchedules)
 
-    visibleSchedules = filterBySearch(visibleSchedules)
-    visibleSchedules = sortSchedules(visibleSchedules)
+  visibleSchedules = filterBySearch(visibleSchedules)
+  visibleSchedules = sortSchedules(visibleSchedules)
 
-    await schedulesShow({ dailySchedules: visibleSchedules })
+  await schedulesShow({ dailySchedules: visibleSchedules })
 
-    enableCompleteButtons()
-    enableNoShowButtons()
-    enableEditButtons()
-    enableRepeatToggle()
-    enableSchedulePaidToggle()
-    buildServiceOptions()
-    initCustomSelects()
-    initAlertsBell()
-    initCalendar()
-    initGeneralHistory()
+  enableCompleteButtons()
+  enableNoShowButtons()
+  enableEditButtons()
+  enableRepeatToggle()
+  enableSchedulePaidToggle()
+  enableMarkDayPaid()
+  buildServiceOptions()
+  initCustomSelects()
+  initAlertsBell()
+  initCalendar()
+  initGeneralHistory()
 
-    await renderHistory()
-    await renderRewardAlerts()
+  await renderHistory()
+  await renderRewardAlerts()
 
-    await renderTomorrowPreview()
+  await renderTomorrowPreview()
 
-    await hoursLoad({ date, dailySchedules: freshSchedules })
+  await hoursLoad({ date, dailySchedules: freshSchedules })
 
-    await renderBlockedList()
+  await renderBlockedList()
 
-    refreshUI(freshSchedules)
+  refreshUI(freshSchedules)
 }
