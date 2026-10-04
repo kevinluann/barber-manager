@@ -1,4 +1,4 @@
-import { resetAlerts, toggleShowAllAbsents, toggleShowAllRewards } from "../schedules/alerts.js"
+import { resetAlerts, toggleShowAllAbsents, toggleShowAllUnpaid, toggleShowAllRewards } from "../schedules/alerts.js"
 
 export function initAlertsBell() {
     const bell = document.querySelector("#alerts-bell")
@@ -32,10 +32,12 @@ export function initAlertsBell() {
 
     const seeAllRewardsBtn = document.querySelector("#alerts-see-all-rewards")
     const seeAllAbsentsBtn = document.querySelector("#alerts-see-all-absents")
+    const seeAllUnpaidBtn = document.querySelector("#alerts-see-all-unpaid")
     const resetBtn = document.querySelector("#alerts-reset")
 
     seeAllRewardsBtn.addEventListener("click", () => toggleShowAllRewards())
     seeAllAbsentsBtn.addEventListener("click", () => toggleShowAllAbsents())
+    seeAllUnpaidBtn.addEventListener("click", () => toggleShowAllUnpaid())
     resetBtn.addEventListener("click", () => resetAlerts())
 }
 
@@ -47,17 +49,19 @@ export function updateAlertsBadge(count) {
     alertsBell.classList.toggle("is-empty", count === 0)
 }
 
-export function updateSeeAllButtons({ totalRewards, shownRewards, expandedRewards, totalAbsents, shownAbsents, expandedAbsents }) {
+export function updateSeeAllButtons({ totalRewards, shownRewards, expandedRewards, totalAbsents, shownAbsents, expandedAbsents, totalUnpaid, shownUnpaid, expandedUnpaid }) {
     const rewardsBtn = document.querySelector("#alerts-see-all-rewards")
     const absentsBtn = document.querySelector("#alerts-see-all-absents")
+    const unpaidBtn = document.querySelector("#alerts-see-all-unpaid")
 
-    const hasAnyAlert = totalRewards + totalAbsents > 0
+    const hasAnyAlert = totalRewards + totalAbsents + totalUnpaid > 0
 
     rewardsBtn.hidden = !hasAnyAlert || (!expandedRewards && totalRewards <= shownRewards)
-
     rewardsBtn.textContent = expandedRewards ? "Voltar aos avisos" : `Ver cortes grátis (${totalRewards})`
 
     absentsBtn.hidden = !hasAnyAlert || (!expandedAbsents && totalAbsents <= shownAbsents)
-
     absentsBtn.textContent = expandedAbsents ? "Voltar aos avisos" : `Ver clientes ausentes (${totalAbsents})`
+
+    unpaidBtn.hidden = !hasAnyAlert || (!expandedUnpaid && totalUnpaid <= shownUnpaid)
+    unpaidBtn.textContent = expandedUnpaid ? "Voltar aos avisos" : `Ver devedores (${totalUnpaid})`
 }

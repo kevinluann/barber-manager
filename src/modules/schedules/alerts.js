@@ -8,6 +8,7 @@ import { showClientHistory } from "./history-client.js"
 const dismissedAlerts = {}
 let showAllRewards = false
 let showAllAbsents = false
+let showAllUnpaid = false
 
 function buildRewardAlert(name, done, total) {
     const alert = document.createElement("div")
@@ -129,6 +130,61 @@ function buildAbsentAlert(name, days, total) {
     return alert
 }
 
+function buildUnpaidAlert(name, total, count, appointmentsTotal) {
+    const alert = document.createElement("div")
+    alert.className = "reward-alert reward-alert--unpaid"
+    alert.setAttribute("role", "button")
+    alert.tabIndex = 0
+
+    const tag = document.createElement("span")
+    tag.className = "reward-tag"
+    tag.textContent = "EM ABERTO"
+
+    const text = document.createElement("span")
+    const strong = document.createElement("strong")
+    strong.textContent = name
+    text.append(strong, ` deve R$${total} (${count} cortes)`)
+
+    const dismiss = document.createElement("button")
+    dismiss.type = "button"
+    dismiss.className = "reward-dismiss"
+    dismiss.setAttribute("aria-label", `Dispensar aviso de ${name}`)
+
+    const dismissIcon = document.createElement("img")
+    dismissIcon.src = "./assets/cancel.svg"
+    dismissIcon.alt = ""
+    dismissIcon.setAttribute("aria-hidden", "true")
+    dismiss.appendChild(dismissIcon)
+
+    dismiss.addEventListener("click", () => {
+        dismissedAlerts[name] = {
+            ...(dismissedAlerts[name] || {}), unpaid: appointmentsTotal
+        }
+
+        renderRewardAlerts()
+
+        alert.remove()
+    })
+
+    alert.append(tag, text, dismiss)
+
+    alert.addEventListener("click", (event) => {
+        if (event.target.closest(".reward-dismiss")) return
+
+        showClientHistory(name)
+    })
+
+    alert.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault()
+
+            showClientHistory(name)
+        }
+    })
+
+    return alert
+}
+
 function collectRewards(all) {
     const doneByName = {}
     const totalByName = {}
@@ -177,6 +233,26 @@ function collectAbsents(all) {
     return sortedAbsents
 }
 
+function collectUnpaid(all) {
+    const debtsByName = {}
+
+    all.forEach((schedule) => {
+        if (schedule.status !== "done" || schedule.paid) return
+
+        const clientDebt = debtsByName[schedule.name] || (debtsByName[schedule.name] = { total: 0, count: 0 })
+        clientDebt.total += Number(schedule.price) || 0
+        clientDebt.count += 1
+    })
+
+    const rawDebts = Object.entries(debtsByName)
+
+    const debtors = rawDebts.map(([name, clientDebt]) => {
+        return { name, total: clientDebt.total, count: clientDebt.count }
+    })
+
+    return debtors
+}
+
 const MAX_ALERTS = 5
 
 export async function renderRewardAlerts() {
@@ -185,6 +261,7 @@ export async function renderRewardAlerts() {
 
     const { rewardedClients, totalByName } = collectRewards(all)
     const absents = collectAbsents(all)
+    const unpaid = collectUnpaid(all)
 
     const box = document.querySelector("#reward-alerts")
     box.replaceChildren()
@@ -193,7 +270,9 @@ export async function renderRewardAlerts() {
         ...rewardedClients.map((reward) => ({
             type: "reward", ...reward
         })),
-
+        ...unpaid.map((unpaid) => ({
+            type: "unpaid", ...unpaid
+        })),
         ...absents.map((absent) => ({
             type: "absent", ...absent
         }))
@@ -209,15 +288,23 @@ export async function renderRewardAlerts() {
 
     let shownRewards = showAllRewards ? eligibleAlerts.filter((item) => item.type === "reward") : baseVisible.filter((item) => item.type === "reward")
     let shownAbsents = showAllAbsents ? eligibleAlerts.filter((item) => item.type === "absent") : baseVisible.filter((item) => item.type === "absent")
+    let shownUnpaid = showAllUnpaid ? eligibleAlerts.filter((item) => item.type === "unpaid") : baseVisible.filter((item) => item.type === "unpaid")
 
     if (showAllRewards) {
         shownAbsents = []
+        shownUnpaid = []
     }
     if (showAllAbsents) {
         shownRewards = []
+        shownUnpaid = []
+    }
+    if (showAllUnpaid) {
+        shownRewards = []
+        shownAbsents = []
     }
 
-    const visibleAlerts = [...shownRewards, ...shownAbsents]
+
+    const visibleAlerts = [...shownRewards, ...shownUnpaid, ...shownAbsents]
 
     let shownCount = 0
 
@@ -229,7 +316,11 @@ export async function renderRewardAlerts() {
             delete dismissalRecord[alertType]
         }
 
-        box.appendChild(alertType === "reward" ? buildRewardAlert(item.name, item.done, totalByName[item.name]) : buildAbsentAlert(item.name, item.days, totalByName[item.name]))
+        box.appendChild(
+            alertType === "reward" ? buildRewardAlert(item.name, item.done, totalByName[item.name])
+                : alertType === "unpaid" ? buildUnpaidAlert(item.name, item.total, item.count, totalByName[item.name])
+                    : buildAbsentAlert(item.name, item.days, totalByName[item.name])
+        )
 
         shownCount++
     })
@@ -250,7 +341,8 @@ export async function renderRewardAlerts() {
     }
 
     const totalRewards = eligibleAlerts.filter((item) => item.type === "reward").length
-    const totalAbsents = eligibleAlerts.length - totalRewards
+    const totalAbsents = eligibleAlerts.filter((item) => item.type === "absent").length
+    const totalUnpaid = eligibleAlerts.filter((item) => item.type === "unpaid").length
 
     updateSeeAllButtons({
         totalRewards,
@@ -259,7 +351,10 @@ export async function renderRewardAlerts() {
         totalAbsents,
         shownAbsents: shownAbsents.length,
         expandedAbsents: showAllAbsents,
-        shownCount
+        shownCount,
+        totalUnpaid,
+        shownUnpaid: shownUnpaid.length,
+        expandedUnpaid: showAllUnpaid
     })
 
     updateAlertsBadge(shownCount)
@@ -282,6 +377,7 @@ export function toggleShowAllRewards() {
 
     if (showAllRewards) {
         showAllAbsents = false
+        showAllUnpaid = false
     }
 
     renderRewardAlerts()
@@ -292,6 +388,18 @@ export function toggleShowAllAbsents() {
 
     if (showAllAbsents) {
         showAllRewards = false
+        showAllUnpaid = false
+    }
+
+    renderRewardAlerts()
+}
+
+export function toggleShowAllUnpaid() {
+    showAllUnpaid = !showAllUnpaid
+
+    if (showAllUnpaid) {
+        showAllRewards = false
+        showAllAbsents = false
     }
 
     renderRewardAlerts()

@@ -343,8 +343,12 @@
 }
 
 .reward-alert--absent .reward-dismiss:hover {
-  border-color: rgba(181, 82, 66, 0.5);
+  border-color: #8B3A2A;
   background: rgba(139, 58, 42, 0.1);
+}
+
+.reward-alert--unpaid .reward-tag {
+  background: #B55242;
 }
 
 /* Vazio */
