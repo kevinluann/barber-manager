@@ -77,8 +77,8 @@ Pré-requisito: [Node.js](https://nodejs.org) e npm instalado.
 1. Clone o repositório
 
 ```bash
-git clone https://github.com/kevinluann/hairday.git
-cd hairday
+git clone https://github.com/kevinluann/barber-manager.git
+cd barber-manager
 ```
 
 2. Instale as dependências:
