@@ -2,6 +2,10 @@
 
 Aplicação web para agendamento e gestão da agenda de uma barbearia.
 
+## Preview
+
+![Preview do BarberManager](docs/preview.png)
+
 ## Sobre o projeto
 
 O BarberManager permite criar agendamentos, bloquear horários, controlar pagamentos e acompanhar o histórico e a fidelidade dos clientes, com avisos sobre cortes e clientes sumidos.
