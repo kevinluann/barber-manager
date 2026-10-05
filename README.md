@@ -8,6 +8,14 @@ O BarberManager permite criar agendamentos, bloquear horários, controlar pagame
 
 A agenda é organizada por data selecionada e os dados são salvos em uma API local simulada com JSON Server.
 
+## Serviços
+
+| Serviço | Duração | Preço |
+| ------- | ------- | ----- |
+| Corte | 30 min | R$ 50 |
+| Barba | 20 min | R$ 30 |
+| Combo | 50 min | R$ 80 |
+
 ## Funcionalidades
 
 - Criação, edição e cancelamento de agendamentos com confirmação
@@ -57,7 +65,7 @@ Arquivos na raiz:
 
 ## Como executar
 
-A aplicação precisa de dois processos rodando ao mesmo tempo: a API local e o servidor de desenvolvimento.
+> A aplicação precisa de dois processos rodando ao mesmo tempo: a API local e o servidor de desenvolvimento.
 
 Pré-requisito: [Node.js](https://nodejs.org) e npm instalado.
 
